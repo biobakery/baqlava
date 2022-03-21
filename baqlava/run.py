@@ -117,12 +117,21 @@ for base in file_bases:
         idx = args.nucindex,
         threads = args.threads)
     workflow.add_task(
-        "mkdir -p " + temp_assembly_file + base,
+        "mkdir -p [targets[0]]",
         depends = fastq_files,
-        targets = temp_assembly_file + base)
-    
-workflow.go()    
+        targets = [temp_assembly_file + base],
+        output_folder = temp_assembly_file)
+    workflow.add_task(
+        "spades.py --meta -1 " + base + "_1.fastq -2 " + base + "_2.fastq -o [depends[0]]",
+        depends = [temp_assembly_file + base],
+        targets = [temp_assembly_file + base + "/contigs.fasta"],
+        output_folder = temp_assembly_file + base)
 
+
+
+
+
+workflow.go()
 
 
 
