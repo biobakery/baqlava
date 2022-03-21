@@ -61,45 +61,67 @@ args = workflow.parse_args()
 # function to run workflow #
 ############################
 
-in_files = workflow.get_input_files(extension=args.input_extension)
+fastq_files = workflow.get_input_files(extension=args.input_extension)
+file_path = args.input + "/"
+
+def collect_and_cat_files(dir):
+    bases = set()
+    for file in dir:
+        base = file.split("/")[-1]
+        base = base.split("_")[0]
+        bases.add(base)
+    return list(bases)
+
+file_bases = collect_and_cat_files(fastq_files)
+
+for base in file_bases:
+    workflow.add_task(
+        "cat " + file_path + base + "_1.fastq " + file_path + base + "_2.fastq > " + file_path + base + "_cat.fastq",
+        depends = fastq_files,
+        targets = file_path + base + "_cat.fastq")
 
 humann_output_files_bac = args.output+"/humann_output_files_bac/"
 humann_output_files_vir = args.output+"/humann_output_files_vir/"
+temp_assembly_file = args.output+"/temp_assembly/"
 
 workflow.add_task(
     "mkdir -p " + humann_output_files_bac,
-    depends = in_files,
+    depends = fastq_files,
     targets = humann_output_files_bac,
     output_folder = args.output)
 
 workflow.add_task(
     "mkdir -p " + humann_output_files_vir,
-    depends = in_files,
+    depends = fastq_files,
     targets = humann_output_files_vir,
     output_folder = args.output)
 
-for file in in_files:
-    base = file.split("/")[-1]
-    base = base.split(".")[0]
+workflow.add_task(
+    "mkdir -p " + temp_assembly_file,
+    depends = fastq_files,
+    targets = temp_assembly_file)
+
+for base in file_bases:
     workflow.add_task(
         "humann --input [depends[0]] --output [output_folder[0]] --threads [threads]",
-        depends = [file, humann_output_files_bac],
+        depends = [file_path + base + "_cat.fastq", humann_output_files_bac],
         output_folder = [humann_output_files_bac],
-        targets = [humann_output_files_bac + base + ".pathabundance.tsv"],
+        targets = [humann_output_files_bac + base +"_cat_pathabundance.tsv", humann_output_files_bac + base + "_cat_genefamilies.tsv"],
         threads = args.threads)
     workflow.add_task(
         "humann --input [depends[0]] --output [output_folder[0]] --bypass-nucleotide-index --nucleotide-database [db] --id-mapping [idx] --threads [threads]",
-        depends = file,
+        depends = [file_path + base + "_cat.fastq", humann_output_files_bac],
         output_folder = [humann_output_files_vir],
         targets = [humann_output_files_vir + base + ".pathabundance.tsv"],
         db = args.nucdb,
         idx = args.nucindex,
         threads = args.threads)
-
-workflow.go()
-
-
-
+    workflow.add_task(
+        "mkdir -p " + temp_assembly_file + base,
+        depends = fastq_files,
+        targets = temp_assembly_file + base)
+    
+workflow.go()    
 
 
 
