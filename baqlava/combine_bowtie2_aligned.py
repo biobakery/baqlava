@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 
 HUMAnN_bt2 = pd.read_csv(sys.argv[1], sep="\t", names=['reads', 'hit','pident','alignment length','unknow3','unknow4','unknow5','unknow6','unknow7','unknow8','unknow9','unknow10'])
-VSC_bt2 = pd.read_csv(sys.argv[2], sep="\t", names=['reads', 'hit','pident','alignment length','unknow3','unknow4','unknow5','unknow6','unknow7','unknow8','unknow9','unknow10'])
+Viral_bt2 = pd.read_csv(sys.argv[2], sep="\t", names=['reads', 'hit','pident','alignment length','unknow3','unknow4','unknow5','unknow6','unknow7','unknow8','unknow9','unknow10'])
 
 def get_saveout_name(sysargv1):
     name = str(sysargv1)
@@ -25,4 +25,4 @@ def pull_reads_from_viral_mapping(df_H, df_V):
 
 name = get_saveout_name(sys.argv[1])
 
-pull_reads_from_viral_mapping(HUMAnN_bt2, VSC_bt2).to_csv(name, sep="\t", index=False, header=False)
+pull_reads_from_viral_mapping(HUMAnN_bt2, Viral_bt2).to_csv(name, sep="\t", index=False, header=False)
