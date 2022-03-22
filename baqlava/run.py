@@ -84,6 +84,7 @@ humann_output_files_bac = args.output+"/humann_output_files_bac/"
 humann_output_files_vir = args.output+"/humann_output_files_vir/"
 temp_assembly_file = args.output+"/temp_assembly/"
 
+
 workflow.add_task(
     "mkdir -p " + humann_output_files_bac,
     depends = fastq_files,
@@ -106,13 +107,13 @@ for base in file_bases:
         "humann --input [depends[0]] --output [output_folder[0]] --threads [threads]",
         depends = [file_path + base + "_cat.fastq", humann_output_files_bac],
         output_folder = [humann_output_files_bac],
-        targets = [humann_output_files_bac + base +"_cat_pathabundance.tsv", humann_output_files_bac + base + "_cat_genefamilies.tsv"],
+        targets = [humann_output_files_bac + base +"_cat_pathabundance.tsv", humann_output_files_bac + base + "_cat_genefamilies.tsv", humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv", humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_diamond_unaligned.fa"],
         threads = args.threads)
     workflow.add_task(
         "humann --input [depends[0]] --output [output_folder[0]] --bypass-nucleotide-index --nucleotide-database [db] --id-mapping [idx] --threads [threads]",
         depends = [file_path + base + "_cat.fastq", humann_output_files_bac],
         output_folder = [humann_output_files_vir],
-        targets = [humann_output_files_vir + base + ".pathabundance.tsv"],
+        targets = [humann_output_files_vir + base + "_cat_pathabundance.tsv", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_unaligned.fa"],
         db = args.nucdb,
         idx = args.nucindex,
         threads = args.threads)
@@ -126,9 +127,20 @@ for base in file_bases:
         depends = [temp_assembly_file + base],
         targets = [temp_assembly_file + base + "/contigs.fasta"],
         output_folder = temp_assembly_file + base)
+    workflow.add_task(
+        "python combine_bowtie2_aligned.py [depends[0]], [depends[1]]" ,
+        depends = [humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv"],
+        targets = [humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_combined_bowtie2_aligned.tsv"],
+        output_folder = humann_output_files_vir + base + "_humann_temp/")
+    workflow.add_task(
+        "python combine_unmapped.py [depends[0]], [depends[1]]" ,
+        depends = [humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_diamond_unaligned.fa", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_unaligned.fa"],
+        targets = [humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_combined_unaligned.fa"],
+        output_folder = humann_output_files_vir + base + "_humann_temp/")
+
+
 
 
 workflow.go()
-
 
 
