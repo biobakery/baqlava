@@ -27,7 +27,7 @@ def process_baqlava_output(sysargv1, nuc_tax, prot_tax):
     df10 = df9.groupby(['Species'], as_index=False).sum()#[['Species', '1M_Abundance-RPKs']]
     df11 = pd.concat([df9, df10])
     df11[['subset']] = df11['subset'].fillna(df11['Species'])
-    return df11.sort_values(by=['subset'], ascending=[True])[['subset', base]].rename(columns={'subset':'# Gene Family'})
+    return df11.sort_values(by=['subset'], ascending=[True])[['subset', base]].rename(columns={'subset':'# Taxon'})
 
 
 processed_output = process_baqlava_output(sys.argv[1], nuc_tax_file, prot_tax_file)
