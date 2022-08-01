@@ -14,23 +14,25 @@ def process_baqlava_output(sysargv1, nuc_tax, prot_tax):
     df3 = pd.merge(df2.copy(), nuc_tax.copy(), right_on='genome', left_on='# Gene Family', how='inner')
     df3[['Species']] = df3['Species'].fillna(df3['sseqid'])
     df4 = df3.groupby(['Species'], as_index=False).sum()[['Species', base]]
-    df4['subset'] = df4['Species'] + "|nucleotide"
+    nuc = df4['Species']
+    df4.loc[:,'subset'] = test + "|nucleotide"
     #process protein
     df5 = df2.copy()[df2['# Gene Family'].str.contains("UniRef90")]
     df6 = pd.merge(df5, prot_tax.copy(), right_on='UniRef90', left_on='# Gene Family', how='outer')
     df6[[base]] = df6[base].fillna(0)
     df7 = df6.groupby(['Species'], as_index=False).mean()[['Species', base]]
     df8 = df7[df7[base] != 0]
-    df8['subset'] = df8['Species'] + "|translated"
+    trans = df8['Species']
+    df8.loc[:,'subset'] = trans + "|translated"
     #now merge together and format results:
     df9 = pd.concat([df4,df8])
     df10 = df9.groupby(['Species'], as_index=False).sum()#[['Species', '1M_Abundance-RPKs']]
-    df11 = pd.concat([df9, df10])
+    df11 = pd.concat([df9, df10], sort=False)
     df11[['subset']] = df11['subset'].fillna(df11['Species'])
     return df11.sort_values(by=['subset'], ascending=[True])[['subset', base]].rename(columns={'subset':'# Taxon'})
 
 
-processed_output = process_baqlava_output(sys.argv[1], nuc_tax_file, prot_tax_file)
+processed_output = process_baqlava_output(input_sysargv1, nuc_tax_file, prot_tax_file)
 
 bas = os.path.split( sys.argv[1] )[1].split("_genefamilies.tsv")[0]
 loc = os.path.split( sys.argv[1] )[0]
