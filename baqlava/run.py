@@ -1,6 +1,5 @@
 """
 BAQLaVa: run module
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -37,13 +36,13 @@ workflow = Workflow(
 
 workflow.add_argument(
     name = "nucdb",
-    desc = "nucleotide database to use",
-    default = "####")
+    desc = "nucleotide database folder to use",
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database/")
 
 workflow.add_argument(
     name = "nucindex",
     desc = "nucleotide annotation index to use",
-    default = "####")
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt")
 
 workflow.add_argument(
     name = "input-extension",
@@ -54,6 +53,11 @@ workflow.add_argument(
     name = "threads",
     desc="number of threads for knead_data to use",
     default=1)
+
+workflow.add_argument(
+    name = "protdb",
+    desc = "protein database folder to use",
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/")
 
 args = workflow.parse_args()
 
@@ -80,16 +84,9 @@ for base in file_bases:
         depends = fastq_files,
         targets = file_path + base + "_cat.fastq")
 
-humann_output_files_bac = args.output+"/humann_output_files_bac/"
 humann_output_files_vir = args.output+"/humann_output_files_vir/"
 temp_assembly_file = args.output+"/temp_assembly/"
 
-
-workflow.add_task(
-    "mkdir -p " + humann_output_files_bac,
-    depends = fastq_files,
-    targets = humann_output_files_bac,
-    output_folder = args.output)
 
 workflow.add_task(
     "mkdir -p " + humann_output_files_vir,
@@ -97,48 +94,21 @@ workflow.add_task(
     targets = humann_output_files_vir,
     output_folder = args.output)
 
-workflow.add_task(
-    "mkdir -p " + temp_assembly_file,
-    depends = fastq_files,
-    targets = temp_assembly_file)
-
 for base in file_bases:
     workflow.add_task(
-        "humann --input [depends[0]] --output [output_folder[0]] --threads [threads]",
-        depends = [file_path + base + "_cat.fastq", humann_output_files_bac],
-        output_folder = [humann_output_files_bac],
-        targets = [humann_output_files_bac + base +"_cat_pathabundance.tsv", humann_output_files_bac + base + "_cat_genefamilies.tsv", humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv", humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_diamond_unaligned.fa"],
-        threads = args.threads)
-    workflow.add_task(
-        "humann --input [depends[0]] --output [output_folder[0]] --bypass-nucleotide-index --nucleotide-database [db] --id-mapping [idx] --threads [threads]",
-        depends = [file_path + base + "_cat.fastq", humann_output_files_bac],
+        "humann --input [depends[0]] --output [output_folder[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --protein-database [p_db] --threads [threads]",
+        depends = [file_path + base + "_cat.fastq"],
         output_folder = [humann_output_files_vir],
-        targets = [humann_output_files_vir + base + "_cat_pathabundance.tsv", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_unaligned.fa"],
-        db = args.nucdb,
+        targets = [humann_output_files_vir + base + "_cat_genefamilies.tsv"],
+        n_db = args.nucdb,
         idx = args.nucindex,
+        p_db = args.protdb,
         threads = args.threads)
     workflow.add_task(
-        "mkdir -p [targets[0]]",
-        depends = fastq_files,
-        targets = [temp_assembly_file + base],
-        output_folder = temp_assembly_file)
-    workflow.add_task(
-        "spades.py --meta -1 " + base + "_1.fastq -2 " + base + "_2.fastq -o [depends[0]]",
-        depends = [temp_assembly_file + base],
-        targets = [temp_assembly_file + base + "/contigs.fasta"],
-        output_folder = temp_assembly_file + base)
-    workflow.add_task(
-        "python combine_bowtie2_aligned.py [depends[0]], [depends[1]]" ,
-        depends = [humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_aligned.tsv"],
-        targets = [humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_combined_bowtie2_aligned.tsv"],
-        output_folder = humann_output_files_vir + base + "_humann_temp/")
-    workflow.add_task(
-        "python combine_unmapped.py [depends[0]], [depends[1]]" ,
-        depends = [humann_output_files_bac + base + "_cat_humann_temp/" + base + "_cat_diamond_unaligned.fa", humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_bowtie2_unaligned.fa"],
-        targets = [humann_output_files_vir + base + "_cat_humann_temp/" + base + "_cat_combined_unaligned.fa"],
-        output_folder = humann_output_files_vir + base + "_humann_temp/")
-
-
+        "python reconcile_mapped_reads.py [depends[0]]" ,
+        depends = [humann_output_files_vir + base + "_cat_genefamilies.tsv" ],
+        targets = [humann_output_files_vir + base + "_cat_baqlava_genefamilies.tsv"],
+        output_folder = humann_output_files_vir)
 
 
 workflow.go()
