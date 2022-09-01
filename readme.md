@@ -8,13 +8,23 @@ First, load the most recent version of biobakery workflows:
   ```
 We reccomend depleting the fastq or fasta of potential bacterial reads before running baqlava. This can be done by running HUMAnN with standard parameters and skipping trasnlated search: 
   ```
-  humann --input <FILE> --output <LOCATION> --bypass-trasnlated-search
+  humann --input <FILE> --output <LOCATION> --bypass-translated-search
   ```
 The file at <LOCATION>/<FILE>_humann_temp/<FILE>_bowtie2_unaligned.fa has been depleted of bacterial reads via bowtie2 search to the chocophlan database. Format this file for BAQLaVa by running:
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/remove_lengths_humann_bacterial_depletion.py
   ```
-or by using the command line: 
+This script creates a new file, <FILE>.lengthremoved.fa. This can alternatively be done through the command line and a new name chosen for the file:
   ```
-  python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/remove_lengths_humann_bacterial_depletion.py
+  sed -r 's/\|[0-9]+$//' <FILE> > <NEWFILE>
+  ```
+Next, run HUMAnN with the BAQLaVa databases:
+  ```
+  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
+  ```
+Use HUMAnN options (e.g. --threads) as you would like!
+
+Finally, run the BAQLaVa reconciliation script:
+  ```
+  python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_nucleotide_only.py <FILE_with_LOCATION>
   ```
