@@ -28,8 +28,7 @@ Finally, run the BAQLaVa reconciliation script:
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_nucleotide_only.py <FILE_with_LOCATION>
   ```
-!!IMPORTANT!! 
-Right now we are only using nucleotide mapping, not translated search. If you would like to use translated search, talk to Jordan about the protein database here:
+!! IMPORTANT !! Right now we are only using nucleotide mapping, not translated search. If you would like to use translated search, talk to Jordan about the protein database and setting that can be applied with:
   ```
   --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
-  '''
+  ```
