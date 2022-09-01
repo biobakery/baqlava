@@ -24,7 +24,7 @@ Next, run HUMAnN with the BAQLaVa databases:
   ```
 Use HUMAnN options (e.g. --threads) as you would like!
 
-Finally, run the BAQLaVa reconciliation script:
+Finally, run the BAQLaVa reconciliation script. Make sure to reference the exact location of the input file (e.g. use ./ if it is in the current directory):
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_nucleotide_only.py <FILE_with_LOCATION>
   ```
