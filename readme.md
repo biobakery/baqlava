@@ -20,7 +20,7 @@ This script creates a new file, <FILE>.lengthremoved.fa. This can alternatively 
   ```
 Next, run HUMAnN with the BAQLaVa databases:
   ```
-  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
+  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt
   ```
 Use HUMAnN options (e.g. --threads) as you would like!
 
@@ -28,3 +28,8 @@ Finally, run the BAQLaVa reconciliation script:
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_nucleotide_only.py <FILE_with_LOCATION>
   ```
+!!IMPORTANT!! 
+Right now we are only using nucleotide mapping, not translated search. If you would like to use translated search, talk to Jordan about the protein database here:
+  ```
+  --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
+  '''
