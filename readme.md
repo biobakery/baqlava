@@ -10,11 +10,11 @@ We reccomend depleting the fastq or fasta of potential bacterial reads before ru
   ```
   humann --input <FILE> --output <LOCATION> --bypass-translated-search
   ```
-The file at <LOCATION>/<FILE>_humann_temp/<FILE>_bowtie2_unaligned.fa has been depleted of bacterial reads via bowtie2 search to the chocophlan database. Format this file for BAQLaVa by running:
+The file at LOCATION/FILE_humann_temp/FILE_bowtie2_unaligned.fa has been depleted of bacterial reads via bowtie2 search to the chocophlan database. Format this file for BAQLaVa by running:
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/remove_lengths_humann_bacterial_depletion.py
   ```
-This script creates a new file, <FILE>.lengthremoved.fa. This can alternatively be done through the command line and a new name chosen for the file:
+This script creates a new filewith the suffix .lengthremoved.fa. This can alternatively be done through the command line and a new name chosen for the file:
   ```
   sed -r 's/\|[0-9]+$//' <FILE> > <NEWFILE>
   ```
