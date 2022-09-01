@@ -20,7 +20,7 @@ This script creates a new filewith the suffix .lengthremoved.fa. This can altern
   ```
 Next, run HUMAnN with the BAQLaVa databases:
   ```
-  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt
+  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt --bypass-translated-search
   ```
 Use HUMAnN options (e.g. --threads) as you would like!
 
