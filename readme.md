@@ -4,7 +4,7 @@ This is a very prelimiary version of the Bioinformatic Application of Quantifica
 
 First, load the most recent version of biobakery workflows: 
   ```
-  hutlab load centos7/python3/biobakery_workflows/3.0.0-beta-devel-dependsUpdate
+  hutlab load centos7/python3/humann3/3.6-devel
   ```
 We reccomend depleting the fastq or fasta of potential bacterial reads before running baqlava. This can be done by running HUMAnN with standard parameters and skipping trasnlated search: 
   ```
