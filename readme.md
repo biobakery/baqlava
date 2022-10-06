@@ -1,4 +1,4 @@
-## BAQLaVa V0
+## BAQLaVa V0.2
 
 This is a very prelimiary version of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa). To run, your reads should be in a single fastq or fasta file (cat paired reads together into one file as needed). 
 
@@ -20,15 +20,12 @@ This script creates a new filewith the suffix .lengthremoved.fa. This can altern
   ```
 Next, run HUMAnN with the BAQLaVa databases:
   ```
-  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt --bypass-translated-search
+  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap4.txt --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
   ```
 Use HUMAnN options (e.g. --threads) as you would like!
 
 Finally, run the BAQLaVa reconciliation script. Make sure to reference the exact location of the input file (e.g. use ./ if it is in the current directory):
   ```
-  python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_nucleotide_only.py <FILE_with_LOCATION>
+  python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_v0.2.py <FILE_with_LOCATION>
   ```
-!! IMPORTANT !! Right now we are only using nucleotide mapping, not translated search. If you would like to use translated search, talk to Jordan about the protein database and setting that can be applied with:
-  ```
-  --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
-  ```
+
