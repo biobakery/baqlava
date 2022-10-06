@@ -24,7 +24,7 @@ Next, run HUMAnN with the BAQLaVa databases:
   ```
 Use HUMAnN options (e.g. --threads) as you would like!
 
-Finally, run the BAQLaVa reconciliation script. Make sure to reference the exact location of the input file (e.g. use ./ if it is in the current directory):
+Finally, run the BAQLaVa reconciliation script. Make sure to reference the exact location of the input file (e.g. use ./ if it is in the current directory). This will create a new file with "baqlava_genefamilies.tsv" as the suffix. This contains nucleotide mapping at the Species or genome (for MAGs) level and protein mapping at the Genus level. 
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_v0.2.py <FILE_with_LOCATION>
   ```
