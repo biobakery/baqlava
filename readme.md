@@ -33,7 +33,7 @@ This script creates a new filewith the suffix .lengthremoved.fa. This can altern
   ```
   sed -r 's/\|[0-9]+$//' <FILE> > <NEWFILE>
   ```
-## Running BAQLaVa
+## Running BAQLaVa - Option 1: manual via command line:
 
 BAQLaVa is run via HUMAnN with the BAQLaVa databases:
   ```
@@ -45,4 +45,7 @@ Finally, run the BAQLaVa reconciliation script. Make sure to reference the exact
   ```
   python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_v0.2.py <FILE_with_LOCATION>
   ```
-
+## Running BAQLaVa - Option 2: AnADAMa2 workflow:
+  ```
+  python run.py -i <FOLDER_WITH_ALL_FILES> -o <OUTPUT_DIRECTORY>
+  ```
