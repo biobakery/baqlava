@@ -37,12 +37,12 @@ workflow = Workflow(
 workflow.add_argument(
     name = "nucdb",
     desc = "nucleotide database folder to use",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database/")
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD/")
 
 workflow.add_argument(
     name = "nucindex",
     desc = "nucleotide annotation index to use",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap3.txt")
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap4.txt")
 
 workflow.add_argument(
     name = "input-extension",
@@ -105,7 +105,7 @@ for base in file_bases:
         p_db = args.protdb,
         threads = args.threads)
     workflow.add_task(
-        "python reconcile_mapped_reads.py [depends[0]]" ,
+        "python reconcile_mapped_reads_v0.2.py [depends[0]]" ,
         depends = [humann_output_files_vir + base + "_cat_genefamilies.tsv" ],
         targets = [humann_output_files_vir + base + "_cat_baqlava_genefamilies.tsv"],
         output_folder = humann_output_files_vir)
