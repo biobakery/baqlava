@@ -6,10 +6,10 @@ This is a very prelimiary version of the Bioinformatic Application of Quantifica
 
 BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. The workign versions are located here:
 
-    ```
+ 
     /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD/
     /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
-    ```
+   
     
 
 
