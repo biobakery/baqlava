@@ -13,7 +13,7 @@ BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence
     
 
 
-
+## Input Data
 
 To run, your reads should be in a single fastq or fasta file (cat paired reads together into one file as needed). 
 
@@ -33,7 +33,9 @@ This script creates a new filewith the suffix .lengthremoved.fa. This can altern
   ```
   sed -r 's/\|[0-9]+$//' <FILE> > <NEWFILE>
   ```
-Next, run HUMAnN with the BAQLaVa databases:
+## Running BAQLaVa
+
+BAQLaVa is run via HUMAnN with the BAQLaVa databases:
   ```
   humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap4.txt --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
   ```
