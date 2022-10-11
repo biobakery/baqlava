@@ -1,0 +1,1295 @@
+	Genus	Species	# segments	segmented
+0	Actinovirus	Perch actinovirus	3	yes
+1	Alfamovirus	Alfalfa mosaic virus	3	yes
+2	Alphachrysovirus	Alphachrysovirus anthurii	3	yes
+3	Alphachrysovirus	Alphachrysovirus aspergilli	4	yes
+4	Alphachrysovirus	Alphachrysovirus brassicae	3	yes
+5	Alphachrysovirus	Alphachrysovirus cerasi	4	yes
+6	Alphachrysovirus	Alphachrysovirus chrysothricis	4	yes
+7	Alphachrysovirus	Alphachrysovirus colletotrichi	3	yes
+8	Alphachrysovirus	Alphachrysovirus cryphonectriae	4	yes
+9	Alphachrysovirus	Alphachrysovirus fusarii	3	yes
+10	Alphachrysovirus	Alphachrysovirus helminthosporii	4	yes
+11	Alphachrysovirus	Alphachrysovirus isariae	4	yes
+12	Alphachrysovirus	Alphachrysovirus macrophominae	4	yes
+13	Alphachrysovirus	Alphachrysovirus penicillii	4	yes
+14	Alphachrysovirus	Alphachrysovirus perseae	3	yes
+15	Alphachrysovirus	Alphachrysovirus raphani	3	yes
+16	Alphachrysovirus	Alphachrysovirus saladoense	4	yes
+17	Alphachrysovirus	Alphachrysovirus shuangaoense	4	yes
+18	Alphachrysovirus	Alphachrysovirus verticillii	4	yes
+19	Alphachrysovirus	Alphachrysovirus zeae	3	yes
+20	Alphainfluenzavirus	Alphainfluenzavirus influenzae	8	yes
+21	Alphanodavirus	Black beetle virus	2	yes
+22	Alphanodavirus	Boolarra virus	2	yes
+23	Alphanodavirus	Flock House virus	2	yes
+24	Alphanodavirus	Nodamura virus	2	yes
+25	Alphanodavirus	Pariacoto virus	2	yes
+26	Alphapartitivirus	Beet cryptic virus 1	2	yes
+27	Alphapartitivirus	Carrot cryptic virus	2	yes
+28	Alphapartitivirus	Cherry chlorotic rusty spot associated partitivirus	2	yes
+29	Alphapartitivirus	Chondrostereum purpureum cryptic virus 1	2	yes
+30	Alphapartitivirus	Flammulina velutipes browning virus	2	yes
+31	Alphapartitivirus	Helicobasidium mompa partitivirus V70	1	yes
+32	Alphapartitivirus	Heterobasidion partitivirus 1	2	yes
+33	Alphapartitivirus	Heterobasidion partitivirus 12	2	yes
+34	Alphapartitivirus	Heterobasidion partitivirus 13	2	yes
+35	Alphapartitivirus	Heterobasidion partitivirus 15	2	yes
+36	Alphapartitivirus	Heterobasidion partitivirus 3	2	yes
+37	Alphapartitivirus	Rosellinia necatrix partitivirus 2	2	yes
+38	Alphapartitivirus	Vicia cryptic virus	2	yes
+39	Alphapartitivirus	White clover cryptic virus 1	2	yes
+40	Alphapermutotetravirus	Thosea asigna virus	2	yes
+41	Antennavirus	Hairy antennavirus	3	yes
+42	Antennavirus	Salmon antennavirus	3	yes
+43	Antennavirus	Striated antennavirus	3	yes
+44	Anulavirus	Amazon lily mild mottle virus	3	yes
+45	Anulavirus	Anulavirus GLPV	3	yes
+46	Anulavirus	Pelargonium zonate spot virus	3	yes
+47	Aquabirnavirus	Infectious pancreatic necrosis virus	2	yes
+48	Aquabirnavirus	Tellina virus	1	yes
+49	Aquabirnavirus	Yellowtail ascites virus	2	yes
+50	Aquareovirus	Aquareovirus A	11	yes
+51	Aquareovirus	Aquareovirus B	10	yes
+52	Aquareovirus	Aquareovirus C	11	yes
+53	Aquareovirus	Aquareovirus E	11	yes
+54	Aquareovirus	Aquareovirus G	11	yes
+55	Ascovirus	Trichoplusia ni ascovirus 2a	2	yes
+56	Atadenovirus	Possum atadenovirus A	2	yes
+57	Avibirnavirus	Infectious bursal disease virus	2	yes
+58	Babuvirus	Abaca bunchy top virus	6	yes
+59	Babuvirus	Banana bunchy top virus	6	yes
+60	Babuvirus	Cardamom bushy dwarf virus	6	yes
+61	Bandavirus	Bhanja bandavirus	3	yes
+62	Bandavirus	Dabie bandavirus	3	yes
+63	Bandavirus	Guertu bandavirus	3	yes
+64	Bandavirus	Heartland bandavirus	3	yes
+65	Bandavirus	Hunter Island bandavirus	3	yes
+66	Bandavirus	Kismaayo bandavirus	3	yes
+67	Bandavirus	Lone star bandavirus	3	yes
+68	Bandavirus	Razdan bandavirus	3	yes
+69	Begomovirus	Abutilon golden mosaic virus	1	yes
+70	Begomovirus	Abutilon mosaic Bolivia virus	2	yes
+71	Begomovirus	Abutilon mosaic Brazil virus	2	yes
+72	Begomovirus	Abutilon mosaic virus	2	yes
+73	Begomovirus	African cassava mosaic Burkina Faso virus	2	yes
+74	Begomovirus	African cassava mosaic virus	2	yes
+75	Begomovirus	Ageratum enation virus	1	yes
+76	Begomovirus	Ageratum yellow vein Hualian virus	1	yes
+77	Begomovirus	Ageratum yellow vein Sri Lanka virus	1	yes
+78	Begomovirus	Ageratum yellow vein virus	1	yes
+79	Begomovirus	Allamanda leaf curl virus	1	yes
+80	Begomovirus	Allamanda leaf mottle distortion virus	2	yes
+81	Begomovirus	Alternanthera yellow vein virus	1	yes
+82	Begomovirus	Asystasia mosaic Madagascar virus	2	yes
+83	Begomovirus	Bean bushy stunt virus	2	yes
+84	Begomovirus	Bean calico mosaic virus	2	yes
+85	Begomovirus	Bean chlorosis virus	2	yes
+86	Begomovirus	Bean dwarf mosaic virus	2	yes
+87	Begomovirus	Bean golden mosaic virus	2	yes
+88	Begomovirus	Bean golden yellow mosaic virus	2	yes
+89	Begomovirus	Bean latent virus	2	yes
+90	Begomovirus	Bean leaf crumple virus	2	yes
+91	Begomovirus	Bean white chlorosis mosaic virus	2	yes
+92	Begomovirus	Bean yellow mosaic Mexico virus	1	yes
+93	Begomovirus	Bhendi yellow vein Bhubhaneswar virus	1	yes
+94	Begomovirus	Bhendi yellow vein mosaic virus	1	yes
+95	Begomovirus	Bitter gourd yellow mosaic virus	2	yes
+96	Begomovirus	Blainvillea yellow spot virus	2	yes
+97	Begomovirus	Blechum interveinal chlorosis virus	2	yes
+98	Begomovirus	Boerhavia yellow spot virus	1	yes
+99	Begomovirus	Cabbage leaf curl Jamaica virus	2	yes
+100	Begomovirus	Cabbage leaf curl virus	2	yes
+101	Begomovirus	Capraria yellow spot virus	2	yes
+102	Begomovirus	Cassava mosaic Madagascar virus	2	yes
+103	Begomovirus	Centrosema yellow spot virus	1	yes
+104	Begomovirus	Chayote yellow mosaic virus	1	yes
+105	Begomovirus	Chilli leaf curl India virus	1	yes
+106	Begomovirus	Chilli leaf curl Kanpur virus	1	yes
+107	Begomovirus	Chilli leaf curl Vellanad virus	1	yes
+108	Begomovirus	Chilli leaf curl virus	1	yes
+109	Begomovirus	Chino del tomate Amazonas virus	1	yes
+110	Begomovirus	Chino del tomate virus	2	yes
+111	Begomovirus	Cleome golden mosaic virus	1	yes
+112	Begomovirus	Cleome leaf crumple virus	2	yes
+113	Begomovirus	Clerodendron golden mosaic virus	2	yes
+114	Begomovirus	Clerodendrum golden mosaic China virus	2	yes
+115	Begomovirus	Clerodendrum golden mosaic Jiangsu virus	1	yes
+116	Begomovirus	Cnidoscolus mosaic leaf deformation virus	2	yes
+117	Begomovirus	Coccinia mosaic Tamil Nadu virus	2	yes
+118	Begomovirus	Common bean mottle virus	2	yes
+119	Begomovirus	Common bean severe mosaic virus	2	yes
+120	Begomovirus	Corchorus golden mosaic virus	2	yes
+121	Begomovirus	Corchorus yellow spot virus	2	yes
+122	Begomovirus	Corchorus yellow vein Cuba virus	2	yes
+123	Begomovirus	Corchorus yellow vein virus	2	yes
+124	Begomovirus	Cotton chlorotic spot virus	2	yes
+125	Begomovirus	Cotton leaf crumple virus	2	yes
+126	Begomovirus	Cotton leaf curl Alabad virus	1	yes
+127	Begomovirus	Cotton leaf curl Bangalore virus	1	yes
+128	Begomovirus	Cotton leaf curl Barasat virus	1	yes
+129	Begomovirus	Cotton leaf curl Gezira virus	1	yes
+130	Begomovirus	Cotton leaf curl Kokhran virus	1	yes
+131	Begomovirus	Cotton leaf curl Multan virus	1	yes
+132	Begomovirus	Cotton yellow mosaic virus	2	yes
+133	Begomovirus	Cowpea bright yellow mosaic virus	2	yes
+134	Begomovirus	Cowpea golden mosaic virus	1	yes
+135	Begomovirus	Croton golden mosaic virus	2	yes
+136	Begomovirus	Cucumber chlorotic leaf virus	2	yes
+137	Begomovirus	Cucurbit leaf crumple virus	2	yes
+138	Begomovirus	Dalechampia chlorotic mosaic virus	2	yes
+139	Begomovirus	Datura leaf distortion virus	2	yes
+140	Begomovirus	Deinbollia mosaic virus	2	yes
+141	Begomovirus	Desmodium leaf distortion virus	2	yes
+142	Begomovirus	Desmodium mottle virus	2	yes
+143	Begomovirus	Dicliptera yellow mottle Cuba virus	1	yes
+144	Begomovirus	Dicliptera yellow mottle virus	2	yes
+145	Begomovirus	Dolichos yellow mosaic virus	1	yes
+146	Begomovirus	Duranta leaf curl virus	1	yes
+147	Begomovirus	East African cassava mosaic Cameroon virus	2	yes
+148	Begomovirus	East African cassava mosaic Kenya virus	2	yes
+149	Begomovirus	East African cassava mosaic Malawi virus	1	yes
+150	Begomovirus	East African cassava mosaic Zanzibar virus	2	yes
+151	Begomovirus	East African cassava mosaic virus	2	yes
+152	Begomovirus	Erectites yellow mosaic virus	1	yes
+153	Begomovirus	Eupatorium yellow vein virus	1	yes
+154	Begomovirus	Euphorbia leaf curl virus	1	yes
+155	Begomovirus	Euphorbia mosaic Peru virus	1	yes
+156	Begomovirus	Euphorbia mosaic virus	2	yes
+157	Begomovirus	Euphorbia yellow mosaic virus	2	yes
+158	Begomovirus	French bean leaf curl virus	1	yes
+159	Begomovirus	Hedyotis uncinella yellow mosaic virus	1	yes
+160	Begomovirus	Hemidesmus yellow mosaic virus	1	yes
+161	Begomovirus	Hibiscus golden mosaic virus	2	yes
+162	Begomovirus	Honeysuckle yellow vein virus	1	yes
+163	Begomovirus	Horsegram yellow mosaic virus	2	yes
+164	Begomovirus	Hybanthus yellow mosaic virus	2	yes
+165	Begomovirus	Indian cassava mosaic virus	2	yes
+166	Begomovirus	Jacquemontia mosaic Yucatan virus	2	yes
+167	Begomovirus	Jacquemontia yellow mosaic virus	2	yes
+168	Begomovirus	Jacquemontia yellow vein virus	2	yes
+169	Begomovirus	Jatropha leaf curl virus	1	yes
+170	Begomovirus	Jatropha leaf yellow mosaic virus	1	yes
+171	Begomovirus	Jatropha mosaic India virus	1	yes
+172	Begomovirus	Jatropha mosaic Nigeria virus	1	yes
+173	Begomovirus	Jatropha mosaic virus	2	yes
+174	Begomovirus	Jatropha yellow mosaic virus	1	yes
+175	Begomovirus	Kudzu mosaic virus	2	yes
+176	Begomovirus	Leonurus mosaic virus	1	yes
+177	Begomovirus	Lindernia anagallis yellow vein virus	1	yes
+178	Begomovirus	Lisianthus enation leaf curl virus	1	yes
+179	Begomovirus	Ludwigia yellow vein Vietnam virus	1	yes
+180	Begomovirus	Ludwigia yellow vein virus	1	yes
+181	Begomovirus	Luffa yellow mosaic virus	2	yes
+182	Begomovirus	Lycianthes yellow mosaic virus	2	yes
+183	Begomovirus	Macroptilium bright mosaic virus	1	yes
+184	Begomovirus	Macroptilium common mosaic virus	2	yes
+185	Begomovirus	Macroptilium golden mosaic virus	2	yes
+186	Begomovirus	Macroptilium mosaic Puerto Rico virus	2	yes
+187	Begomovirus	Macroptilium yellow mosaic Florida virus	2	yes
+188	Begomovirus	Macroptilium yellow mosaic virus	2	yes
+189	Begomovirus	Macroptilium yellow spot virus	1	yes
+190	Begomovirus	Macroptilium yellow vein virus	1	yes
+191	Begomovirus	Malvastrum bright yellow mosaic virus	2	yes
+192	Begomovirus	Malvastrum leaf curl Philippines virus	1	yes
+193	Begomovirus	Malvastrum leaf curl virus	1	yes
+194	Begomovirus	Malvastrum yellow mosaic Helshire virus	1	yes
+195	Begomovirus	Malvastrum yellow mosaic Jamaica virus	2	yes
+196	Begomovirus	Malvastrum yellow mosaic virus	1	yes
+197	Begomovirus	Malvastrum yellow vein Cambodia virus	1	yes
+198	Begomovirus	Malvastrum yellow vein Honghe virus	1	yes
+199	Begomovirus	Malvastrum yellow vein virus	1	yes
+200	Begomovirus	Melochia mosaic virus	2	yes
+201	Begomovirus	Melochia yellow mosaic virus	2	yes
+202	Begomovirus	Melon chlorotic leaf curl virus	2	yes
+203	Begomovirus	Melon chlorotic mosaic virus	2	yes
+204	Begomovirus	Merremia mosaic Puerto Rico virus	2	yes
+205	Begomovirus	Merremia mosaic virus	2	yes
+206	Begomovirus	Mesta yellow vein mosaic Bahraich virus	1	yes
+207	Begomovirus	Mimosa yellow leaf curl virus	1	yes
+208	Begomovirus	Mungbean yellow mosaic India virus	2	yes
+209	Begomovirus	Mungbean yellow mosaic virus	2	yes
+210	Begomovirus	Ocimum golden mosaic virus	2	yes
+211	Begomovirus	Ocimum mosaic virus	2	yes
+212	Begomovirus	Ocimum yellow vein virus	2	yes
+213	Begomovirus	Okra enation leaf curl virus	1	yes
+214	Begomovirus	Okra mottle virus	2	yes
+215	Begomovirus	Okra yellow crinkle virus	1	yes
+216	Begomovirus	Okra yellow mosaic Mexico virus	2	yes
+217	Begomovirus	Oxalis yellow vein virus	1	yes
+218	Begomovirus	Papaya leaf crumple virus	1	yes
+219	Begomovirus	Papaya leaf curl China virus	1	yes
+220	Begomovirus	Papaya leaf curl Guandong virus	1	yes
+221	Begomovirus	Papaya leaf curl virus	1	yes
+222	Begomovirus	Passionfruit leaf distortion virus	2	yes
+223	Begomovirus	Passionfruit severe leaf distortion virus	2	yes
+224	Begomovirus	Pavonia mosaic virus	2	yes
+225	Begomovirus	Pavonia yellow mosaic virus	2	yes
+226	Begomovirus	Pea leaf distortion virus	1	yes
+227	Begomovirus	Pedilanthus leaf curl virus	1	yes
+228	Begomovirus	Pepper blistering leaf virus	2	yes
+229	Begomovirus	Pepper golden mosaic virus	2	yes
+230	Begomovirus	Pepper huasteco yellow vein virus	2	yes
+231	Begomovirus	Pepper leaf curl Bangladesh virus	1	yes
+232	Begomovirus	Pepper leaf curl Lahore virus	1	yes
+233	Begomovirus	Pepper leaf curl virus	1	yes
+234	Begomovirus	Pepper leafroll virus	2	yes
+235	Begomovirus	Pepper yellow leaf curl Aceh virus	2	yes
+236	Begomovirus	Pepper yellow leaf curl Indonesia virus	2	yes
+237	Begomovirus	Pepper yellow leaf curl Thailand virus	2	yes
+238	Begomovirus	Potato yellow mosaic Panama virus	2	yes
+239	Begomovirus	Potato yellow mosaic virus	2	yes
+240	Begomovirus	Pouzolzia golden mosaic virus	1	yes
+241	Begomovirus	Pouzolzia mosaic Guangdong virus	1	yes
+242	Begomovirus	Premna leaf curl virus	1	yes
+243	Begomovirus	Pumpkin yellow mosaic virus	1	yes
+244	Begomovirus	Ramie mosaic Yunnan virus	1	yes
+245	Begomovirus	Rhynchosia golden mosaic Havana virus	2	yes
+246	Begomovirus	Rhynchosia golden mosaic Sinaloa virus	2	yes
+247	Begomovirus	Rhynchosia golden mosaic virus	2	yes
+248	Begomovirus	Rhynchosia mild mosaic virus	2	yes
+249	Begomovirus	Rhynchosia rugose golden mosaic virus	2	yes
+250	Begomovirus	Rhynchosia yellow mosaic India virus	2	yes
+251	Begomovirus	Rhynchosia yellow mosaic virus	2	yes
+252	Begomovirus	Sauropus leaf curl virus	1	yes
+253	Begomovirus	Sida angular mosaic virus	2	yes
+254	Begomovirus	Sida bright yellow mosaic virus	2	yes
+255	Begomovirus	Sida chlorotic leaf virus	2	yes
+256	Begomovirus	Sida chlorotic mottle virus	1	yes
+257	Begomovirus	Sida chlorotic vein virus	2	yes
+258	Begomovirus	Sida ciliaris golden mosaic virus	2	yes
+259	Begomovirus	Sida golden mosaic Brazil virus	1	yes
+260	Begomovirus	Sida golden mosaic Buckup virus	2	yes
+261	Begomovirus	Sida golden mosaic Costa Rica virus	2	yes
+262	Begomovirus	Sida golden mosaic Florida virus	2	yes
+263	Begomovirus	Sida golden mosaic Lara virus	1	yes
+264	Begomovirus	Sida golden mosaic virus	2	yes
+265	Begomovirus	Sida golden mottle virus	2	yes
+266	Begomovirus	Sida interveinal bright yellow virus	2	yes
+267	Begomovirus	Sida micrantha mosaic virus	2	yes
+268	Begomovirus	Sida mosaic Alagoas virus	2	yes
+269	Begomovirus	Sida mosaic Bolivia virus 1	2	yes
+270	Begomovirus	Sida mosaic Bolivia virus 2	2	yes
+271	Begomovirus	Sida mosaic Sinaloa virus	2	yes
+272	Begomovirus	Sida mottle Alagoas virus	1	yes
+273	Begomovirus	Sida mottle virus	2	yes
+274	Begomovirus	Sida yellow blotch virus	1	yes
+275	Begomovirus	Sida yellow golden mosaic virus	2	yes
+276	Begomovirus	Sida yellow leaf curl virus	1	yes
+277	Begomovirus	Sida yellow mosaic Alagoas virus	1	yes
+278	Begomovirus	Sida yellow mosaic Yucatan virus	2	yes
+279	Begomovirus	Sida yellow mosaic virus	1	yes
+280	Begomovirus	Sida yellow mottle virus	2	yes
+281	Begomovirus	Sida yellow net virus	1	yes
+282	Begomovirus	Sida yellow vein Vietnam virus	1	yes
+283	Begomovirus	Sida yellow vein virus	2	yes
+284	Begomovirus	Sidastrum golden leaf spot virus	1	yes
+285	Begomovirus	Solanum mosaic Bolivia virus	2	yes
+286	Begomovirus	South African cassava mosaic virus	2	yes
+287	Begomovirus	Soybean blistering mosaic virus	1	yes
+288	Begomovirus	Soybean chlorotic blotch virus	2	yes
+289	Begomovirus	Spilanthes yellow vein virus	1	yes
+290	Begomovirus	Squash leaf curl China virus	2	yes
+291	Begomovirus	Squash leaf curl Philippines virus	2	yes
+292	Begomovirus	Squash leaf curl virus	2	yes
+293	Begomovirus	Squash mild leaf curl virus	2	yes
+294	Begomovirus	Sri Lankan cassava mosaic virus	2	yes
+295	Begomovirus	Stachytarpheta leaf curl virus	1	yes
+296	Begomovirus	Sunn hemp leaf distortion virus	1	yes
+297	Begomovirus	Sweet potato leaf curl China virus	1	yes
+298	Begomovirus	Sweet potato leaf curl Georgia virus	1	yes
+299	Begomovirus	Sweet potato leaf curl virus	1	yes
+300	Begomovirus	Synedrella yellow vein clearing virus	1	yes
+301	Begomovirus	Telfairia golden mosaic virus	1	yes
+302	Begomovirus	Tobacco curly shoot virus	1	yes
+303	Begomovirus	Tobacco leaf curl Cuba virus	2	yes
+304	Begomovirus	Tobacco leaf curl Dominican Republic virus	2	yes
+305	Begomovirus	Tobacco leaf curl Pusa virus	1	yes
+306	Begomovirus	Tobacco leaf rugose virus	1	yes
+307	Begomovirus	Tobacco yellow crinkle virus	2	yes
+308	Begomovirus	Tomato bright yellow mosaic virus	1	yes
+309	Begomovirus	Tomato bright yellow mottle virus	1	yes
+310	Begomovirus	Tomato chino La Paz virus	1	yes
+311	Begomovirus	Tomato chlorotic leaf curl virus	2	yes
+312	Begomovirus	Tomato chlorotic leaf distortion virus	2	yes
+313	Begomovirus	Tomato chlorotic mottle Guyane virus	2	yes
+314	Begomovirus	Tomato chlorotic mottle virus	2	yes
+315	Begomovirus	Tomato common mosaic virus	2	yes
+316	Begomovirus	Tomato curly stunt virus	1	yes
+317	Begomovirus	Tomato dwarf leaf virus	2	yes
+318	Begomovirus	Tomato enation leaf curl virus	1	yes
+319	Begomovirus	Tomato golden leaf distortion virus	1	yes
+320	Begomovirus	Tomato golden leaf spot virus	1	yes
+321	Begomovirus	Tomato golden mosaic virus	2	yes
+322	Begomovirus	Tomato golden mottle virus	2	yes
+323	Begomovirus	Tomato golden vein virus	2	yes
+324	Begomovirus	Tomato interveinal chlorosis virus	1	yes
+325	Begomovirus	Tomato leaf curl Arusha virus	1	yes
+326	Begomovirus	Tomato leaf curl Bangalore virus	1	yes
+327	Begomovirus	Tomato leaf curl Cebu virus	1	yes
+328	Begomovirus	Tomato leaf curl China virus	1	yes
+329	Begomovirus	Tomato leaf curl Ghana virus	1	yes
+330	Begomovirus	Tomato leaf curl Guangdong virus	1	yes
+331	Begomovirus	Tomato leaf curl Gujarat virus	2	yes
+332	Begomovirus	Tomato leaf curl Hsinchu virus	2	yes
+333	Begomovirus	Tomato leaf curl Joydebpur virus	1	yes
+334	Begomovirus	Tomato leaf curl Kerala virus	1	yes
+335	Begomovirus	Tomato leaf curl Malaysia virus	1	yes
+336	Begomovirus	Tomato leaf curl New Delhi virus	2	yes
+337	Begomovirus	Tomato leaf curl New Delhi virus 4	1	yes
+338	Begomovirus	Tomato leaf curl Palampur virus	2	yes
+339	Begomovirus	Tomato leaf curl Patna virus	1	yes
+340	Begomovirus	Tomato leaf curl Philippines virus	1	yes
+341	Begomovirus	Tomato leaf curl Rajasthan virus	1	yes
+342	Begomovirus	Tomato leaf curl Sinaloa virus	2	yes
+343	Begomovirus	Tomato leaf curl Sri Lanka virus	1	yes
+344	Begomovirus	Tomato leaf curl Sudan virus	1	yes
+345	Begomovirus	Tomato leaf curl Sulawesi virus	1	yes
+346	Begomovirus	Tomato leaf curl Taiwan virus	1	yes
+347	Begomovirus	Tomato leaf curl Uganda virus	1	yes
+348	Begomovirus	Tomato leaf curl Vietnam virus	1	yes
+349	Begomovirus	Tomato leaf curl virus	1	yes
+350	Begomovirus	Tomato leaf deformation virus	1	yes
+351	Begomovirus	Tomato leaf distortion virus	1	yes
+352	Begomovirus	Tomato mild mosaic virus	2	yes
+353	Begomovirus	Tomato mild yellow leaf curl Aragua virus	2	yes
+354	Begomovirus	Tomato mosaic Havana virus	2	yes
+355	Begomovirus	Tomato mosaic severe dwarf virus	2	yes
+356	Begomovirus	Tomato mottle Taino virus	2	yes
+357	Begomovirus	Tomato mottle leaf curl virus	1	yes
+358	Begomovirus	Tomato mottle virus	2	yes
+359	Begomovirus	Tomato mottle wrinkle virus	2	yes
+360	Begomovirus	Tomato rugose mosaic virus	2	yes
+361	Begomovirus	Tomato rugose yellow leaf curl virus	2	yes
+362	Begomovirus	Tomato severe leaf curl virus	1	yes
+363	Begomovirus	Tomato severe rugose virus	2	yes
+364	Begomovirus	Tomato vein clearing leaf deformation virus	2	yes
+365	Begomovirus	Tomato wrinkled mosaic virus	2	yes
+366	Begomovirus	Tomato yellow leaf curl China virus	1	yes
+367	Begomovirus	Tomato yellow leaf curl Guangdong virus	1	yes
+368	Begomovirus	Tomato yellow leaf curl Indonesia virus	1	yes
+369	Begomovirus	Tomato yellow leaf curl Kanchanaburi virus	2	yes
+370	Begomovirus	Tomato yellow leaf curl Mali virus	1	yes
+371	Begomovirus	Tomato yellow leaf curl Thailand virus	2	yes
+372	Begomovirus	Tomato yellow leaf curl Vietnam virus	1	yes
+373	Begomovirus	Tomato yellow leaf curl Yunnan virus	1	yes
+374	Begomovirus	Tomato yellow leaf deformation dwarf virus	2	yes
+375	Begomovirus	Tomato yellow leaf distortion virus	2	yes
+376	Begomovirus	Tomato yellow margin leaf curl virus	2	yes
+377	Begomovirus	Tomato yellow mottle virus	2	yes
+378	Begomovirus	Tomato yellow spot virus	2	yes
+379	Begomovirus	Tomato yellow vein streak virus	2	yes
+380	Begomovirus	Triumfetta yellow mosaic virus	2	yes
+381	Begomovirus	Velvet bean severe mosaic virus	2	yes
+382	Begomovirus	Verbena mottle virus	2	yes
+383	Begomovirus	Vernonia yellow vein virus	1	yes
+384	Begomovirus	Vigna yellow mosaic virus	1	yes
+385	Begomovirus	Watermelon chlorotic stunt virus	2	yes
+386	Begomovirus	West African Asystasia virus 1	2	yes
+387	Begomovirus	West African Asystasia virus 2	1	yes
+388	Begomovirus	West African Asystasia virus 3	2	yes
+389	Begomovirus	Whitefly-associated begomovirus 1	1	yes
+390	Begomovirus	Whitefly-associated begomovirus 2	1	yes
+391	Begomovirus	Whitefly-associated begomovirus 3	1	yes
+392	Begomovirus	Whitefly-associated begomovirus 4	1	yes
+393	Begomovirus	Whitefly-associated begomovirus 6	1	yes
+394	Begomovirus	Wissadula golden mosaic virus	2	yes
+395	Begomovirus	Wissadula yellow mosaic virus	1	yes
+396	Beidivirus	Dipteran beidivirus	3	yes
+397	Benyvirus	Beet necrotic yellow vein virus	5	yes
+398	Benyvirus	Beet soil-borne mosaic virus	4	yes
+399	Benyvirus	Burdock mottle virus	2	yes
+400	Benyvirus	Rice stripe necrosis virus	2	yes
+401	Betachrysovirus	Betachrysovirus alternariae	5	yes
+402	Betachrysovirus	Betachrysovirus aspergilli	4	yes
+403	Betachrysovirus	Betachrysovirus botryosphaeriae	4	yes
+404	Betachrysovirus	Betachrysovirus colletotrichi	7	yes
+405	Betachrysovirus	Betachrysovirus coniothyrii	4	yes
+406	Betachrysovirus	Betachrysovirus foxyspori	4	yes
+407	Betachrysovirus	Betachrysovirus fugramineari	5	yes
+408	Betachrysovirus	Betachrysovirus magnaporthis	5	yes
+409	Betachrysovirus	Betachrysovirus neofusicocci	4	yes
+410	Betachrysovirus	Betachrysovirus pripenicillii	4	yes
+411	Betachrysovirus	Betachrysovirus secupenicillii	4	yes
+412	Betaentomopoxvirus	Choristoneura fumiferana entomopoxvirus	4	yes
+413	Betainfluenzavirus	Betainfluenzavirus influenzae	8	yes
+414	Betanodavirus	Barfin flounder nervous necrosis virus	2	yes
+415	Betanodavirus	Redspotted grouper nervous necrosis virus	2	yes
+416	Betanodavirus	Striped jack nervous necrosis virus	2	yes
+417	Betanodavirus	Tiger puffer nervous necrosis virus	2	yes
+418	Betapartitivirus	Atkinsonella hypoxylon virus	2	yes
+419	Betapartitivirus	Cannabis cryptic virus	2	yes
+420	Betapartitivirus	Ceratocystis resinifera virus 1	2	yes
+421	Betapartitivirus	Crimson clover cryptic virus 2	2	yes
+422	Betapartitivirus	Dill cryptic virus 2	2	yes
+423	Betapartitivirus	Fusarium poae virus 1	2	yes
+424	Betapartitivirus	Heterobasidion partitivirus 2	2	yes
+425	Betapartitivirus	Heterobasidion partitivirus 7	2	yes
+426	Betapartitivirus	Heterobasidion partitivirus 8	2	yes
+427	Betapartitivirus	Heterobasidion partitivirus P	1	yes
+428	Betapartitivirus	Hop trefoil cryptic virus 2	2	yes
+429	Betapartitivirus	Pleurotus ostreatus virus 1	2	yes
+430	Betapartitivirus	Primula malacoides virus 1	2	yes
+431	Betapartitivirus	Red clover cryptic virus 2	2	yes
+432	Betapartitivirus	Rhizoctonia solani virus 717	2	yes
+433	Betapartitivirus	Rosellinia necatrix virus 1	2	yes
+434	Betapartitivirus	White clover cryptic virus 2	2	yes
+435	Bidensovirus	Bombyx mori bidensovirus	2	yes
+436	Blosnavirus	Blotched snakehead virus	2	yes
+437	Blosnavirus	Lates calcarifer birnavirus	2	yes
+438	Blunervirus	Blueberry necrotic ring blotch virus	4	yes
+439	Blunervirus	Tea plant necrotic ring blotch virus	4	yes
+440	Blunervirus	Tomato fruit blotch virus	4	yes
+441	Boscovirus	Boscovirus hippoboscidae	2	yes
+442	Boscovirus	Boscovirus hypoboscidae	2	yes
+443	Botybirnavirus	Botrytis porri botybirnavirus 1	2	yes
+444	Bracoviriform	Bracoviriform congregatae	30	yes
+445	Bracoviriform	Bracoviriform demolitoris	15	yes
+446	Bracoviriform	Bracoviriform facetosae	29	yes
+447	Bracoviriform	Bracoviriform flavipedis	12	yes
+448	Bracoviriform	Bracoviriform glomeratae	14	yes
+449	Bracoviriform	Bracoviriform inaniti	18	yes
+450	Bracoviriform	Bracoviriform indiense	27	yes
+451	Bracoviriform	Bracoviriform marginiventris	4	yes
+452	Bracoviriform	Bracoviriform melanoscelae	2	yes
+453	Bracoviriform	Bracoviriform nigricipitis	2	yes
+454	Bracoviriform	Bracoviriform rubeculae	8	yes
+455	Bromovirus	Broad bean mottle virus	3	yes
+456	Bromovirus	Brome mosaic virus	3	yes
+457	Bromovirus	Bromovirus SVS	3	yes
+458	Bromovirus	Cassia yellow blotch virus	3	yes
+459	Bromovirus	Cowpea chlorotic mottle virus	3	yes
+460	Bromovirus	Melandrium yellow fleck virus	3	yes
+461	Bromovirus	Spring beauty latent virus	3	yes
+462	Bymovirus	Barley mild mosaic virus	2	yes
+463	Bymovirus	Barley yellow mosaic virus	2	yes
+464	Bymovirus	Oat mosaic virus	2	yes
+465	Bymovirus	Rice necrosis mosaic virus	2	yes
+466	Bymovirus	Wheat yellow mosaic virus	2	yes
+467	Cardiovirus	Cardiovirus B	3	yes
+468	Cheravirus	Apple latent spherical virus	2	yes
+469	Cheravirus	Arracacha virus B	2	yes
+470	Cheravirus	Cherry rasp leaf virus	2	yes
+471	Cheravirus	Currant latent virus	2	yes
+472	Cheravirus	Stocky prune virus	2	yes
+473	Chlorovirus	Paramecium bursaria Chlorella virus NC1A	2	yes
+474	Chlorovirus	Paramecium bursaria Chlorella virus NYs1	2	yes
+475	Chlorovirus	Paramecium bursaria Chlorella virus SC1A	5	yes
+476	Chuvivirus	Chuvivirus brunnichi	2	yes
+477	Chuvivirus	Chuvivirus canceris	2	yes
+478	Cicadellivirus	Cicadellivirus scaphoidei	3	yes
+479	Cilevirus	Cilevirus oahuense	2	yes
+480	Cilevirus	Citrus leprosis virus C	2	yes
+481	Cilevirus	Citrus leprosis virus C2	2	yes
+482	Cilevirus	Passion fruit green spot virus	2	yes
+483	Coguvirus	Citrus coguvirus	2	yes
+484	Coguvirus	Coguvirus eburi	2	yes
+485	Coguvirus	Grapevine coguvirus	3	yes
+486	Coltivirus	Colorado tick fever coltivirus	12	yes
+487	Coltivirus	Eyach coltivirus	12	yes
+488	Coltivirus	Kundal coltivirus	12	yes
+489	Coltivirus	Tai Forest coltivirus	10	yes
+490	Coltivirus	Tarumizu coltivirus	12	yes
+491	Comovirus	Bean pod mottle virus	2	yes
+492	Comovirus	Bean rugose mosaic virus	2	yes
+493	Comovirus	Broad bean stain virus	2	yes
+494	Comovirus	Broad bean true mosaic virus	2	yes
+495	Comovirus	Comovirus ArLV1	2	yes
+496	Comovirus	Comovirus PepMMV	2	yes
+497	Comovirus	Comovirus PvSMV	2	yes
+498	Comovirus	Cowpea mosaic virus	2	yes
+499	Comovirus	Cowpea severe mosaic virus	2	yes
+500	Comovirus	Radish mosaic virus	2	yes
+501	Comovirus	Red clover mottle virus	2	yes
+502	Comovirus	Squash mosaic virus	2	yes
+503	Cosavirus	Cosavirus A	2	yes
+504	Crinivirus	Abutilon yellows virus	2	yes
+505	Crinivirus	Bean yellow disorder virus	2	yes
+506	Crinivirus	Beet pseudoyellows virus	2	yes
+507	Crinivirus	Blackberry yellow vein-associated virus	2	yes
+508	Crinivirus	Cucurbit yellow stunting disorder virus	2	yes
+509	Crinivirus	Diodia vein chlorosis virus	2	yes
+510	Crinivirus	Lettuce chlorosis virus	2	yes
+511	Crinivirus	Lettuce infectious yellows virus	2	yes
+512	Crinivirus	Potato yellow vein virus	3	yes
+513	Crinivirus	Strawberry pallidosis-associated virus	2	yes
+514	Crinivirus	Sweet potato chlorotic stunt virus	2	yes
+515	Crinivirus	Tetterwort vein chlorosis virus	2	yes
+516	Crinivirus	Tomato chlorosis virus	2	yes
+517	Crinivirus	Tomato infectious chlorosis virus	2	yes
+518	Cryspovirus	Cryptosporidium parvum virus 1	2	yes
+519	Cucumovirus	Cucumber mosaic virus	3	yes
+520	Cucumovirus	Gayfeather mild mottle virus	3	yes
+521	Cucumovirus	Peanut stunt virus	3	yes
+522	Cucumovirus	Tomato aspermy virus	3	yes
+523	Cypovirus	Cypovirus 1	10	yes
+524	Cypovirus	Cypovirus 14	10	yes
+525	Cypovirus	Cypovirus 15	11	yes
+526	Cypovirus	Cypovirus 16	8	yes
+527	Cypovirus	Cypovirus 2	10	yes
+528	Cypovirus	Cypovirus 4	4	yes
+529	Cypovirus	Cypovirus 5	10	yes
+530	Cystovirus	Cystovirus phi12	3	yes
+531	Cystovirus	Cystovirus phi13	3	yes
+532	Cystovirus	Cystovirus phi2954	3	yes
+533	Cystovirus	Cystovirus phi6	3	yes
+534	Cystovirus	Cystovirus phi8	3	yes
+535	Cystovirus	Cystovirus phiNN	3	yes
+536	Cystovirus	Cystovirus phiYY	3	yes
+537	Deltainfluenzavirus	Deltainfluenzavirus influenzae	7	yes
+538	Deltapartitivirus	Beet cryptic virus 2	3	yes
+539	Deltapartitivirus	Beet cryptic virus 3	1	yes
+540	Deltapartitivirus	Fig cryptic virus	2	yes
+541	Deltapartitivirus	Pepper cryptic virus 1	2	yes
+542	Deltapartitivirus	Pepper cryptic virus 2	2	yes
+543	Demapteravirus	Demapteravirus dermapteri	2	yes
+544	Dianthovirus	Carnation ringspot virus	2	yes
+545	Dianthovirus	Red clover necrotic mosaic virus	2	yes
+546	Dianthovirus	Sweet clover necrotic mosaic virus	2	yes
+547	Dichorhavirus	Dichorhavirus citri	2	yes
+548	Dichorhavirus	Dichorhavirus clerodendri	2	yes
+549	Dichorhavirus	Dichorhavirus coffeae	2	yes
+550	Dichorhavirus	Dichorhavirus leprosis	2	yes
+551	Dichorhavirus	Dichorhavirus orchidaceae	2	yes
+552	Dinovernavirus	Aedes pseudoscutellaris reovirus	9	yes
+553	Dronavirus	Drosophina B birnavirus	2	yes
+554	Emaravirus	Emaravirus aceris	6	yes
+555	Emaravirus	Emaravirus actinidiae	5	yes
+556	Emaravirus	Emaravirus cajani	5	yes
+557	Emaravirus	Emaravirus camelliae	9	yes
+558	Emaravirus	Emaravirus cercidis	5	yes
+559	Emaravirus	Emaravirus chrysantemi	7	yes
+560	Emaravirus	Emaravirus cordylinae	5	yes
+561	Emaravirus	Emaravirus fici	6	yes
+562	Emaravirus	Emaravirus idaeobati	8	yes
+563	Emaravirus	Emaravirus kiwii	6	yes
+564	Emaravirus	Emaravirus parkinsoniae	4	yes
+565	Emaravirus	Emaravirus perillae	10	yes
+566	Emaravirus	Emaravirus pistaciae	8	yes
+567	Emaravirus	Emaravirus populi	5	yes
+568	Emaravirus	Emaravirus pyri	5	yes
+569	Emaravirus	Emaravirus quercus	5	yes
+570	Emaravirus	Emaravirus rosae	7	yes
+571	Emaravirus	Emaravirus rubi	5	yes
+572	Emaravirus	Emaravirus sorbi	4	yes
+573	Emaravirus	Emaravirus syringae	5	yes
+574	Emaravirus	Emaravirus toordali	6	yes
+575	Emaravirus	Emaravirus tritici	8	yes
+576	Emaravirus	Emaravirus verbanni	4	yes
+577	Emaravirus	Emaravirus ziziphi	6	yes
+578	Enterovirus	Enterovirus B	4	yes
+579	Enterovirus	Enterovirus D	4	yes
+580	Enterovirus	Enterovirus E	2	yes
+581	Enterovirus	Enterovirus J	2	yes
+582	Entomobirnavirus	Drosophila X virus	2	yes
+583	Entomobirnavirus	Mosquito X virus	2	yes
+584	Entovirus	Entoleuca entovirus	2	yes
+585	Fabavirus	Broad bean wilt virus 1	2	yes
+586	Fabavirus	Broad bean wilt virus 2	2	yes
+587	Fabavirus	Cucurbit mild mosaic virus	2	yes
+588	Fabavirus	Fabavirus PLPaV	2	yes
+589	Fabavirus	Gentian mosaic virus	2	yes
+590	Fabavirus	Grapevine fabavirus	2	yes
+591	Fabavirus	Lamium mild mosaic virus	2	yes
+592	Fabavirus	Prunus virus F	2	yes
+593	Feravirus	Ferak feravirus	3	yes
+594	Feravirus	Hemipteran feravirus	3	yes
+595	Feravirus	Neuropteran feravirus	3	yes
+596	Fijivirus	Fiji disease virus	10	yes
+597	Fijivirus	Maize rough dwarf virus	10	yes
+598	Fijivirus	Mal de Rio Cuarto virus	10	yes
+599	Fijivirus	Nilaparvata lugens reovirus	10	yes
+600	Fijivirus	Oat sterile dwarf virus	4	yes
+601	Fijivirus	Rice black streaked dwarf virus	10	yes
+602	Fijivirus	Southern rice black-streaked dwarf virus	10	yes
+603	Firehammervirus	Campylobacter virus IBB35	5	yes
+604	Furovirus	Chinese wheat mosaic virus	2	yes
+605	Furovirus	Japanese soil-borne wheat mosaic virus	2	yes
+606	Furovirus	Oat golden stripe virus	2	yes
+607	Furovirus	Soil-borne cereal mosaic virus	2	yes
+608	Furovirus	Soil-borne wheat mosaic virus	2	yes
+609	Furovirus	Sorghum chlorotic spot virus	2	yes
+610	Gammainfluenzavirus	Gammainfluenzavirus influenzae	7	yes
+611	Gammapartitivirus	Aspergillus ochraceous virus	3	yes
+612	Gammapartitivirus	Discula destructiva virus 1	2	yes
+613	Gammapartitivirus	Discula destructiva virus 2	2	yes
+614	Gammapartitivirus	Fusarium solani virus 1	2	yes
+615	Gammapartitivirus	Gremmeniella abietina RNA virus MS1	3	yes
+616	Gammapartitivirus	Ophiostoma partitivirus 1	2	yes
+617	Gammapartitivirus	Penicillium stoloniferum virus F	2	yes
+618	Gammapartitivirus	Penicillium stoloniferum virus S	2	yes
+619	Gemytripvirus	Gemytripvirus fugra1	3	yes
+620	Goravirus	Drakaea virus A	2	yes
+621	Goravirus	Gentian ovary ringspot virus	2	yes
+622	Goukovirus	Cumuto goukovirus	3	yes
+623	Goukovirus	Gouleako goukovirus	3	yes
+624	Goukovirus	Yichang insect goukovirus	3	yes
+625	Hadakavirus	Hadakavirus nanga	11	yes
+626	Hartmanivirus	Haartman hartmanivirus	2	yes
+627	Hartmanivirus	Heimat hartmanivirus	2	yes
+628	Hartmanivirus	Muikkunen hartmanivirus	2	yes
+629	Hartmanivirus	Schoolhouse hartmanivirus	2	yes
+630	Hartmanivirus	Zurich hartmanivirus	2	yes
+631	Herbevirus	Herbert herbevirus	3	yes
+632	Herbevirus	Kibale herbevirus	3	yes
+633	Herbevirus	Tai herbevirus	3	yes
+634	Higrevirus	Hibiscus green spot virus 2	3	yes
+635	Hordeivirus	Barley stripe mosaic virus	3	yes
+636	Hordeivirus	Lychnis ringspot virus	2	yes
+637	Hordeivirus	Poa semilatent virus	2	yes
+638	Horwuvirus	Horsefly horwuvirus	4	yes
+639	Horwuvirus	Kimberley horwuvirus	4	yes
+640	Hubavirus	Hubavirus myriapedis	3	yes
+641	Hudivirus	Dipteran hudivirus	3	yes
+642	Hudovirus	Lepidopteran hudovirus	3	yes
+643	Hymovirus	Hymenopteran hymovirus 1	3	yes
+644	Hymovirus	Hymenopteran hymovirus 2	3	yes
+645	Ichnoviriform	Ichnoviriform fugitivi	56	yes
+646	Ichnoviriform	Ichnoviriform fumiferanae	106	yes
+647	Ichnoviriform	Ichnoviriform sonorense	23	yes
+648	Idaeovirus	Idaeovirus ligustri	2	yes
+649	Idaeovirus	Idaeovirus rubi	2	yes
+650	Idnoreovirus	Idnoreovirus 1	7	yes
+651	Iflavirus	Acheta domesticus iflavirus	2	yes
+652	Ilarvirus	Ageratum latent virus	3	yes
+653	Ilarvirus	American plum line pattern virus	3	yes
+654	Ilarvirus	Apple mosaic virus	3	yes
+655	Ilarvirus	Asparagus virus 2	3	yes
+656	Ilarvirus	Blackberry chlorotic ringspot virus	3	yes
+657	Ilarvirus	Blueberry shock virus	3	yes
+658	Ilarvirus	Citrus leaf rugose virus	3	yes
+659	Ilarvirus	Citrus variegation virus	3	yes
+660	Ilarvirus	Elm mottle virus	3	yes
+661	Ilarvirus	Fragaria chiloensis latent virus	3	yes
+662	Ilarvirus	Humulus japonicus latent virus	3	yes
+663	Ilarvirus	Lilac leaf chlorosis virus	3	yes
+664	Ilarvirus	Lilac ring mottle virus	2	yes
+665	Ilarvirus	Parietaria mottle virus	3	yes
+666	Ilarvirus	Privet ringspot virus	3	yes
+667	Ilarvirus	Prune dwarf virus	3	yes
+668	Ilarvirus	Prunus necrotic ringspot virus	3	yes
+669	Ilarvirus	Spinach latent virus	3	yes
+670	Ilarvirus	Strawberry necrotic shock virus	3	yes
+671	Ilarvirus	Tobacco streak virus	3	yes
+672	Ilarvirus	Tomato necrotic streak virus	3	yes
+673	Ilarvirus	Tulare apple mosaic virus	3	yes
+674	Isavirus	Isavirus salaris	8	yes
+675	Ixovirus	Blackleg ixovirus	2	yes
+676	Ixovirus	Norway ixovirus	2	yes
+677	Ixovirus	Scapularis ixovirus	2	yes
+678	Jonvirus	Jonchet jonvirus	3	yes
+679	Khurdivirus	Khurdivirus volgaense	3	yes
+680	Lakivirus	Lakivirus lakamhaense	3	yes
+681	Lambavirus	Lambavirus wisconsinense	3	yes
+682	Laulavirus	Grapevine laulavirus 2	3	yes
+683	Laulavirus	Grapevine laulavirus 3	3	yes
+684	Laulavirus	Grapevine laulavirus 4	3	yes
+685	Laulavirus	Laurel Lake laulavirus	3	yes
+686	Lentinuvirus	Lentinula lentinuvirus	2	yes
+687	Lincruvirus	Lincruvirus europense	3	yes
+688	Lincruvirus	Lincruvirus sinense	3	yes
+689	Lincruvirus	Lincruvirus wenlingense	3	yes
+690	Loanvirus	Brno loanvirus	3	yes
+691	Loanvirus	Longquan loanvirus	3	yes
+692	Mammarenavirus	Allpahuayo mammarenavirus	2	yes
+693	Mammarenavirus	Alxa mammarenavirus	2	yes
+694	Mammarenavirus	Argentinian mammarenavirus	2	yes
+695	Mammarenavirus	Bear Canyon mammarenavirus	2	yes
+696	Mammarenavirus	Brazilian mammarenavirus	2	yes
+697	Mammarenavirus	Cali mammarenavirus	2	yes
+698	Mammarenavirus	Chapare mammarenavirus	2	yes
+699	Mammarenavirus	Chevrier mammarenavirus	2	yes
+700	Mammarenavirus	Cupixi mammarenavirus	2	yes
+701	Mammarenavirus	Flexal mammarenavirus	2	yes
+702	Mammarenavirus	Gairo mammarenavirus	2	yes
+703	Mammarenavirus	Guanarito mammarenavirus	2	yes
+704	Mammarenavirus	Ippy mammarenavirus	2	yes
+705	Mammarenavirus	Kitale mammarenavirus	2	yes
+706	Mammarenavirus	Lassa mammarenavirus	2	yes
+707	Mammarenavirus	Latino mammarenavirus	2	yes
+708	Mammarenavirus	Loei River mammarenavirus	2	yes
+709	Mammarenavirus	Lujo mammarenavirus	2	yes
+710	Mammarenavirus	Luna mammarenavirus	2	yes
+711	Mammarenavirus	Lunk mammarenavirus	2	yes
+712	Mammarenavirus	Lymphocytic choriomeningitis mammarenavirus	2	yes
+713	Mammarenavirus	Machupo mammarenavirus	2	yes
+714	Mammarenavirus	Mammarenavirus bituense	2	yes
+715	Mammarenavirus	Mammarenavirus kwanzaense	2	yes
+716	Mammarenavirus	Mariental mammarenavirus	2	yes
+717	Mammarenavirus	Merino Walk mammarenavirus	2	yes
+718	Mammarenavirus	Mobala mammarenavirus	2	yes
+719	Mammarenavirus	Mopeia mammarenavirus	2	yes
+720	Mammarenavirus	Okahandja mammarenavirus	2	yes
+721	Mammarenavirus	Oliveros mammarenavirus	2	yes
+722	Mammarenavirus	Paraguayan mammarenavirus	2	yes
+723	Mammarenavirus	Pirital mammarenavirus	2	yes
+724	Mammarenavirus	Planalto mammarenavirus	2	yes
+725	Mammarenavirus	Ryukyu mammarenavirus	2	yes
+726	Mammarenavirus	Serra do Navio mammarenavirus	2	yes
+727	Mammarenavirus	Solwezi mammarenavirus	2	yes
+728	Mammarenavirus	Souris mammarenavirus	2	yes
+729	Mammarenavirus	Tacaribe mammarenavirus	2	yes
+730	Mammarenavirus	Tamiami mammarenavirus	2	yes
+731	Mammarenavirus	Wenzhou mammarenavirus	2	yes
+732	Mammarenavirus	Whitewater Arroyo mammarenavirus	2	yes
+733	Mammarenavirus	Xapuri mammarenavirus	2	yes
+734	Marseillevirus	Senegalvirus marseillevirus	6	yes
+735	Mastadenovirus	Human mastadenovirus E	1	yes
+736	Mastadenovirus	Murine mastadenovirus A	10	yes
+737	Megabirnavirus	Rosellinia necatrix megabirnavirus 1	2	yes
+738	Mimoreovirus	Micromonas pusilla reovirus	11	yes
+739	Mobatvirus	Laibin mobatvirus	3	yes
+740	Mobatvirus	Lena mobatvirus	3	yes
+741	Mobatvirus	Nova mobatvirus	3	yes
+742	Mobatvirus	Quezon mobatvirus	3	yes
+743	Mobatvirus	Xuan Son mobatvirus	3	yes
+744	Mobuvirus	Mothra mobuvirus	3	yes
+745	Mobuvirus	Narangue mobuvirus	3	yes
+746	Mycoreovirus	Mycoreovirus 1	11	yes
+747	Mycoreovirus	Mycoreovirus 3	12	yes
+748	Mykissvirus	Mykissvirus tructae	8	yes
+749	Nanovirus	Black medic leaf roll virus	8	yes
+750	Nanovirus	Cow vetch latent virus	8	yes
+751	Nanovirus	Faba bean necrotic stunt virus	8	yes
+752	Nanovirus	Faba bean necrotic yellows virus	8	yes
+753	Nanovirus	Faba bean yellow leaf virus	8	yes
+754	Nanovirus	Milk vetch dwarf virus	8	yes
+755	Nanovirus	Parsley severe stunt associated virus	7	yes
+756	Nanovirus	Pea necrotic yellow dwarf virus	8	yes
+757	Nanovirus	Pea yellow stunt virus	8	yes
+758	Nanovirus	Sophora yellow stunt virus	8	yes
+759	Nanovirus	Subterranean clover stunt virus	8	yes
+760	Nepovirus	Aeonium ringspot virus	2	yes
+761	Nepovirus	Arabis mosaic virus	2	yes
+762	Nepovirus	Artichoke Italian latent virus	2	yes
+763	Nepovirus	Beet ringspot virus	2	yes
+764	Nepovirus	Blackcurrant reversion virus	2	yes
+765	Nepovirus	Blueberry latent spherical virus	2	yes
+766	Nepovirus	Cherry leaf roll virus	2	yes
+767	Nepovirus	Cycas necrotic stunt virus	2	yes
+768	Nepovirus	Grapevine Anatolian ringspot virus	2	yes
+769	Nepovirus	Grapevine Bulgarian latent virus	2	yes
+770	Nepovirus	Grapevine chrome mosaic virus	2	yes
+771	Nepovirus	Grapevine deformation virus	2	yes
+772	Nepovirus	Grapevine fanleaf virus	2	yes
+773	Nepovirus	Melon mild mottle virus	2	yes
+774	Nepovirus	Mulberry mosaic leaf roll associated virus	2	yes
+775	Nepovirus	Nepovirus CawYV	2	yes
+776	Nepovirus	Nepovirus GNVA	2	yes
+777	Nepovirus	Nepovirus GSPNeV	2	yes
+778	Nepovirus	Nepovirus PCMoV	2	yes
+779	Nepovirus	Nepovirus PoLNVA	2	yes
+780	Nepovirus	Nepovirus RCNA	2	yes
+781	Nepovirus	Peach rosette mosaic virus	2	yes
+782	Nepovirus	Potato black ringspot virus	2	yes
+783	Nepovirus	Potato virus B	2	yes
+784	Nepovirus	Raspberry ringspot virus	2	yes
+785	Nepovirus	Soybean latent spherical virus	2	yes
+786	Nepovirus	Tobacco ringspot virus	2	yes
+787	Nepovirus	Tomato black ring virus	2	yes
+788	Nepovirus	Tomato ringspot virus	2	yes
+789	Norwavirus	Grotenhout norwavirus	2	yes
+790	Nuarterivirus	Nuarterivirus guemel	1	yes
+791	Ocetevirus	Blattodean ocetevirus	3	yes
+792	Ohlsrhavirus	Ohlsrhavirus northcreek	4	yes
+793	Oleavirus	Olive latent virus 2	3	yes
+794	Omegatetravirus	Dendrolimus punctatus virus	2	yes
+795	Omegatetravirus	Helicoverpa armigera stunt virus	2	yes
+796	Ophiovirus	Ophiovirus citri	3	yes
+797	Ophiovirus	Ophiovirus freesiae	1	yes
+798	Ophiovirus	Ophiovirus lactucae	4	yes
+799	Ophiovirus	Ophiovirus mirafioriense	4	yes
+800	Ophiovirus	Ophiovirus ranunculi	1	yes
+801	Ophiovirus	Ophiovirus tulipae	1	yes
+802	Ophiovirus	Ophiovirus vaccinii	3	yes
+803	Orbivirus	African horse sickness virus	10	yes
+804	Orbivirus	Bluetongue virus	10	yes
+805	Orbivirus	Changuinola virus	10	yes
+806	Orbivirus	Chenuda virus	10	yes
+807	Orbivirus	Chobar Gorge virus	10	yes
+808	Orbivirus	Corriparta virus	10	yes
+809	Orbivirus	Epizootic hemorrhagic disease virus	10	yes
+810	Orbivirus	Equine encephalosis virus	10	yes
+811	Orbivirus	Eubenangee virus	10	yes
+812	Orbivirus	Great Island virus	10	yes
+813	Orbivirus	Lebombo virus	10	yes
+814	Orbivirus	Orungo virus	10	yes
+815	Orbivirus	Palyam virus	10	yes
+816	Orbivirus	Peruvian horse sickness virus	10	yes
+817	Orbivirus	St Croix River virus	10	yes
+818	Orbivirus	Umatilla virus	10	yes
+819	Orbivirus	Wad Medani virus	10	yes
+820	Orbivirus	Wallal virus	10	yes
+821	Orbivirus	Warrego virus	10	yes
+822	Orbivirus	Yunnan orbivirus	10	yes
+823	Orthobornavirus	Orthobornavirus alphapsittaciforme	7	yes
+824	Orthobornavirus	Orthobornavirus betapsittaciforme	2	yes
+825	Orthobunyavirus	Abras orthobunyavirus	3	yes
+826	Orthobunyavirus	Aino orthobunyavirus	3	yes
+827	Orthobunyavirus	Akabane orthobunyavirus	3	yes
+828	Orthobunyavirus	Alajuela orthobunyavirus	3	yes
+829	Orthobunyavirus	Anadyr orthobunyavirus	3	yes
+830	Orthobunyavirus	Ananindeua orthobunyavirus	3	yes
+831	Orthobunyavirus	Anhembi orthobunyavirus	3	yes
+832	Orthobunyavirus	Anopheles A orthobunyavirus	3	yes
+833	Orthobunyavirus	Anopheles B orthobunyavirus	1	yes
+834	Orthobunyavirus	Apeu orthobunyavirus	3	yes
+835	Orthobunyavirus	Bakau orthobunyavirus	1	yes
+836	Orthobunyavirus	Batai orthobunyavirus	3	yes
+837	Orthobunyavirus	Batama orthobunyavirus	1	yes
+838	Orthobunyavirus	Bellavista orthobunyavirus	3	yes
+839	Orthobunyavirus	Bertioga orthobunyavirus	3	yes
+840	Orthobunyavirus	Bimiti orthobunyavirus	3	yes
+841	Orthobunyavirus	Birao orthobunyavirus	3	yes
+842	Orthobunyavirus	Bozo orthobunyavirus	3	yes
+843	Orthobunyavirus	Brazoran orthobunyavirus	3	yes
+844	Orthobunyavirus	Bruconha orthobunyavirus	3	yes
+845	Orthobunyavirus	Buffalo Creek orthobunyavirus	3	yes
+846	Orthobunyavirus	Bunyamwera orthobunyavirus	3	yes
+847	Orthobunyavirus	Buttonwillow orthobunyavirus	3	yes
+848	Orthobunyavirus	Bwamba orthobunyavirus	3	yes
+849	Orthobunyavirus	Cache Valley orthobunyavirus	3	yes
+850	Orthobunyavirus	Cachoeira Porteira orthobunyavirus	3	yes
+851	Orthobunyavirus	California encephalitis orthobunyavirus	3	yes
+852	Orthobunyavirus	Capim orthobunyavirus	3	yes
+853	Orthobunyavirus	Caraparu orthobunyavirus	3	yes
+854	Orthobunyavirus	Cat Que orthobunyavirus	3	yes
+855	Orthobunyavirus	Catu orthobunyavirus	3	yes
+856	Orthobunyavirus	Enseada orthobunyavirus	3	yes
+857	Orthobunyavirus	Faceys paddock orthobunyavirus	3	yes
+858	Orthobunyavirus	Fort Sherman orthobunyavirus	3	yes
+859	Orthobunyavirus	Gamboa orthobunyavirus	3	yes
+860	Orthobunyavirus	Gan Gan orthobunyavirus	3	yes
+861	Orthobunyavirus	Guajara orthobunyavirus	3	yes
+862	Orthobunyavirus	Guama orthobunyavirus	3	yes
+863	Orthobunyavirus	Guaroa orthobunyavirus	3	yes
+864	Orthobunyavirus	Iaco orthobunyavirus	3	yes
+865	Orthobunyavirus	Ilesha orthobunyavirus	3	yes
+866	Orthobunyavirus	Ingwavuma orthobunyavirus	3	yes
+867	Orthobunyavirus	Jamestown Canyon orthobunyavirus	3	yes
+868	Orthobunyavirus	Jatobal orthobunyavirus	3	yes
+869	Orthobunyavirus	Kaeng Khoi orthobunyavirus	3	yes
+870	Orthobunyavirus	Kairi orthobunyavirus	3	yes
+871	Orthobunyavirus	Keystone orthobunyavirus	3	yes
+872	Orthobunyavirus	Koongol orthobunyavirus	3	yes
+873	Orthobunyavirus	La Crosse orthobunyavirus	3	yes
+874	Orthobunyavirus	Leanyer orthobunyavirus	3	yes
+875	Orthobunyavirus	Lumbo orthbunyavirus	3	yes
+876	Orthobunyavirus	MPoko orthobunyavirus	1	yes
+877	Orthobunyavirus	Macaua orthobunyavirus	3	yes
+878	Orthobunyavirus	Madrid orthobunyavirus	3	yes
+879	Orthobunyavirus	Maguari orthobunyavirus	3	yes
+880	Orthobunyavirus	Mahogany Hammock orthobunyavirus	3	yes
+881	Orthobunyavirus	Main Drain orthobunyavirus	3	yes
+882	Orthobunyavirus	Manzanilla orthobunyavirus	3	yes
+883	Orthobunyavirus	Mapputta orthobunyavirus	3	yes
+884	Orthobunyavirus	Maprik orthobunyavirus	3	yes
+885	Orthobunyavirus	Marituba orthobunyavirus	3	yes
+886	Orthobunyavirus	Matruh orthobunyavirus	3	yes
+887	Orthobunyavirus	Melao orthobunyavirus	3	yes
+888	Orthobunyavirus	Mermet orthobunyavirus	3	yes
+889	Orthobunyavirus	Moju orthobunyavirus	3	yes
+890	Orthobunyavirus	Nyando orthobunyavirus	3	yes
+891	Orthobunyavirus	Oriboca orthobunyavirus	3	yes
+892	Orthobunyavirus	Oropouche orthobunyavirus	3	yes
+893	Orthobunyavirus	Oyo orthobunyavirus	3	yes
+894	Orthobunyavirus	Patois orthobunyavirus	3	yes
+895	Orthobunyavirus	Peaton orthobunyavirus	3	yes
+896	Orthobunyavirus	Potosi orthobunyavirus	3	yes
+897	Orthobunyavirus	Sabo orthobunyavirus	3	yes
+898	Orthobunyavirus	San Angelo orthobunyavirus	3	yes
+899	Orthobunyavirus	Sango orthobunyavirus	3	yes
+900	Orthobunyavirus	Schmallenberg orthobunyavirus	3	yes
+901	Orthobunyavirus	Sedlec orthobunyavirus	3	yes
+902	Orthobunyavirus	Serra do Navio orthobunyavirus	3	yes
+903	Orthobunyavirus	Shark River orthobunyavirus	3	yes
+904	Orthobunyavirus	Shuni orthobunyavirus	3	yes
+905	Orthobunyavirus	Simbu orthobunyavirus	3	yes
+906	Orthobunyavirus	Snowshoe hare orthobunyavirus	3	yes
+907	Orthobunyavirus	Sororoca orthobunyavirus	3	yes
+908	Orthobunyavirus	Tacaiuma orthobunyavirus	3	yes
+909	Orthobunyavirus	Tahyna orthobunyavirus	3	yes
+910	Orthobunyavirus	Tataguine orthobunyavirus	3	yes
+911	Orthobunyavirus	Tensaw orthobunyavirus	3	yes
+912	Orthobunyavirus	Tete orthobunyavirus	3	yes
+913	Orthobunyavirus	Thimiri orthobunyavirus	3	yes
+914	Orthobunyavirus	Triniti orthobunyavirus	3	yes
+915	Orthobunyavirus	Trivittatus orthobunyavirus	3	yes
+916	Orthobunyavirus	Turlock orthobunyavirus	3	yes
+917	Orthobunyavirus	Utinga orthobunyavirus	3	yes
+918	Orthobunyavirus	Witwatersrand orthobunyavirus	3	yes
+919	Orthobunyavirus	Wolkberg orthobunyavirus	3	yes
+920	Orthobunyavirus	Wyeomyia orthobunyavirus	3	yes
+921	Orthocurvulavirus	Curvularia orthocurvulavirus 1	2	yes
+922	Orthocurvulavirus	Fusarium graminearum orthocurvulavirus	2	yes
+923	Orthocurvulavirus	Heterobasidion orthocurvulavirus	2	yes
+924	Orthocurvulavirus	Lactarius rufus orthocurvulavirus 1	2	yes
+925	Orthocurvulavirus	Lactarius tabidus orthocurvulavirus 1	2	yes
+926	Orthocurvulavirus	Rhizoctonia solani orthocurvulavirus 1	2	yes
+927	Orthocurvulavirus	Sclerotium hydrophilum orthocurvulavirus 1	2	yes
+928	Orthocurvulavirus	Trichoderma harzianum orthocurvulavirus 1	2	yes
+929	Orthodiscovirus	Orthodiscovirus coniellae	3	yes
+930	Orthodiscovirus	Orthodiscovirus hispaniae	3	yes
+931	Orthodiscovirus	Orthodiscovirus iberiae	3	yes
+932	Orthodiscovirus	Orthodiscovirus missouriense	3	yes
+933	Orthodiscovirus	Orthodiscovirus penicillii	3	yes
+934	Orthohantavirus	Andes orthohantavirus	3	yes
+935	Orthohantavirus	Asama orthohantavirus	2	yes
+936	Orthohantavirus	Asikkala orthohantavirus	3	yes
+937	Orthohantavirus	Bayou orthohantavirus	3	yes
+938	Orthohantavirus	Black Creek Canal orthohantavirus	3	yes
+939	Orthohantavirus	Bowe orthohantavirus	3	yes
+940	Orthohantavirus	Bruges orthohantavirus	3	yes
+941	Orthohantavirus	Cano Delgadito orthohantavirus	3	yes
+942	Orthohantavirus	Cao Bang orthohantavirus	3	yes
+943	Orthohantavirus	Choclo orthohantavirus	2	yes
+944	Orthohantavirus	Dabieshan orthohantavirus	2	yes
+945	Orthohantavirus	Dobrava-Belgrade orthohantavirus	3	yes
+946	Orthohantavirus	El Moro Canyon orthohantavirus	2	yes
+947	Orthohantavirus	Fugong orthohantavirus	3	yes
+948	Orthohantavirus	Fusong orthohantavirus	2	yes
+949	Orthohantavirus	Hantaan orthohantavirus	3	yes
+950	Orthohantavirus	Jeju orthohantavirus	3	yes
+951	Orthohantavirus	Kenkeme orthohantavirus	3	yes
+952	Orthohantavirus	Khabarovsk orthohantavirus	3	yes
+953	Orthohantavirus	Laguna Negra orthohantavirus	2	yes
+954	Orthohantavirus	Luxi orthohantavirus	3	yes
+955	Orthohantavirus	Maporal orthohantavirus	3	yes
+956	Orthohantavirus	Montano orthohantavirus	3	yes
+957	Orthohantavirus	Necocli orthohantavirus	3	yes
+958	Orthohantavirus	Oxbow orthohantavirus	3	yes
+959	Orthohantavirus	Prospect Hill orthohantavirus	3	yes
+960	Orthohantavirus	Puumala orthohantavirus	3	yes
+961	Orthohantavirus	Robina orthohantavirus	3	yes
+962	Orthohantavirus	Rockport orthohantavirus	3	yes
+963	Orthohantavirus	Sangassou orthohantavirus	3	yes
+964	Orthohantavirus	Seoul orthohantavirus	3	yes
+965	Orthohantavirus	Sin Nombre orthohantavirus	3	yes
+966	Orthohantavirus	Tatenale orthohantavirus	3	yes
+967	Orthohantavirus	Thailand orthohantavirus	3	yes
+968	Orthohantavirus	Tula orthohantavirus	3	yes
+969	Orthohantavirus	Yakeshi orthohantavirus	2	yes
+970	Orthonairovirus	Abu Hammad orthonairovirus	3	yes
+971	Orthonairovirus	Abu Mina orthonairovirus	3	yes
+972	Orthonairovirus	Artashat orthonairovirus	3	yes
+973	Orthonairovirus	Avalon orthonairovirus	3	yes
+974	Orthonairovirus	Bandia orthonairovirus	3	yes
+975	Orthonairovirus	Burana orthonairovirus	3	yes
+976	Orthonairovirus	Chim orthonairovirus	3	yes
+977	Orthonairovirus	Congoid orthonairovirus	3	yes
+978	Orthonairovirus	Crimean-Congo hemorrhagic fever orthonairovirus	3	yes
+979	Orthonairovirus	Dera Ghazi Khan orthonairovirus	3	yes
+980	Orthonairovirus	Dugbe orthonairovirus	3	yes
+981	Orthonairovirus	Erve orthonairovirus	3	yes
+982	Orthonairovirus	Estero Real orthonairovirus	3	yes
+983	Orthonairovirus	Gossas orthonairovirus	3	yes
+984	Orthonairovirus	Hazara orthonairovirus	3	yes
+985	Orthonairovirus	Huangpi orthonairovirus	3	yes
+986	Orthonairovirus	Hughes orthonairovirus	3	yes
+987	Orthonairovirus	Issyk-kul orthonairovirus	3	yes
+988	Orthonairovirus	Kasokero orthonairovirus	3	yes
+989	Orthonairovirus	Keterah orthonairovirus	3	yes
+990	Orthonairovirus	Kupe orthonairovirus	3	yes
+991	Orthonairovirus	Leopards Hill orthonairovirus	3	yes
+992	Orthonairovirus	Meram orthonairovirus	3	yes
+993	Orthonairovirus	Nairobi sheep disease orthonairovirus	3	yes
+994	Orthonairovirus	Pacific Coast orthonairovirus	3	yes
+995	Orthonairovirus	Punta orthonairovirus	3	yes
+996	Orthonairovirus	Qalyub orthonairovirus	3	yes
+997	Orthonairovirus	Sakhalin orthonairovirus	3	yes
+998	Orthonairovirus	Sapphire orthonairovirus	3	yes
+999	Orthonairovirus	Scot orthonairovirus	3	yes
+1000	Orthonairovirus	Soldado orthonairovirus	3	yes
+1001	Orthonairovirus	Tacheng orthonairovirus	3	yes
+1002	Orthonairovirus	Taggert orthonairovirus	3	yes
+1003	Orthonairovirus	Tamdy orthonairovirus	3	yes
+1004	Orthonairovirus	Thiafora orthonairovirus	3	yes
+1005	Orthonairovirus	Tofla orthonairovirus	3	yes
+1006	Orthonairovirus	Tunis orthonairovirus	3	yes
+1007	Orthonairovirus	Vinegar Hill orthonairovirus	3	yes
+1008	Orthonairovirus	Wenzhou orthonairovirus	3	yes
+1009	Orthonairovirus	Yogue orthonairovirus	3	yes
+1010	Orthonairovirus	Zirqa orthonairovirus	3	yes
+1011	Orthophasmavirus	Anopheles orthophasmavirus	3	yes
+1012	Orthophasmavirus	Coleopteran orthophasmavirus	3	yes
+1013	Orthophasmavirus	Culex orthophasmavirus	3	yes
+1014	Orthophasmavirus	Ganda orthophasmavirus	3	yes
+1015	Orthophasmavirus	Hymenopteran orthophasmavirus 1	3	yes
+1016	Orthophasmavirus	Hymenopteran orthophasmavirus 2	3	yes
+1017	Orthophasmavirus	Kigluaik phantom orthophasmavirus	3	yes
+1018	Orthophasmavirus	Niukluk phantom orthophasmavirus	3	yes
+1019	Orthophasmavirus	Odonate orthophasmavirus	3	yes
+1020	Orthophasmavirus	Orthophasmavirus bastukasense	3	yes
+1021	Orthophasmavirus	Orthophasmavirus coredoense	3	yes
+1022	Orthophasmavirus	Orthophasmavirus flenense	3	yes
+1023	Orthophasmavirus	Orthophasmavirus moglotasense	3	yes
+1024	Orthophasmavirus	Qingling orthophasmavirus	3	yes
+1025	Orthophasmavirus	Wuchang cockroach orthophasmavirus 1	3	yes
+1026	Orthophasmavirus	Wuhan mosquito orthophasmavirus 1	3	yes
+1027	Orthophasmavirus	Wuhan mosquito orthophasmavirus 2	3	yes
+1028	Orthopicobirnavirus	Orthopicobirnavirus beihaiense	2	yes
+1029	Orthopicobirnavirus	Orthopicobirnavirus equi	2	yes
+1030	Orthopicobirnavirus	Orthopicobirnavirus hominis	2	yes
+1031	Orthoreovirus	Avian orthoreovirus	10	yes
+1032	Orthoreovirus	Baboon orthoreovirus	10	yes
+1033	Orthoreovirus	Broome orthoreovirus	10	yes
+1034	Orthoreovirus	Mahlapitsi orthoreovirus	10	yes
+1035	Orthoreovirus	Mammalian orthoreovirus	10	yes
+1036	Orthoreovirus	Nelson Bay orthoreovirus	10	yes
+1037	Orthoreovirus	Neoavian orthoreovirus	10	yes
+1038	Orthoreovirus	Piscine orthoreovirus	10	yes
+1039	Orthoreovirus	Reptilian orthoreovirus	10	yes
+1040	Orthoreovirus	Testudine orthoreovirus	10	yes
+1041	Orthotospovirus	Alstroemeria necrotic streak orthotospovirus	3	yes
+1042	Orthotospovirus	Alstroemeria yellow spot orthotospovirus	3	yes
+1043	Orthotospovirus	Bean necrotic mosaic orthotospovirus	3	yes
+1044	Orthotospovirus	Calla lily chlorotic spot orthotospovirus	3	yes
+1045	Orthotospovirus	Capsicum chlorosis orthotospovirus	3	yes
+1046	Orthotospovirus	Chrysanthemum stem necrosis orthotospovirus	3	yes
+1047	Orthotospovirus	Groundnut bud necrosis orthotospovirus	3	yes
+1048	Orthotospovirus	Groundnut chlorotic fan spot orthotospovirus	3	yes
+1049	Orthotospovirus	Groundnut ringspot orthotospovirus	3	yes
+1050	Orthotospovirus	Groundnut yellow spot orthotospovirus	1	yes
+1051	Orthotospovirus	Hippeastrum chlorotic ringspot orthotospovirus	3	yes
+1052	Orthotospovirus	Impatiens necrotic spot orthotospovirus	3	yes
+1053	Orthotospovirus	Iris yellow spot orthotospovirus	3	yes
+1054	Orthotospovirus	Melon severe mosaic orthotospovirus	3	yes
+1055	Orthotospovirus	Melon yellow spot orthotospovirus	3	yes
+1056	Orthotospovirus	Mulberry vein banding associated orthotospovirus	3	yes
+1057	Orthotospovirus	Pepper chlorotic spot orthotospovirus	3	yes
+1058	Orthotospovirus	Polygonum ringspot orthotospovirus	3	yes
+1059	Orthotospovirus	Soybean vein necrosis orthotospovirus	3	yes
+1060	Orthotospovirus	Tomato chlorotic spot orthotospovirus	1	yes
+1061	Orthotospovirus	Tomato spotted wilt orthotospovirus	3	yes
+1062	Orthotospovirus	Tomato yellow ring orthotospovirus	3	yes
+1063	Orthotospovirus	Tomato zonate spot orthotospovirus	3	yes
+1064	Orthotospovirus	Watermelon bud necrosis orthotospovirus	3	yes
+1065	Orthotospovirus	Watermelon silver mottle orthotospovirus	3	yes
+1066	Orthotospovirus	Zucchini lethal chlorosis orthotospovirus	3	yes
+1067	Oryzavirus	Rice ragged stunt virus	10	yes
+1068	Ourmiavirus	Cassava virus C	3	yes
+1069	Ourmiavirus	Epirus cherry virus	3	yes
+1070	Ourmiavirus	Ourmia melon virus	3	yes
+1071	Pacuvirus	Caimito pacuvirus	3	yes
+1072	Pacuvirus	Chilibre pacuvirus	3	yes
+1073	Pacuvirus	Pacui pacuvirus	3	yes
+1074	Pacuvirus	Rio Preto da Eva pacuvirus	3	yes
+1075	Pacuvirus	Tapirape pacuvirus	3	yes
+1076	Pecluvirus	Indian peanut clump virus	2	yes
+1077	Pecluvirus	Peanut clump virus	2	yes
+1078	Phaeovirus	Feldmannia irregularis virus a	16	yes
+1079	Phasivirus	Badu phasivirus	3	yes
+1080	Phasivirus	Dipteran phasivirus	3	yes
+1081	Phasivirus	Fly phasivirus	3	yes
+1082	Phasivirus	Guadeloupe phasivirus	3	yes
+1083	Phasivirus	Kimberley phasivirus	3	yes
+1084	Phasivirus	Phasi Charoen-like phasivirus	3	yes
+1085	Phasivirus	Wutai mosquito phasivirus	3	yes
+1086	Phlebovirus	Adana phlebovirus	3	yes
+1087	Phlebovirus	Aguacate phlebovirus	3	yes
+1088	Phlebovirus	Alcube phlebovirus	3	yes
+1089	Phlebovirus	Alenquer phlebovirus	3	yes
+1090	Phlebovirus	Ambe phlebovirus	3	yes
+1091	Phlebovirus	Anhanga phlebovirus	3	yes
+1092	Phlebovirus	Arumowot phlebovirus	3	yes
+1093	Phlebovirus	Bogoria phlebovirus	3	yes
+1094	Phlebovirus	Buenaventura phlebovirus	3	yes
+1095	Phlebovirus	Bujaru phlebovirus	3	yes
+1096	Phlebovirus	Cacao phlebovirus	3	yes
+1097	Phlebovirus	Campana phlebovirus	3	yes
+1098	Phlebovirus	Candiru phlebovirus	3	yes
+1099	Phlebovirus	Chagres phlebovirus	3	yes
+1100	Phlebovirus	Cocle phlebovirus	3	yes
+1101	Phlebovirus	Corfou phlebovirus	3	yes
+1102	Phlebovirus	Dashli phlebovirus	3	yes
+1103	Phlebovirus	Durania phlebovirus	3	yes
+1104	Phlebovirus	Echarate phlebovirus	3	yes
+1105	Phlebovirus	Embossos phlebovirus	3	yes
+1106	Phlebovirus	Frijoles phlebovirus	3	yes
+1107	Phlebovirus	Gabek phlebovirus	3	yes
+1108	Phlebovirus	Gordil phlebovirus	3	yes
+1109	Phlebovirus	Icoaraci phlebovirus	3	yes
+1110	Phlebovirus	Itaituba phlebovirus	3	yes
+1111	Phlebovirus	Itaporanga phlebovirus	3	yes
+1112	Phlebovirus	Ixcanal phlebovirus	3	yes
+1113	Phlebovirus	Karimabad phlebovirus	3	yes
+1114	Phlebovirus	Kiborgoch phlebovirus	3	yes
+1115	Phlebovirus	La Gloria phlebovirus	3	yes
+1116	Phlebovirus	Lara phlebovirus	3	yes
+1117	Phlebovirus	Leticia phlebovirus	3	yes
+1118	Phlebovirus	Maldonado phlebovirus	3	yes
+1119	Phlebovirus	Massilia phlebovirus	3	yes
+1120	Phlebovirus	Medjerda phlebovirus	3	yes
+1121	Phlebovirus	Mona Grita phlebovirus	3	yes
+1122	Phlebovirus	Mukawa phlebovirus	3	yes
+1123	Phlebovirus	Munguba phlebovirus	3	yes
+1124	Phlebovirus	Naples phlebovirus	3	yes
+1125	Phlebovirus	Nique phlebovirus	3	yes
+1126	Phlebovirus	Ntepes phlebovirus	3	yes
+1127	Phlebovirus	Odrenisrou phlebovirus	3	yes
+1128	Phlebovirus	Oriximina phlebovirus	3	yes
+1129	Phlebovirus	Pena Blanca phlebovirus	3	yes
+1130	Phlebovirus	Penshurt phlebovirus	3	yes
+1131	Phlebovirus	Perkerra phlebovirus	3	yes
+1132	Phlebovirus	Punique phlebovirus	3	yes
+1133	Phlebovirus	Punta Toro phlebovirus	3	yes
+1134	Phlebovirus	Rift Valley fever phlebovirus	3	yes
+1135	Phlebovirus	Rio Grande phlebovirus	3	yes
+1136	Phlebovirus	Saint Floris phlebovirus	3	yes
+1137	Phlebovirus	Salanga phlebovirus	3	yes
+1138	Phlebovirus	Salehabad phlebovirus	3	yes
+1139	Phlebovirus	Salobo phlebovirus	3	yes
+1140	Phlebovirus	Sicilian phlebovirus	3	yes
+1141	Phlebovirus	Tapara phlebovirus	3	yes
+1142	Phlebovirus	Tehran phlebovirus	3	yes
+1143	Phlebovirus	Tico phlebovirus	3	yes
+1144	Phlebovirus	Toros phlebovirus	3	yes
+1145	Phlebovirus	Toscana phlebovirus	3	yes
+1146	Phlebovirus	Tres Almendras phlebovirus	3	yes
+1147	Phlebovirus	Turuna phlebovirus	3	yes
+1148	Phlebovirus	Uriurana phlebovirus	3	yes
+1149	Phlebovirus	Urucuri phlebovirus	3	yes
+1150	Phlebovirus	Viola phlebovirus	2	yes
+1151	Phlebovirus	Zerdali phlebovirus	3	yes
+1152	Phytoreovirus	Rice dwarf virus	12	yes
+1153	Phytoreovirus	Rice gall dwarf virus	12	yes
+1154	Phytoreovirus	Wound tumor virus	9	yes
+1155	Pidchovirus	Coleopteran pidchovirus	3	yes
+1156	Pidchovirus	Pidgey pidchovirus	3	yes
+1157	Polymycovirus	Aspergillus fumigatus polymycovirus 1	4	yes
+1158	Polymycovirus	Aspergillus spelaeus polymycovirus 1	4	yes
+1159	Polymycovirus	Beauveria bassiana polymycovirus 1	4	yes
+1160	Polymycovirus	Botryoshaeria dothidea polymycovirus 1	5	yes
+1161	Polymycovirus	Cladosporium cladosporioides polymycovirus 1	5	yes
+1162	Polymycovirus	Colletotrichum camelliae polymycovirus 1	8	yes
+1163	Polymycovirus	Fusarium redolens polymycovirus 1	8	yes
+1164	Polymycovirus	Magnaporthe oryzae polymycovirus 1	4	yes
+1165	Polymycovirus	Penicillium digitatum polymycovirus 1	4	yes
+1166	Polymycovirus	Penicillum brevicompactum polymycovirus 1	4	yes
+1167	Pomovirus	Beet soil-borne virus	3	yes
+1168	Pomovirus	Beet virus Q	3	yes
+1169	Pomovirus	Broad bean necrosis virus	3	yes
+1170	Pomovirus	Colombian potato soil-borne virus	3	yes
+1171	Pomovirus	Potato mop-top virus	3	yes
+1172	Pteridovirus	Pteridovirus filicis	2	yes
+1173	Pteridovirus	Pteridovirus maydis	2	yes
+1174	Quadrivirus	Rosellinia necatrix quadrivirus 1	4	yes
+1175	Quaranjavirus	Quaranjavirus araguariense	7	yes
+1176	Quaranjavirus	Quaranjavirus chadense	7	yes
+1177	Quaranjavirus	Quaranjavirus johnstonense	2	yes
+1178	Quaranjavirus	Quaranjavirus quaranfilense	6	yes
+1179	Quaranjavirus	Quaranjavirus tyulekense	7	yes
+1180	Quaranjavirus	Quaranjavirus wellfleetense	7	yes
+1181	Reptarenavirus	California reptarenavirus	2	yes
+1182	Reptarenavirus	Giessen reptarenavirus	2	yes
+1183	Reptarenavirus	Golden reptarenavirus	2	yes
+1184	Reptarenavirus	Ordinary reptarenavirus	2	yes
+1185	Reptarenavirus	Rotterdam reptarenavirus	2	yes
+1186	Ronavirus	Rotifer birnavirus	2	yes
+1187	Rosavirus	Rosavirus B	2	yes
+1188	Rotavirus	Rotavirus A	11	yes
+1189	Rotavirus	Rotavirus B	11	yes
+1190	Rotavirus	Rotavirus C	11	yes
+1191	Rotavirus	Rotavirus D	11	yes
+1192	Rotavirus	Rotavirus F	11	yes
+1193	Rotavirus	Rotavirus G	11	yes
+1194	Rotavirus	Rotavirus H	11	yes
+1195	Rotavirus	Rotavirus I	11	yes
+1196	Rotavirus	Rotavirus J	11	yes
+1197	Rubodvirus	Apple rubodvirus 1	3	yes
+1198	Rubodvirus	Apple rubodvirus 2	5	yes
+1199	Rubodvirus	Grapevine rubodvirus 1	3	yes
+1200	Rubodvirus	Grapevine rubodvirus 2	3	yes
+1201	Sabavirus	South Bay sabavirus	2	yes
+1202	Sadwavirus	Black raspberry necrosis virus	2	yes
+1203	Sadwavirus	Chocolate lily virus A	2	yes
+1204	Sadwavirus	Dioscorea mosaic associated virus	2	yes
+1205	Sadwavirus	Sadwavirus LSV1	2	yes
+1206	Sadwavirus	Sadwavirus PSVA	2	yes
+1207	Sadwavirus	Satsuma dwarf virus	2	yes
+1208	Sadwavirus	Strawberry mottle virus	2	yes
+1209	Sardinovirus	Sardinovirus pilchardi	8	yes
+1210	Sawastrivirus	Sanxia sawastrivirus	3	yes
+1211	Scarabeuvirus	Scarabeuvirus blattae	2	yes
+1212	Scarabeuvirus	Scarabeuvirus hubeiense	2	yes
+1213	Scarabeuvirus	Scarabeuvirus lishiense	2	yes
+1214	Seadornavirus	Banna virus	12	yes
+1215	Seadornavirus	Kadipiro virus	12	yes
+1216	Seadornavirus	Liao ning virus	12	yes
+1217	Semotivirus	Caenorhabditis elegans Cer13 virus	1	yes
+1218	Shangavirus	Insect shangavirus	3	yes
+1219	Shaspivirus	Spider shaspivirus	3	yes
+1220	Shilevirus	Shilevirus leptomonadis	3	yes
+1221	Sopolycivirus	Formica exsecta virus 3	2	yes
+1222	Stralarivirus	Stralarivirus LycMoV	2	yes
+1223	Stralarivirus	Stralarivirus SLRSV	2	yes
+1224	Striwavirus	Strider striwavirus	3	yes
+1225	Tanzavirus	Human tanzavirus	3	yes
+1226	Tapwovirus	Tapwovirus cesti	2	yes
+1227	Telnavirus	Tellina virus 1	2	yes
+1228	Tenuivirus	Echinochloa hoja blanca tenuivirus	3	yes
+1229	Tenuivirus	European wheat striate mosaic tenuivirus	4	yes
+1230	Tenuivirus	Iranian wheat stripe tenuivirus	3	yes
+1231	Tenuivirus	Maize stripe tenuivirus	4	yes
+1232	Tenuivirus	Melon tenuivirus	8	yes
+1233	Tenuivirus	Rice grassy stunt tenuivirus	6	yes
+1234	Tenuivirus	Rice hoja blanca tenuivirus	4	yes
+1235	Tenuivirus	Rice stripe tenuivirus	4	yes
+1236	Tenuivirus	Urochloa hoja blanca tenuivirus	2	yes
+1237	Thogotovirus	Thogotovirus bourbonense	6	yes
+1238	Thogotovirus	Thogotovirus dhoriense	6	yes
+1239	Thogotovirus	Thogotovirus josense	6	yes
+1240	Thogotovirus	Thogotovirus ozense	6	yes
+1241	Thogotovirus	Thogotovirus sinuense	6	yes
+1242	Thogotovirus	Thogotovirus thailandense	6	yes
+1243	Thogotovirus	Thogotovirus thogotoense	6	yes
+1244	Thogotovirus	Thogotovirus upoluense	6	yes
+1245	Thottimvirus	Imjin thottimvirus	3	yes
+1246	Thottimvirus	Thottopalayam thottimvirus	3	yes
+1247	Tilapinevirus	Tilapinevirus tilapiae	10	yes
+1248	Tobamovirus	Sunn-hemp mosaic virus	2	yes
+1249	Tobravirus	Pea early-browning virus	2	yes
+1250	Tobravirus	Pepper ringspot virus	2	yes
+1251	Tobravirus	Tobacco rattle virus	2	yes
+1252	Torovirus	Equine torovirus	3	yes
+1253	Torradovirus	Carrot torradovirus 1	2	yes
+1254	Torradovirus	Lettuce necrotic leaf curl virus	2	yes
+1255	Torradovirus	Motherwort yellow mottle virus	2	yes
+1256	Torradovirus	Squash chlorotic leaf spot virus	2	yes
+1257	Torradovirus	Tomato marchitez virus	2	yes
+1258	Torradovirus	Tomato torrado virus	2	yes
+1259	Uukuvirus	American dog uukuvirus	2	yes
+1260	Uukuvirus	Dabieshan uukuvirus	2	yes
+1261	Uukuvirus	Grand Arbaud uukuvirus	3	yes
+1262	Uukuvirus	Huangpi uukuvirus	3	yes
+1263	Uukuvirus	Kabuto mountain uukuvirus	3	yes
+1264	Uukuvirus	Kaisodi uukuvirus	3	yes
+1265	Uukuvirus	Lihan uukuvirus	2	yes
+1266	Uukuvirus	Murre uukuvirus	3	yes
+1267	Uukuvirus	Pacific coast uukuvirus	2	yes
+1268	Uukuvirus	Precarious Point uukuvirus	3	yes
+1269	Uukuvirus	Rukutama uukuvirus	3	yes
+1270	Uukuvirus	Schmidt uukuvirus	3	yes
+1271	Uukuvirus	Silverwater uukuvirus	3	yes
+1272	Uukuvirus	Tacheng uukuvirus	2	yes
+1273	Uukuvirus	Uukuniemi uukuvirus	3	yes
+1274	Uukuvirus	Yongjia uukuvirus	2	yes
+1275	Uukuvirus	Zaliv Terpeniya uukuvirus	3	yes
+1276	Varicosavirus	Varicosavirus alopecuri	2	yes
+1277	Varicosavirus	Varicosavirus lactucae	2	yes
+1278	Varicosavirus	Varicosavirus trifolii	2	yes
+1279	Wenrivirus	Shrimp wenrivirus	3	yes
+1280	Wuhivirus	Insect wuhivirus	3	yes
+1281	Wumivirus	Wumivirus millepedae	3	yes
+1282	Xinspivirus	Xinzhou xinspivirus	3	yes
+1283	Yingvirus	Yingvirus beihaiense	2	yes
+1284	Yingvirus	Yingvirus charybdis	2	yes
+1285	Yingvirus	Yingvirus hubeiense	2	yes
+1286	Yingvirus	Yingvirus sanxiaense	2	yes
+1287	Yingvirus	Yingvirus shaheense	2	yes
+1288	Yingvirus	Yingvirus wenzhouense	2	yes
+1289	Yingvirus	Yingvirus wuhanense	2	yes
+1290	Yingvirus	Yingvirus xinzhouense	2	yes
+1291	Yuyuevirus	Yuyuevirus beihaiense	2	yes
+1292	Yuyuevirus	Yuyuevirus shaheense	2	yes
+1293	Hartmanivirus	Setpatvet hartmanivirus	3	yes
