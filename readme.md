@@ -1,6 +1,21 @@
 ## BAQLaVa V0.2
 
-This is a very prelimiary version of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa). To run, your reads should be in a single fastq or fasta file (cat paired reads together into one file as needed). 
+This is a very prelimiary version of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa). 
+
+## Database requirements
+
+BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. The workign versions are located here:
+
+    ```
+    /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD/
+    /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
+    ```
+    
+
+
+
+
+To run, your reads should be in a single fastq or fasta file (cat paired reads together into one file as needed). 
 
 First, load the most recent version of biobakery workflows: 
   ```
