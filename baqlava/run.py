@@ -37,7 +37,7 @@ workflow = Workflow(
 workflow.add_argument(
     name = "nucdb",
     desc = "nucleotide database folder to use",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD/")
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database/")
 
 workflow.add_argument(
     name = "nucindex",
@@ -59,58 +59,35 @@ workflow.add_argument(
     desc = "protein database folder to use",
     default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/")
 
+workflow.add_argument(
+    name = "reconcile",
+    desc = "script to reconcile reads",
+    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_v0.2.py")
+
 args = workflow.parse_args()
 
 ############################
 # function to run workflow #
 ############################
 
-fastq_files = workflow.get_input_files(extension=args.input_extension)
-file_path = args.input + "/"
-
-def collect_and_cat_files(dir):
-    bases = set()
-    for file in dir:
-        base = file.split("/")[-1]
-        base = base.split("_")[0]
-        bases.add(base)
-    return list(bases)
-
-file_bases = collect_and_cat_files(fastq_files)
-
-for base in file_bases:
-    workflow.add_task(
-        "cat " + file_path + base + "_1.fastq " + file_path + base + "_2.fastq > " + file_path + base + "_cat.fastq",
-        depends = fastq_files,
-        targets = file_path + base + "_cat.fastq")
-
-humann_output_files_vir = args.output+"/humann_output_files_vir/"
-temp_assembly_file = args.output+"/temp_assembly/"
-
+file_base = args.input.split("/")[-1].split(".")[0]
+output_dir = args.output + "/" + file_base + "/"
 
 workflow.add_task(
-    "mkdir -p " + humann_output_files_vir,
-    depends = fastq_files,
-    targets = humann_output_files_vir,
-    output_folder = args.output)
+    "humann --input [depends[0]] --output [output_folder[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --protein-database [p_db] --threads [threads]",
+    depends = [args.input],
+    output_folder = [output_dir],
+    targets = [output_dir + file_base + "_genefamilies.tsv"],
+    n_db = args.nucdb,
+    idx = args.nucindex,
+    p_db = args.protdb,
+    threads = args.threads)
 
-for base in file_bases:
-    workflow.add_task(
-        "humann --input [depends[0]] --output [output_folder[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --protein-database [p_db] --threads [threads]",
-        depends = [file_path + base + "_cat.fastq"],
-        output_folder = [humann_output_files_vir],
-        targets = [humann_output_files_vir + base + "_cat_genefamilies.tsv"],
-        n_db = args.nucdb,
-        idx = args.nucindex,
-        p_db = args.protdb,
-        threads = args.threads)
-    workflow.add_task(
-        "python reconcile_mapped_reads_v0.2.py [depends[0]]" ,
-        depends = [humann_output_files_vir + base + "_cat_genefamilies.tsv" ],
-        targets = [humann_output_files_vir + base + "_cat_baqlava_genefamilies.tsv"],
-        output_folder = humann_output_files_vir)
-
+workflow.add_task(
+    "python [script] [depends[0]]" ,
+    depends = [output_dir + file_base + "_genefamilies.tsv"],
+    targets = [output_dir + file_base + "_baqlava_genefamilies.tsv"],
+    output_folder = output_dir,
+    script = args.reconcile)
 
 workflow.go()
-
-
