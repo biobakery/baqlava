@@ -62,7 +62,7 @@ workflow.add_argument(
 workflow.add_argument(
     name = "reconcile",
     desc = "script to reconcile reads",
-    default = "reconcile_mapped_reads_v0.2.py")
+    default = "reconcile_mapped_reads.py")
 
 args = workflow.parse_args()
 
