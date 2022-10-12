@@ -3,14 +3,13 @@ import os
 import sys
 import numpy as np
 
-nuc_tax_file = pd.read_csv("/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/nucleotide_ICTV_taxonomy_2.txt", sep="\t", index_col='Unnamed: 0', low_memory=False)
+nuc_tax_file = pd.read_csv("utility_files/nucleotide_ICTV_taxonomy_2.txt", sep="\t", index_col='Unnamed: 0', low_memory=False)
 prot_tax_file = pd.read_csv("/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/uniref90_ICTV_taxonomy_2.txt", sep="\t", index_col='Unnamed: 0', low_memory=False)
                            
-#viral_names = pd.read_csv("/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/viral_name_conversion.tsv", sep="\t", index_col='Unnamed: 0', low_memory=False)
-viral_names2 = pd.read_csv("/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/viral_name_conversion_2.tsv", sep="\t", index_col='Unnamed: 0', low_memory=False)
+viral_names2 = pd.read_csv("utility_files/viral_name_conversion_2.tsv", sep="\t", index_col='Unnamed: 0', low_memory=False)
 
 jaccard_df = pd.read_csv("/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/species_protein_families_jaccard_similarity.tsv", sep="\t", low_memory=False)
-segment_ref = pd.read_csv("/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/segmented_nucleotide_genomes.tsv", sep="\t", index_col='Unnamed: 0')
+segment_ref = pd.read_csv("utility_files/segmented_nucleotide_genomes.tsv", sep="\t", index_col='Unnamed: 0')
 
 def format_file_and_base(sysargv1):
     #get column of interest (basename plus RPK)
