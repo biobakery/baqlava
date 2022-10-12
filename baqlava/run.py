@@ -42,7 +42,7 @@ workflow.add_argument(
 workflow.add_argument(
     name = "nucindex",
     desc = "nucleotide annotation index to use",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap4.txt")
+    default = "utility_files/idmap4.txt")
 
 workflow.add_argument(
     name = "input-extension",
@@ -62,7 +62,7 @@ workflow.add_argument(
 workflow.add_argument(
     name = "reconcile",
     desc = "script to reconcile reads",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_v0.2.py")
+    default = "reconcile_mapped_reads_v0.2.py")
 
 args = workflow.parse_args()
 
