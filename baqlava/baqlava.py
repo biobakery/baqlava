@@ -37,32 +37,22 @@ workflow = Workflow(
 workflow.add_argument(
     name = "nucdb",
     desc = "nucleotide database folder to use",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database/")
+    default = config.nucleotide_db)
 
 workflow.add_argument(
     name = "nucindex",
     desc = "nucleotide annotation index to use",
-    default = "utility_files/idmap4.txt")
-
-workflow.add_argument(
-    name = "input-extension",
-    desc = "the input file extension",
-    default = "fastq")
+    default = config.idmap)
 
 workflow.add_argument(
     name = "threads",
     desc="number of threads for knead_data to use",
-    default=1)
+    default=config.threads)
 
 workflow.add_argument(
     name = "protdb",
     desc = "protein database folder to use",
-    default = "/n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/")
-
-workflow.add_argument(
-    name = "reconcile",
-    desc = "script to reconcile reads",
-    default = "reconcile_mapped_reads.py")
+    default = config.proteindb)
 
 args = workflow.parse_args()
 
@@ -84,7 +74,7 @@ workflow.add_task(
     threads = args.threads)
 
 workflow.add_task(
-    "python [script] [depends[0]]" ,
+    "python reconcile_mapped_reads.py [depends[0]]" ,
     depends = [output_dir + file_base + "_genefamilies.tsv"],
     targets = [output_dir + file_base + "_baqlava_genefamilies.tsv"],
     output_folder = output_dir,
