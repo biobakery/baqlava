@@ -1,5 +1,6 @@
 .python-version
 .env
+.DS_Store
 .venv
 env/
 venv/
