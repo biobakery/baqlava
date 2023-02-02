@@ -3,13 +3,29 @@ import os
 import sys
 import numpy as np
 
-nuc_tax_file = pd.read_csv(config.nucleotide_taxonomy, sep="\t", index_col='Unnamed: 0', low_memory=False)
-prot_tax_file = pd.read_csv(config.protein_taxonomy, sep="\t", index_col='Unnamed: 0', low_memory=False)
-                           
-viral_names2 = pd.read_csv(config.viral_name_conversion, sep="\t", index_col='Unnamed: 0', low_memory=False)
+# Config Parsers 
+# try to import the python2 ConfigParser
+# if unable to import, then try to import the python3 configparser
+try:
+    import ConfigParser as configparser
+except ImportError:
+    import configparser
 
-jaccard_df = pd.read_csv(config.jaccard, sep="\t", low_memory=False)
-segment_ref = pd.read_csv(config.segmented, sep="\t", index_col='Unnamed: 0')
+config = configparser.ConfigParser()
+config.read(os.path.abspath('baqlava/configs/baqlava.cfg'))
+nucleotide_taxonomy = os.path.abspath(config.get('utility','nucleotide_taxonomy'))
+protein_taxonomy = os.path.abspath(config.get('utility','protein_taxonomy'))
+viral_name_conversion = os.path.abspath(config.get('utility','viral_name_conversion'))
+jaccard = os.path.abspath(config.get('utility','jaccard'))
+segmented = os.path.abspath(config.get('utility','segmented'))
+
+nuc_tax_file = pd.read_csv(nucleotide_taxonomy, sep="\t", index_col='Unnamed: 0', low_memory=False)
+prot_tax_file = pd.read_csv(protein_taxonomy, sep="\t", index_col='Unnamed: 0', low_memory=False)
+                           
+viral_names2 = pd.read_csv(viral_name_conversion, sep="\t", index_col='Unnamed: 0', low_memory=False)
+
+jaccard_df = pd.read_csv(jaccard, sep="\t", low_memory=False)
+segment_ref = pd.read_csv(segmented, sep="\t", index_col='Unnamed: 0')
 
 def format_file_and_base(sysargv1):
     #get column of interest (basename plus RPK)

@@ -217,18 +217,19 @@ setuptools.setup(
 	],
 	#install_requires=['anadama2>=0.7.4'],
 	packages=setuptools.find_packages(),
-	#cmdclass={'install': Install},
+	# cmdclass={'install': Install},
 	entry_points={
 		'console_scripts': [
 			'baqlava = baqlava.baqlava:main',
 		]},
 	package_data={
 		'baqlava': [
-			'*.py',
-			'baqlava.cfg',
 			'configs/*',
-			'data/*',
+			'utility_files/*',
+			'utility_scripts/*',
+			'data/nucleotidedb/*',
+			'data/proteindb/*',
 		]},
-	scripts=glob('baqlava/*py'),
+	# scripts=['baqlava/baqlava.py'],
 	zip_safe=False
 )

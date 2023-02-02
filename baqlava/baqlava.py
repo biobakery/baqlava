@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 BAQLaVa: run module
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,6 +23,15 @@ from glob import glob
 from anadama2 import Workflow
 from anadama2.tracked import TrackedExecutable
 
+# Config Parsers 
+# try to import the python2 ConfigParser
+# if unable to import, then try to import the python3 configparser
+
+try:
+    from baqlava import utility_scripts
+except ImportError:
+    sys.exit("ERROR: Unable to find the kneaddata python package." +
+        " Please check your install.")
 
 # Config Parsers 
 # try to import the python2 ConfigParser
@@ -32,32 +42,14 @@ except ImportError:
     import configparser
 
 config = configparser.ConfigParser()
-config.read('configs/baqlava.cfg')
+config.read('/Users/sam1389/Desktop/workspace/harvard/baqlava/baqlava/configs/baqlava.cfg')
 
-WORKFLOW_FOLDER = "."
-WORKFLOW_EXTENSION = ".py"
-
-
-def find_workflows():
-	""" Search for installed workflows """
-
-	workflow_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), WORKFLOW_FOLDER)
-	workflows = {}
-	for file in os.listdir(workflow_folder):
-		# look for files with the expected extension
-		if file.endswith(WORKFLOW_EXTENSION):
-			# do not need to add full path as these are also installed as executable scripts
-			workflows[file.replace(WORKFLOW_EXTENSION, "")] = file
-
-	return workflows
 
 # Setting the version of the workflow and short description
 workflow = Workflow(
     version="0.0.1",                    #Update the version as needed
     description="Viral Profiling"     #Update the description as needed
     )
-
-### run.py [-i <folder_with_input_files> -o <output_directory>]
 
 ###############
 # custom args #
@@ -97,20 +89,22 @@ def main():
     depends = [args.input],
     output_folder = [output_dir],
     targets = [output_dir + file_base + "_genefamilies.tsv"],
-    n_db = args.nucdb,
-    idx = args.nucindex,
-    p_db = args.protdb,
+    n_db = os.path.abspath(args.nucdb),
+    idx = os.path.abspath(args.nucindex),
+    p_db = os.path.abspath(args.protdb),
     threads = args.threads)
 
+    reconcile_mapped_script = os.path.abspath("baqlava/utility_scripts/reconcile_mapped_reads.py")
+
     workflow.add_task(
-        "python reconcile_mapped_reads.py [depends[0]]" ,
+        "python3 [script] [depends[0]]" ,
         depends = [output_dir + file_base + "_genefamilies.tsv"],
         targets = [output_dir + file_base + "_baqlava_genefamilies.tsv"],
         output_folder = output_dir,
-        script = args.reconcile)
+        script = reconcile_mapped_script)
 
     workflow.go()
 
 
-if __name__ == "__main__":
-	main()
+if __name__ == '__main__':
+    main()
