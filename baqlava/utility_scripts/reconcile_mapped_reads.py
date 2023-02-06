@@ -184,4 +184,4 @@ final_baq_profile = run_functions_and_obtain_final_output(sys.argv[1], nuc_tax_f
 
 bas = os.path.split( sys.argv[1] )[1].split("_genefamilies.tsv")[0]
 loc = os.path.split( sys.argv[1] )[0]
-final_baq_profile.to_csv(loc + "/" + bas + "_baqlava_genefamilies.tsv", sep="\t", index=False)
+final_baq_profile.to_csv(loc + "/" + bas + "_BAQLaVa_profile.tsv", sep="\t", index=False)
