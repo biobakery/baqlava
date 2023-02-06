@@ -42,7 +42,8 @@ except ImportError:
     import configparser
 
 config = configparser.ConfigParser()
-config.read('/Users/sam1389/Desktop/workspace/harvard/baqlava/baqlava/configs/baqlava.cfg')
+config_file = os.path.abspath("baqlava/configs/baqlava.cfg")
+config.read(config_file)
 
 
 # Setting the version of the workflow and short description
