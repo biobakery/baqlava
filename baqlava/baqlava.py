@@ -100,7 +100,7 @@ def main():
     workflow.add_task(
         "python3 [script] [depends[0]]" ,
         depends = [output_dir + file_base + "_genefamilies.tsv"],
-        targets = [output_dir + file_base + "_baqlava_genefamilies.tsv"],
+        targets = [output_dir + file_base + "_BAQLaVa_profile.tsv"],
         output_folder = output_dir,
         script = reconcile_mapped_script)
 
