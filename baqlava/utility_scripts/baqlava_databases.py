@@ -22,36 +22,37 @@ THE SOFTWARE.
 """
 
 import sys
-    
-# Try to load one of the humann src modules to check the installation
-try:
-    from .. import check
-except ImportError:
-    sys.exit("CRITICAL ERROR: Unable to find the HUMAnN python package." +
-        " Please check your install.") 
-
-# Check the python version
-check.python_version()
-
-import argparse
 import os
 
-from .. import config
-from .. import utilities
+# Config Parsers
+# try to import the python2 ConfigParser
+# if unable to import, then try to import the python3 configparser
+try:
+    import ConfigParser as configparser
+except ImportError:
+    import configparser
+
+config = configparser.ConfigParser()
+config.read(os.path.abspath('baqlava/configs/baqlava.cfg'))
+
+nucleotide_db = config.get('hosted_databases','nucleotide_db_full')
+protein_db = config.get('hosted_databases','uniref_db_full')
+
 
 # the locations of the current databases to download
-current_downloads = [ config.get('hosted_databases','nucleotide_db_full'), 
-                     config.get('hosted_databases','uniref_db_full')]
+#current_downloads = [ config.get('hosted_databases','nucleotide_db_full'), 
+#                     config.get('hosted_databases','uniref_db_full')]
 
-def download_databases(location):
+
+def download_databases(location, db_list):
     """
     Download and decompress the selected database
     """
     
     # download the database
-    for i in current_downloads:
+    for i in db_list:
         os.system("wget -P " + location + " " + i)
         os.system("tar -zxvf " + os.path.join(location,i.split('/')[-1]))
     return None
 
-download_databases(sys.argv[1])
+download_databases(sys.argv[1], [nucleotide_db, protein_db])
