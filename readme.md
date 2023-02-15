@@ -1,14 +1,23 @@
 ## BAQLaVa V0.2
 
-This is a very prelimiary version of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa). 
+This is a very prelimiary version (V0) of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa). 
+
+## Download & Installation:
+
+To download BAQLaVa V0.1, first please request for the repository to be made public briefly. You can then run: 
+
+     hutlab load centos7/python3/anadama2/0.10.0-devel
+     hutlab load centos7/python3/humann3/3.6-devel
+     git pull
+     python3 setup.py install --user
 
 ## Database requirements
 
-BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. The workign versions are located here:
+BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. The databases can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
 
  
-    /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD/
-    /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
+    https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.nucleotide.tar.gz
+    https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.protein.tar.gz   
    
     
 
