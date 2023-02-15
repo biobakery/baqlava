@@ -30,13 +30,19 @@ BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence
     https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.nucleotide.tar.gz
     https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.protein.tar.gz   
    
+These databases can be downloaded then unacked with the following code:
     
+    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.nucleotide.tar.gz
+    tar -zxvf BAQLaVa.V0.1.nucleotide.tar.gz
+    
+    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.protein.tar.gz
+    tar -zxvf BAQLaVa.V0.1.protein.tar.gz
 
+Finally, update the config file located at baqlava/baqlava/configs/baqlava.cfg so that the new folder locations for the protein and nucleotide databases are reflected where the current demo databases are notated. This should be sufficient to run BAQLaVa V0.1 with the full V0 databases. 
 
 ## Input Data
 
 To run, your reads should be in a single fastq or fasta file (cat paired reads together into one file as needed). 
-
 First, load the most recent version of biobakery workflows: 
   ```
   hutlab load centos7/python3/humann3/3.6-devel
@@ -53,19 +59,12 @@ This script creates a new filewith the suffix .lengthremoved.fa. This can altern
   ```
   sed -r 's/\|[0-9]+$//' <FILE> > <NEWFILE>
   ```
-## Running BAQLaVa - Option 1: manual via command line:
+## Running BAQLaVa
 
-BAQLaVa is run via HUMAnN with the BAQLaVa databases:
-  ```
-  humann --input <FILE> --output <LOCATION> --bypass-nucleotide-index --nucleotide-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/nucleotide_database_smallGVD --id-mapping /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/additional_files/idmap4.txt --protein-database /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/protein_database/
-  ```
-Use HUMAnN options (e.g. --threads) as you would like!
+Finally, run BAQLaVa on your data!
+```
+baqlava -i <FILE> -o <OUTPUT_DIRECTORY>
+```
 
-Finally, run the BAQLaVa reconciliation script. Make sure to reference the exact location of the input file (e.g. use ./ if it is in the current directory). This will create a new file with "baqlava_genefamilies.tsv" as the suffix. This contains nucleotide mapping at the Species or genome (for MAGs) level and protein mapping at the Genus level. 
-  ```
-  python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/reconcile_mapped_reads_v0.2.py <FILE_with_LOCATION>
-  ```
-## Running BAQLaVa - Option 2: AnADAMa2 workflow:
-  ```
-  python run.py -i <FOLDER_WITH_ALL_FILES> -o <OUTPUT_DIRECTORY>
-  ```
+
+
