@@ -61,7 +61,7 @@ This script creates a new filewith the suffix .lengthremoved.fa. This can altern
   ```
 ## Running BAQLaVa
 
-Finally, run BAQLaVa on your data!
+Finally, run BAQLaVa on your data! (If you have not loaded current biobakery workflows, first run hutlab load centos7/python3/humann3/3.6-devel)
 ```
 baqlava -i <FILE> -o <OUTPUT_DIRECTORY>
 ```
