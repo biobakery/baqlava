@@ -1,6 +1,6 @@
 ## BAQLaVa V0.2
 
-This is a very prelimiary version (V0) of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa). 
+This is a very prelimiary version (V0) of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa), made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA. 
 
 ## Download & Installation:
 
@@ -8,8 +8,19 @@ To download BAQLaVa V0.1, first please request for the repository to be made pub
 
      hutlab load centos7/python3/anadama2/0.10.0-devel
      hutlab load centos7/python3/humann3/3.6-devel
-     git pull
-     python3 setup.py install --user
+     git clone https://github.com/biobakery/baqlava.git
+     python3 <DIR>/setup.py install --user
+
+To test the installation, run: 
+
+     baqlava -i examples/baqlava_demo.fastq -o output/
+     
+The BAQLaVa data product is located in a file called <SAMPLE_PREFIX>_BAQLaVa_profile.txt (so for the demo data, this is "baqlava_demo_BAQLaVa_profile.tsv"). The data will look like: 
+
+    Virus	baqlava_demo_Abundance-RPKs	Virus_metadata	Database
+    Punavirus|Punavirus P1	30.0470091397	Escherichia phage P1	nucleotide
+    Tequatrovirus|Tequatrovirus T4	15.0099591829	Escherichia phage T4	nucleotide
+    Tunavirus|unclassified	61.74688894626818		translated
 
 ## Database requirements
 
