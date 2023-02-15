@@ -1,4 +1,4 @@
-## BAQLaVa V0.2
+## BAQLaVa V0.1
 
 This is a very prelimiary version (V0) of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa), made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA. 
 
