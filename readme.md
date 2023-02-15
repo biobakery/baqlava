@@ -17,10 +17,10 @@ To test the installation, run:
      
 The BAQLaVa data product is located in a file called <SAMPLE_PREFIX>_BAQLaVa_profile.txt (so for the demo data, this is "baqlava_demo_BAQLaVa_profile.tsv"). The data will look like: 
 
-    Virus	                         baqlava_demo_Abundance-RPKs	Virus_metadata	          Database
-    Punavirus|Punavirus P1	     30.0470091397	               Escherichia phage P1	nucleotide
-    Tequatrovirus|Tequatrovirus T4 15.0099591829	               Escherichia phage T4	nucleotide
-    Tunavirus|unclassified	     61.74688894626818		                              translated
+    Virus	                              baqlava_demo_Abundance-RPKs	Virus_metadata	          Database
+    Punavirus|Punavirus P1	          30.0470091397	               Escherichia phage P1	nucleotide
+    Tequatrovirus|Tequatrovirus T4      15.0099591829	               Escherichia phage T4	nucleotide
+    Tunavirus|unclassified	          61.74688894626818		                              translated
 
 ## Database requirements
 
