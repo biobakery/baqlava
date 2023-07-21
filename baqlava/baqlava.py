@@ -42,7 +42,8 @@ except ImportError:
     import configparser
 
 config = configparser.ConfigParser()
-config_file = os.path.abspath("baqlava/configs/baqlava.cfg")
+install_folder=os.path.dirname(os.path.realpath(__file__))
+config_file=os.path.join(install_folder,"configs/baqlava.cfg")
 config.read(config_file)
 
 
@@ -95,7 +96,7 @@ def main():
     p_db = os.path.abspath(args.protdb),
     threads = args.threads)
 
-    reconcile_mapped_script = os.path.abspath("baqlava/utility_scripts/reconcile_mapped_reads.py")
+    reconcile_mapped_script = os.path.join(install_folder,"utility_scripts/reconcile_mapped_reads.py")
 
     workflow.add_task(
         "python3 [script] [depends[0]]" ,
