@@ -1,10 +1,16 @@
 import sys
 import os
+import gzip
 
-savefile = sys.argv[1].replace(".fa", ".lengthremoved.fa")
+savefile = sys.argv[1].replace(".fa", "_lengthremoved.fa")
 
-with open(sys.argv[1], "r") as deplfasta:
-    with open(savefile, "w") as wfasta:
+if sys.argv[1].endswith(".gz"):
+    open_func=gzip.open
+else:
+    open_func=open
+
+with open_func(sys.argv[1], "rt") as deplfasta:
+    with open_func(savefile, "wt") as wfasta:
         for i in deplfasta:
             i = i.strip()
             if ">" in i:

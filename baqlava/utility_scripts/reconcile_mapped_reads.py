@@ -12,7 +12,11 @@ except ImportError:
     import configparser
 
 config = configparser.ConfigParser()
-config.read(os.path.abspath('baqlava/configs/baqlava.cfg'))
+
+install_folder=os.path.dirname(os.path.realpath(__file__))
+config_file=os.path.join(install_folder,os.path.pardir,"configs/baqlava.cfg")
+config.read(config_file)
+
 nucleotide_taxonomy = os.path.abspath(config.get('utility','nucleotide_taxonomy'))
 protein_taxonomy = os.path.abspath(config.get('utility','protein_taxonomy'))
 viral_name_conversion = os.path.abspath(config.get('utility','viral_name_conversion'))
