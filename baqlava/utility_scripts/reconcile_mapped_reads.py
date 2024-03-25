@@ -2,11 +2,15 @@ import pandas as pd
 import os
 import sys
 import numpy as np
+import scipy
+from scipy import stats
+from Bio import SeqIO
 
 
 # Config Parsers
 # try to import the python2 ConfigParser
 # if unable to import, then try to import the python3 configparser
+
 try:
     import ConfigParser as configparser
 except ImportError:
@@ -18,13 +22,13 @@ install_folder=os.path.dirname(os.path.realpath(__file__))
 config_file=os.path.join(install_folder,os.path.pardir,"configs/baqlava.cfg")
 config.read(config_file)
 
-marker_taxonomy = os.path.abspath(config.get('utility','marker_taxonomy'))
-translated_marker_conversion = os.path.abspath(config.get('utility','translated_marker_conversion'))
-species_conversion = os.path.abspath(config.get('utility','species_conversion'))
+nucleotide_reference_file = os.path.abspath(config.get('utility','nucleotide_reference'))
+protein_reference_file = os.path.abspath(config.get('utility','protein_reference'))
 
-marker_taxonomy_df = pd.read_csv(marker_taxonomy, sep="\t", index_col='Unnamed: 0', low_memory=False)
-translated_marker_conversion_df = pd.read_csv(translated_marker_conversion, sep="\t", index_col='Unnamed: 0')
-species_conversion_df = pd.read_csv(species_conversion, sep="\t", index_col='Unnamed: 0')
+nucleotide_reference = pd.read_csv(nucleotide_reference_file, sep="\t", index_col='Unnamed: 0', low_memory=False)
+protein_reference = pd.read_csv(protein_reference_file, sep="\t", index_col='Unnamed: 0', low_memory=False)
+
+
 
 def format_file_and_base(in_genefams):
     # get column of interest (basename plus RPK)
@@ -36,139 +40,163 @@ def format_file_and_base(in_genefams):
     return base, df3
 
 
-def process_baqlava_nucleotide(base, format_df, nuc_tax, readlen):
-    df2 = format_df.copy()
-    df3 = df2.copy()[~df2['# Gene Family'].str.contains("_P1")]
-    df3 = df3.copy()[~df3['# Gene Family'].str.contains("_P2")]
-    df3 = df3.copy()[~df3['# Gene Family'].str.contains("_P3")]
-    df3 = df3.copy()[~df3['# Gene Family'].str.contains("_M1")]
-    df3 = df3.copy()[~df3['# Gene Family'].str.contains("_M2")]
-    df3 = df3.copy()[~df3['# Gene Family'].str.contains("_M3")]
+def get_read_length(file):
+    counter = 0
+    lens = []
+    with open(file) as handle:
+        for record in SeqIO.parse(handle, "fastq"):
+            counter += 1
+            if counter <=10000:
+                lens.append(len(record.seq))
+            else:
+                break
+    return sum(lens) / len(lens) 
+
+
+def process_baqlava_nucleotide(base, format_df, ref, readlen):
+    df1 = format_df.copy()
     
-    df4 = pd.merge(df3.copy(), nuc_tax.copy(), right_on='marker', left_on='# Gene Family', how='inner').drop_duplicates()
-    df4['reads_mapped'] = df4[base] * ((df4['marker_len']- (readlen-1))/1000) 
-    df4['marker_len'] = df4['marker_len'].astype(float)
-    df4 = df4[df4['marker_len']>400]
-    df4['marker_len_adj'] = df4['marker_len'] - (readlen-1) 
-    df5 = df4.copy().groupby("VGB", as_index=False).sum()[['VGB','reads_mapped']]
-    df6 = df4.copy().groupby(["cluster_member","VGB"], as_index=False).sum()[['VGB','marker_len_adj']].groupby("VGB", as_index=False).quantile(0.95)
-    df7 = pd.merge(df5, df6, on='VGB', how='inner')
-    df7['observed_RPK'] = df7['reads_mapped']/(df7['marker_len_adj']/1000)
-    df8 = df7.copy()[['VGB','observed_RPK']].drop_duplicates()
+    df2 = pd.merge(df1, ref.copy(), left_on='# Gene Family', right_on='marker', how='right')
+    df2[base] = df2[base].fillna(0)    
+    df2['reads_mapped'] = df2[base] * ((df2['len']- (readlen-1))/1000) 
+    df3 = df2[df2['len']>400]
+    df3 = df3.copy()
+    df3['marker_len_adj'] = df3['len'] - (readlen-1) 
+    df4 = df3.copy().groupby("segment_group", as_index=False).sum()[['segment_group','reads_mapped']]
+    df5 = df3.copy().groupby(["segment_group","cluster_member"], as_index=False).sum()[['segment_group','marker_len_adj']].groupby("segment_group", as_index=False).quantile(0.95)
+    df6 = pd.merge(df4, df5, on='segment_group', how='inner')
+    df6['observed_RPK'] = df6['reads_mapped']/(df6['marker_len_adj']/1000)
+    df7 = df6.copy()[['segment_group','observed_RPK']].drop_duplicates().query("observed_RPK>0")
     
-    #handle segmentation:
-    df9 = nuc_tax.copy().dropna(subset=["segment_group"]).query("marker_len>400").query("marker!='no_marker'")[['Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species', 'VGB_specificity', 'segment_group', 'VGB_specificity_type', 'Virus name(s)', 'VGB']].drop_duplicates()
-    df10 = pd.merge(df8, df9, on='VGB', how='inner')
+    df8 = pd.merge(df7, ref.copy()[['segment_group','Taxonomy','Reference Species','Other ICTV Genomes in VGB']].drop_duplicates(), on='segment_group', how='left')
     
-    if len(df10) != 0:
-        seg_grps = df10.copy()[['segment_group']].drop_duplicates()
-        sdf1 = pd.merge(df9, seg_grps, on='segment_group', how='inner')
-        sdf2 = pd.merge(sdf1, df10[['VGB', 'observed_RPK']], on='VGB', how='outer')
-        sdf2['observed_RPK'] = sdf2['observed_RPK'].fillna(0)
-        
-        # drop specific VGB zeros and average remaining VGB abundances:
-        sdf3 = sdf2.copy().query("VGB_specificity!='conserved'").query("VGB_specificity!='group1'").query("observed_RPK==0")
-        sdf3['drop'] = 'yes'
-        sdf4 = pd.merge(sdf2, sdf3[['VGB','drop']], on='VGB', how='outer').query("drop!='yes'")
-        sdf5 = sdf4.copy().groupby("segment_group", as_index=False).mean()
-        sdf6 = pd.merge(df9.copy()[['segment_group','Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']].drop_duplicates(), sdf5, on='segment_group', how='right')
-        
-        # merge back into VGB abundance table:
-        df10['drop'] = 'yes'
-        df11 = pd.merge(df10[['VGB','drop']], df8, on='VGB', how = 'outer').query("drop!='yes'")
-        df12 = pd.merge(df11, nuc_tax.copy()[['VGB','Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']].drop_duplicates(), on='VGB', how='inner')
-        df13 = pd.concat([df12, sdf6])
-        df13['VGB'] = df13['VGB'].fillna(df13['segment_group'])
-        return df13[['VGB', 'observed_RPK', 'Realm', 'Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']]
+    # format in HUMAnN like style:
+    df9 = df8.copy()
+    df9['BAQLaVa VGB'] = df9['segment_group'] + "|nucleotide"
+    df8['BAQLaVa VGB'] = df8['segment_group']
+    df10 = pd.concat([df9, df8]).sort_values(by=['segment_group', 'BAQLaVa VGB']).rename(columns={'observed_RPK':base})
+
+    # format tempfile to save out:
+    df11 = df3.copy()[['# Gene Family','VGB', 'reads_mapped', 'marker_len_adj']]
+    df11['RPK'] = df11['reads_mapped']/(df11['marker_len_adj']/1000)
+    df12 = df11[df11['RPK']!=0][['# Gene Family','VGB','RPK']].rename(columns={"# Gene Family":"Marker"})
+    return df10, df12
+
+
+def process_baqlava_translated(base, format_df, ref):
+    df1 = format_df.copy()
+    
+    df2 = pd.merge(df1, ref.copy(), left_on='# Gene Family', right_on='protein', how='right')
+    df2[base] = df2[base].fillna(0)  
+    
+    #cut down to just the segment groups where at least one observation has been non-zero:
+    df3 = df2.copy()[df2[base]!=0][['segment_group']].drop_duplicates()
+    df4 = pd.merge(df2, df3, on='segment_group', how='inner')
+    
+    #turn df into dict to move through the averaging more quickly:
+    dct = {}
+    for i in range(len(df4)):
+        if df4.iloc[i]['VGB'] in dct:
+            dct[df4.iloc[i]['VGB']].append(df4.iloc[i][base])
+        else:
+            dct[df4.iloc[i]['VGB']] = [df4.iloc[i][base]]
+    
+    abund = []
+    for j in dct.keys():
+        arr = np.array(dct[j])
+        lo, hi = scipy.stats.mstats.mquantiles( arr, [.5, .95] )
+        arr2 = arr[np.where((arr >= lo) & (arr <= hi))]
+        abund.append(np.mean(arr2))
+    df5 = pd.DataFrame({'VGB':list(dct.keys()), 'observed_RPK':abund})
+    df6 = pd.merge(df5, ref.copy()[['VGB','segment_group','Taxonomy','Reference Species','Other ICTV Genomes in VGB', 'conserved_VGB']].drop_duplicates(), on='VGB', how='left')
+    # non-segmented:
+    df7 = df6.copy()[~df6['segment_group'].str.contains("segment")].query("observed_RPK!=0").drop(columns=['conserved_VGB', 'VGB'])
+    
+    # segmented:
+    df8 = df6.copy()[df6['segment_group'].str.contains("segment")]
+    df91 = df8.copy().query("conserved_VGB=='conserved'")
+    df92 = df8.copy().query("conserved_VGB=='not_conserved'").query("observed_RPK!=0")
+    df9 = pd.concat([df91, df92])
+    df10 = df9[['segment_group','observed_RPK']].groupby("segment_group", as_index=False).mean()
+    df11 = pd.merge(df10, ref.copy()[['segment_group','Taxonomy','Reference Species','Other ICTV Genomes in VGB']].drop_duplicates(), on='segment_group', how='left')
+    
+    df12 = pd.concat([df7, df11])
+    
+    # format in HUMAnN like style:
+    df13 = df12.copy()
+    df13['BAQLaVa VGB'] = df13['segment_group'] + "|translated"
+    df12['BAQLaVa VGB'] = df12['segment_group']
+    df14 = pd.concat([df12, df13]).sort_values(by=['segment_group', 'BAQLaVa VGB']).rename(columns={'observed_RPK':base})
+
+    # format tempfile to save out:
+    df15 = df2.copy()[['# Gene Family','VGB', base]]
+    df16 = df15[df15[base]!=0].rename(columns={"# Gene Family":"Protein", base:"RPK"})
+    
+    return df14, df16
+
+
+def join_nuc_trans(nuc, trans, nucbase, transbase, ref):
+    nuc = nuc.rename(columns={nucbase:'nucleotide'}).drop(columns=['BAQLaVa VGB']).drop_duplicates()
+    trans = trans.rename(columns={transbase:'translated'}).drop(columns=['BAQLaVa VGB']).drop_duplicates()
+    df1 = pd.merge(nuc[['segment_group', 'nucleotide']], trans[['segment_group', 'translated']], on='segment_group', how='outer').fillna(0)
+    
+    # where we can, subtract abundance:
+    df2 = df1[df1['translated']>df1['nucleotide']]
+    df2 = df2.copy()
+    df2['extra_protein'] = df2['translated']-df2['nucleotide']
+    df3 = df1[~(df1['translated']>df1['nucleotide'])]
+    df4 = pd.concat([df2, df3]).fillna(0)
+    df4['Total'] = df4['nucleotide'] + df4['extra_protein']
+    df5 = df4.melt(id_vars='segment_group').sort_values(by=['segment_group','variable'])
+    df6 = df5.query("variable!='extra_protein'").query("value!=0")
+    df7 = pd.merge(df6, ref.copy()[['segment_group','Taxonomy','Reference Species','Other ICTV Genomes in VGB']].drop_duplicates(), on='segment_group', how='left')
+    
+    # format similar to HUMAnN:
+    df71 = df7.copy().query("variable=='Total'")
+    df71['BAQLaVa VGB'] = df71['segment_group']
+    df72 = df7.copy().query("variable!='Total'")
+    df72['BAQLaVa VGB'] = df72['segment_group'] + "|" + df72['variable']
+    
+    df8 = pd.concat([df71, df72]).rename(columns={'value':nucbase}).reset_index().sort_values(by='index')
+    return df8[['BAQLaVa VGB',nucbase,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
+
+
+def run_reconciliation(sys1, sys2, sys3, nucref, transref, depl, inp_fa):
+    #1: nuc only
+    #2: trans only
+    #3: both
+    if sys1 == "1" or sys1 == "3":
+        print('processing nuc')
+        a,b = format_file_and_base(sys2)
+        c = get_read_length(inp_fa)
+        d,e = process_baqlava_nucleotide(a, b, nucref, c)
+        e.to_csv(sys.argv[7], sep="\t", index=False)
+    if sys1 == "2" or sys1 == "3":
+        print('processing trans')
+        f,g = format_file_and_base(sys3)
+        h,i = process_baqlava_translated(f, g, transref)
+        i.to_csv(sys.argv[8], sep="\t", index=False)
+    if sys1 == "1":
+        if depl == "0":
+            return d[['BAQLaVa VGB',a,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
+        elif depl == "1":
+            d2 = d[['BAQLaVa VGB',a,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']].rename(columns={a:a.replace(".bacterial_depleted_nucleotide","")})
+            return d2
+    elif sys1 == "2":
+        if depl == "0":
+            return h[['BAQLaVa VGB',f,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
+        elif depl == "1":
+            h2 = h[['BAQLaVa VGB',f,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']].rename(columns={f:f.replace(".bacterial_depleted_translated","")})
+       	    return h2
+    elif sys1 == "3":
+        j = join_nuc_trans(d, h, a, f, nucref)
+        if depl == "0":
+            return j[['BAQLaVa VGB',a,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
+        elif depl == "1":
+            j2 = j[['BAQLaVa VGB',a,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']].rename(columns={a:a.replace(".bacterial_depleted_nucleotide","")})
+            return j2
     else:
-        df12 = pd.merge(df8, nuc_tax.copy()[['VGB','Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']].drop_duplicates(), on='VGB', how='inner')
-        return df12[['VGB', 'observed_RPK', 'Realm', 'Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']]
-
-
-def process_baqlava_translated(base, format_df, prot_conv, nuc_tax, readlen):
-    df2 = format_df.copy()
-    df31 = df2.copy()[df2['# Gene Family'].str.contains("_P1")]
-    df32 = df2.copy()[df2['# Gene Family'].str.contains("_P2")]
-    df33 = df2.copy()[df2['# Gene Family'].str.contains("_P3")]
-    df34 = df2.copy()[df2['# Gene Family'].str.contains("_M1")]
-    df35 = df2.copy()[df2['# Gene Family'].str.contains("_P2")]
-    df36 = df2.copy()[df2['# Gene Family'].str.contains("_P3")]
-    df4 = pd.concat([df31, df32, df33, df34, df35, df36])
+        return 'ERROR: incorrect reconciliation task requested'
     
-    df6 = pd.merge(df4, prot_conv, left_on='# Gene Family', right_on='translated_marker', how='left')
-    df7 = df6.copy().groupby("nucleotide_marker", as_index=False).sum()
-
-    df8 = pd.merge(df7.copy(), nuc_tax.copy(), right_on='marker', left_on='nucleotide_marker', how='inner').drop_duplicates()
-    df8['reads_mapped'] = df8[base] * ((df8['marker_len']- (readlen-1))/1000) # - n1 + 1
-    df8['marker_len'] = df8['marker_len'].astype(float)
-    df9 = df8[df8['marker_len']>400]
-    df9 = df9.copy()
-    df9['marker_len_adj'] = df9['marker_len'] - (readlen-1) 
-    
-    df10 = df9.copy().groupby("VGB", as_index=False).sum()[['VGB','reads_mapped']]
-    df11 = df9.copy().groupby(["cluster_member","VGB"], as_index=False).sum()[['VGB','marker_len_adj']].groupby("VGB", as_index=False).quantile(0.95)
-    df12 = pd.merge(df10, df11, on='VGB', how='inner')
-    df12['observed_RPK'] = df12['reads_mapped']/(df12['marker_len_adj']/1000)
-    df13 = df12.copy()[['VGB','observed_RPK']].drop_duplicates()
-    
-    #handle segmentation:
-    df14 = nuc_tax.copy().dropna(subset=["segment_group"]).query("marker_len>400").query("marker!='no_marker'")[['Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species', 'VGB_specificity', 'segment_group', 'VGB_specificity_type', 'Virus name(s)', 'VGB']].drop_duplicates()
-    df15 = pd.merge(df13, df14, on='VGB', how='inner')
-    
-    if len(df15) != 0:
-        seg_grps = df15.copy()[['segment_group']].drop_duplicates()
-        sdf1 = pd.merge(df14, seg_grps, on='segment_group', how='inner')
-        sdf2 = pd.merge(sdf1, df15[['VGB', 'observed_RPK']], on='VGB', how='outer')
-        sdf2['observed_RPK'] = sdf2['observed_RPK'].fillna(0)
-        
-        # drop specific VGB zeros and average remaining VGB abundances:
-        sdf3 = sdf2.copy().query("VGB_specificity!='conserved'").query("VGB_specificity!='group1'").query("observed_RPK==0")
-        sdf3['drop'] = 'yes'
-        sdf4 = pd.merge(sdf2, sdf3[['VGB','drop']], on='VGB', how='outer').query("drop!='yes'")
-        sdf5 = sdf4.copy().groupby("segment_group", as_index=False).mean()
-        sdf6 = pd.merge(df14.copy()[['segment_group','Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']].drop_duplicates(), sdf5, on='segment_group', how='right')
-        
-        # merge back into VGB abundance table:
-        df15['drop'] = 'yes'
-        df16 = pd.merge(df15[['VGB','drop']], df13, on='VGB', how = 'outer').query("drop!='yes'")
-        df17 = pd.merge(df16, nuc_tax.copy()[['VGB','Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']].drop_duplicates(), on='VGB', how='inner')
-        df18 = pd.concat([df17, sdf6])
-        df18['VGB'] = df18['VGB'].fillna(df18['segment_group'])
-        df19 = df18[df18['observed_RPK']>=10]
-        return df19[['VGB', 'observed_RPK', 'Realm', 'Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']]
-        
-    else:
-        df20 = pd.merge(df13, nuc_tax.copy()[['VGB','Realm','Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']].drop_duplicates(), on='VGB', how='inner')
-        df21 = df20[df20['observed_RPK']>=10]
-        return df21[['VGB', 'observed_RPK', 'Realm', 'Kingdom', 'Phylum', 'Class', 'Order','Family', 'Genus', 'Species']] 
-
-    
-def merge_and_format_outputs(df1, df2, format_file, base):
-    df1['Database'] = 'nucleotide'
-    df1['sort'] = 2
-    df2['Database'] = 'translated'
-    df2['sort'] = 3
-    df3 = pd.concat([df1[['VGB','Species','observed_RPK', 'Database','sort']], df2.rename(columns={'Genus_translated_collapse':'Genus'})[['VGB','Species','observed_RPK', 'Database', 'sort']]])
-    df4 = pd.merge(format_file.copy(), df3, on=['VGB','Species'], how='right')
-    df5 = df4[['Species_formatted','observed_RPK','Database','sort']].rename(columns={'Species_formatted':'Species'})
-    df6 = df5.copy().groupby("Species", as_index=False).sum()
-    df6['Database'] = "TOTAL"
-    df6['sort'] = 1
-    df7 = pd.concat([df5, df6]).sort_values(by = ['Species', 'sort'])
-    df8 = df7.rename(columns={'observed_RPK':base})[['Species',base,'Database']]
-    return df8
-    
-def run_functions_and_obtain_final_output(in_genefams, nuc_tax, prot_conv, readlen, format_file):
-    a = format_file_and_base(in_genefams)
-    b = process_baqlava_nucleotide(a[0], a[1], nuc_tax, readlen)
-    c = process_baqlava_translated(a[0], a[1], prot_conv, nuc_tax, readlen)
-    d = merge_and_format_outputs(b, c, format_file, a[0])
-    return d
-
-
-final_baq_profile = run_functions_and_obtain_final_output(sys.argv[1], marker_taxonomy_df, translated_marker_conversion_df, 100, species_conversion_df)
-
-
-bas = os.path.split( sys.argv[1] )[1].split("_genefamilies.tsv")[0]
-loc = os.path.split( sys.argv[1] )[0]
-final_baq_profile.to_csv(loc + "/" + bas + "_BAQLaVa_profile.tsv", sep="\t", index=False)
+baq_out = run_reconciliation(sys.argv[1], sys.argv[2], sys.argv[3], nucleotide_reference, protein_reference, sys.argv[4], sys.argv[5])
+baq_out.to_csv(sys.argv[6], sep="\t", index=False)

@@ -221,6 +221,7 @@ setuptools.setup(
 	entry_points={
 		'console_scripts': [
 			'baqlava = baqlava.baqlava:main',
+                        'baqlava_join_tables = baqlava.utility_scripts.join_tables:main',
 		]},
 	package_data={
 		'baqlava': [

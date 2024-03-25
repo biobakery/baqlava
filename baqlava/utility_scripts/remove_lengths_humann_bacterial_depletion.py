@@ -2,7 +2,8 @@ import sys
 import os
 import gzip
 
-savefile = sys.argv[1].replace(".fa", "_lengthremoved.fa")
+newname = os.path.split( sys.argv[1] )[1].replace("_bowtie2_unaligned.fa", ".bacterial_depleted.fa") 
+savefile = sys.argv[2] + newname
 
 if sys.argv[1].endswith(".gz"):
     open_func=gzip.open
