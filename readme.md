@@ -30,44 +30,38 @@ The BAQLaVa data product is located in a file called <SAMPLE_PREFIX>_BAQLaVa_pro
 
 ## Database requirements
 
-BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. The databases can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
+BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. BAQLaVa also needs two large reference files. These can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
 
  
-    https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.nucleotide.tar.gz
-    https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.protein.tar.gz   
+    https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.v0.3.tar.gz
    
-These databases can be downloaded then unacked with the following code:
+Download the package above and unpack it. You will have a directory containing three subdirectories, each which need to be placed in a specific location:
     
-    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.nucleotide.tar.gz
-    tar -zxvf BAQLaVa.V0.1.nucleotide.tar.gz
-    
-    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.1.protein.tar.gz
-    tar -zxvf BAQLaVa.V0.1.protein.tar.gz
+    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.v0.3.tar.gz
+    tar -zxvf BAQLaVa.v0.3.tar.gz
+    mv baqlava_release_v0.3_hostedfiles/BAQLaVa.V0.2.nucleotide <PATH>/baqlava/baqlava/data/.
+    mv baqlava_release_v0.3_hostedfiles/BAQLaVa.V0.2.protein <PATH>/baqlava/baqlava/data/.
+    mv baqlava_release_v0.3_hostedfiles/utility_files/nucleotide_marker_reference.txt <PATH>/baqlava/baqlava/utility_files/.
+    mv baqlava_release_v0.3_hostedfiles/utility_files/translated_protein_reference.txt <PATH>/baqlava/baqlava/utility_files/.
 
-Finally, update the config file located at baqlava/baqlava/configs/baqlava.cfg so that the new folder locations for the protein and nucleotide databases are reflected where the current demo databases are notated. This should be sufficient to run BAQLaVa V0.1 with the full V0 databases. 
+If you chose other locations to store this data, update the config file located at baqlava/baqlava/configs/baqlava.cfg so that the new locations for the protein and nucleotide databases and reference files are reflected.
 
 ## Input Data
 
 To run, your reads should be in a single fastq or fasta file (cat paired reads together into one file as needed). 
 First, load the most recent version of biobakery workflows: 
   ```
-  hutlab load centos7/python3/humann3/3.6-devel
+  hutlab load rocky8/humann3/3.9-devel
+  hutlab load rocky8/anadama2/0.10.0-devel
   ```
-We reccomend depleting the fastq or fasta of potential bacterial reads before running baqlava. This can be done by running HUMAnN with standard parameters and skipping trasnlated search: 
+We reccomend depleting the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag: 
   ```
-  humann --input <FILE> --output <LOCATION> --bypass-translated-search
+  --bypass-bacterial-depletion
   ```
-The file at LOCATION/FILE_humann_temp/FILE_bowtie2_unaligned.fa has been depleted of bacterial reads via bowtie2 search to the chocophlan database. Format this file for BAQLaVa by running:
-  ```
-  python /n/holystore01/LABS/huttenhower_lab/Users/jjensen/baqlava/run/remove_lengths_humann_bacterial_depletion.py
-  ```
-This script creates a new filewith the suffix .lengthremoved.fa. This can alternatively be done through the command line and a new name chosen for the file:
-  ```
-  sed -r 's/\|[0-9]+$//' <FILE> > <NEWFILE>
-  ```
+
 ## Running BAQLaVa
 
-Finally, run BAQLaVa on your data! (If you have not loaded current biobakery workflows, first run hutlab load centos7/python3/humann3/3.6-devel)
+Finally, run BAQLaVa on your data!
 ```
 baqlava -i <FILE> -o <OUTPUT_DIRECTORY>
 ```
