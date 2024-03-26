@@ -1,19 +1,25 @@
-## BAQLaVa V0.1
+## BAQLaVa V0.3
 
-This is a very prelimiary version (V0) of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa), made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA. 
+This is a pre-publication version of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa), made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA. The final version of BAQLaVa may contain algorithmic differences.
 
 ## Download & Installation:
 
 To download BAQLaVa V0.1, first please request for the repository to be made public briefly. You can then run: 
 
-     hutlab load centos7/python3/anadama2/0.10.0-devel
-     hutlab load centos7/python3/humann3/3.6-devel
+     hutlab load rocky8/humann3/3.9-devel
+     hutlab load rocky8/anadama2/0.10.0-devel
      git clone https://github.com/biobakery/baqlava.git
      python3 <DIR>/setup.py install --user
 
 To test the installation, run: 
 
      baqlava -i examples/baqlava_demo.fastq -o output/
+
+BAQLaVa v0.3 options:
+     
+     --bypass-bacterial-depletion
+     --bypass-nucleotide-search
+     --bypass-translated-search
      
 The BAQLaVa data product is located in a file called <SAMPLE_PREFIX>_BAQLaVa_profile.txt (so for the demo data, this is "baqlava_demo_BAQLaVa_profile.tsv"). The data will look like: 
 
