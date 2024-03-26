@@ -315,10 +315,10 @@ def main():
     #depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
     #args = [baq_dir])
 
-    #workflow.add_task(
-    #"rm -r [args[0]]",
-    #depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
-    #args = [tempdir])
+    workflow.add_task(
+        "rm -r [args[0]]",
+        depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
+        args = [tempdir])
 
     workflow.go()
 
