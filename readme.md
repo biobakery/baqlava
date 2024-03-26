@@ -4,7 +4,7 @@ This is a pre-publication version of the Bioinformatic Application of Quantifica
 
 ## Download & Installation:
 
-To download BAQLaVa V0.1, first please request for the repository to be made public briefly. You can then run: 
+To download BAQLaVa V0.3, first please request for the repository to be made public briefly. You can then run: 
 
      hutlab load rocky8/humann3/3.9-devel
      hutlab load rocky8/anadama2/0.10.0-devel
