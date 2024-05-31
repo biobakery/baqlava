@@ -20,18 +20,17 @@ BAQLaVa v1.0 options:
 ## Database requirements
 
 BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. BAQLaVa also needs two large reference files. These can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
-
  
     https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.v0.3.tar.gz
    
 Download the package above and unpack it. You will have a directory containing three subdirectories, each which need to be placed in a specific location:
     
-    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.v0.3.tar.gz
-    tar -zxvf BAQLaVa.v0.3.tar.gz
-    mv baqlava_release_v0.3_hostedfiles/BAQLaVa.V0.2.nucleotide <PATH>/baqlava/baqlava/data/.
-    mv baqlava_release_v0.3_hostedfiles/BAQLaVa.V0.2.protein <PATH>/baqlava/baqlava/data/.
-    mv baqlava_release_v0.3_hostedfiles/utility_files/nucleotide_marker_reference.txt <PATH>/baqlava/baqlava/utility_files/.
-    mv baqlava_release_v0.3_hostedfiles/utility_files/translated_protein_reference.txt <PATH>/baqlava/baqlava/utility_files/.
+    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.v1.0.tar.gz
+    tar -zxvf BAQLaVa.v1.0.tar.gz
+    mv baqlava_release_v1.0_hostedfiles <PATH>/baqlava/baqlava/.
+    mv baqlava_release_v1.0_hostedfiles/utility_files/nucleotide_marker_reference.txt <PATH>/baqlava/baqlava/utility_files/.
+    mv baqlava_release_v1.0_hostedfiles/utility_files/translated_protein_reference.txt <PATH>/baqlava/baqlava/utility_files/.
+    mv baqlava_release_v1.0_hostedfiles/utility_files/translated_protein_reference.txt <PATH>/baqlava/baqlava/utility_files/.
 
 If you chose other locations to store this data, update the config file located at baqlava/baqlava/configs/baqlava.cfg so that the new locations for the protein and nucleotide databases and reference files are reflected.
 
