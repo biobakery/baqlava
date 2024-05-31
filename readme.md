@@ -1,33 +1,22 @@
-## BAQLaVa V0.3
+## BAQLaVa V1.0
 
-This is a pre-publication version of the Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa), made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA. The final version of BAQLaVa may contain algorithmic differences.
+Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa) is made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA.
 
 ## Download & Installation:
 
-To download BAQLaVa V0.3, first please request for the repository to be made public briefly. You can then run: 
+To download BAQLaVa V1.0, first please request for the repository to be made public briefly. You can then run: 
 
      hutlab load rocky8/humann3/3.9-devel
      hutlab load rocky8/anadama2/0.10.0-devel
      git clone https://github.com/biobakery/baqlava.git
      python3 <DIR>/setup.py install --user
 
-To test the installation, run: 
-
-     baqlava -i examples/baqlava_demo.fastq -o output/
-
-BAQLaVa v0.3 options:
+BAQLaVa v1.0 options:
      
      --bypass-bacterial-depletion
      --bypass-nucleotide-search
      --bypass-translated-search
      
-The BAQLaVa data product is located in a file called <SAMPLE_PREFIX>_BAQLaVa_profile.txt (so for the demo data, this is "baqlava_demo_BAQLaVa_profile.tsv"). The data will look like: 
-
-    Virus                               baqlava_demo_Abundance-RPKs	Virus_metadata	          Database
-    Punavirus|Punavirus P1              30.0470091397	               Escherichia phage P1	nucleotide
-    Tequatrovirus|Tequatrovirus T4      15.0099591829	               Escherichia phage T4	nucleotide
-    Tunavirus|unclassified              61.74688894626818		                              translated
-
 ## Database requirements
 
 BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. BAQLaVa also needs two large reference files. These can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
