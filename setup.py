@@ -11,7 +11,7 @@ import re
 import time
 
 
-VERSION = "0.2.0"
+VERSION = "1.0.0"
 AUTHOR = "BAQLaVa Development Team"
 MAINTAINER = "Jordan Jensen"
 MAINTAINER_EMAIL = "jordanjensen@g.harvard.edu"
