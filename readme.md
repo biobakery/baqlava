@@ -62,8 +62,8 @@ BAQLaVa produces the following data products:
 
 FILE_BAQLaVa_profile.txt is the BAQLaVa viral profile. The other three files produced are not reqired for any further viral analysis but are produced to aid in future research. If you do not plan to utilize them, they can be discarded. 
      
-     FILE_bacterial_depleted.fa: The intermediate fasta file that has been bacterially depleted and only contains viral and microbial dark matter reads.
-     FILE_tempfile_markers.txt:  A list of all nucleotide markers mapped to, at what abundances, and which VGBs the markers belong to.
-     FILE_tempfile_proteins.txt:  A list of all proteins mapped to, at what abundances, and which VGBs the proteins belong to.
+     FILE_bacterial_depleted.fa:   The intermediate fasta file that has been bacterially depleted and only contains viral and microbial dark matter reads.
+     FILE_tempfile_markers.txt:    A list of all nucleotide markers mapped to, at what abundances, and which VGBs the markers belong to.
+     FILE_tempfile_proteins.txt:   A list of all proteins mapped to, at what abundances, and which VGBs the proteins belong to.
      
 
