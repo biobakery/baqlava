@@ -1,17 +1,17 @@
-## BAQLaVa V1.0
+## BAQLaVa V0.4
 
 Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa) is made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA.
 
 ## Download & Installation:
 
-To download BAQLaVa V1.0, first please request for the repository to be made public briefly. You can then run: 
+To download BAQLaVa V0.4, first please request for the repository to be made public briefly. You can then run: 
 
      hutlab load rocky8/humann3/3.9-devel
      hutlab load rocky8/anadama2/0.10.0-devel
      git clone https://github.com/biobakery/baqlava.git
      python3 <DIR>/setup.py install --user
 
-BAQLaVa v1.0 options:
+BAQLaVa v0.4 options:
      
      --bypass-bacterial-depletion
      --bypass-nucleotide-search
