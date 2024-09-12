@@ -1,3 +1,5 @@
+# to run: python join_tables.py <DIRECTORY_WITH_BAQLAVA_TABLES> <DESIRED_PREFIX_TO_SAVE> 
+
 import pandas as pd
 import os
 import sys
