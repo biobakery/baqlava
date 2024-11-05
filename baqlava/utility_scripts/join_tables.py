@@ -15,7 +15,7 @@ def main():
             tempdf = tempdf[['BAQLaVa VGB',colname]].rename(columns={colname:name})
             retdf = pd.merge(retdf, tempdf, on='BAQLaVa VGB', how='outer')
     a = retdf.fillna(0)
-    a.to_csv(sys.argv[2] + "BAQLaVa_VGB_table.tsv", sep="\t", index=False)
+    a.to_csv(sys.argv[2] + "_BAQLaVa_VGB_table.tsv", sep="\t", index=False)
     return None
 
 if __name__ == '__main__':
