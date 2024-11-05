@@ -4,18 +4,19 @@ Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQL
 
 ## Download & Installation:
 
-To download BAQLaVa V0.4, first please request for the repository to be made public briefly. You can then run: 
+To download BAQLaVa V0.5, first please request for the repository to be made public briefly. You can then run: 
 
      hutlab load rocky8/humann3/3.9-devel
      hutlab load rocky8/anadama2/0.10.0-devel
      git clone https://github.com/biobakery/baqlava.git
      python3 <DIR>/setup.py install --user
 
-BAQLaVa v0.4 options:
+BAQLaVa v0.5 options:
      
      --bypass-bacterial-depletion
      --bypass-nucleotide-search
      --bypass-translated-search
+     --taxonomic-profile (provide a MetaPhlAn taxonomic profile to aid bacterial depletion)
      
 ## Database requirements
 
