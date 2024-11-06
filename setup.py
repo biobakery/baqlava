@@ -20,7 +20,7 @@ MAINTAINER_EMAIL = "jordanjensen@g.harvard.edu"
 # check for either of the required versions
 # required python versions (3.6+)
 required_python_version_major = [3]
-required_python_version_minor = [7]
+required_python_version_minor = [10]
 
 pass_check = False
 try:
