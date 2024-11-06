@@ -1,4 +1,4 @@
-## BAQLaVa V0.4
+## BAQLaVa V0.5
 
 Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa) is made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA.
 
