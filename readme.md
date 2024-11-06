@@ -66,5 +66,9 @@ FILE_BAQLaVa_profile.txt is the BAQLaVa viral profile. The other three files pro
      FILE_bacterial_depleted.fa:   The intermediate fasta file that has been bacterially depleted and only contains viral and microbial dark matter reads.
      FILE_tempfile_markers.txt:    A list of all nucleotide markers mapped to, at what abundances, and which VGBs the markers belong to.
      FILE_tempfile_proteins.txt:   A list of all proteins mapped to, at what abundances, and which VGBs the proteins belong to.
+
+If you'd like to access the full length BAQLaVa genomes, they are available for download here:
+
+    https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_databases.tar.gz
      
 
