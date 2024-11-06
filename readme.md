@@ -26,12 +26,12 @@ BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence
    
 Download the package above and unpack it. You will have a directory containing three subdirectories, each which need to be placed in a specific location:
     
-    wget -P <LOCATION_TO_DOWNLOAD> https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.v1.0.tar.gz
-    tar -zxvf BAQLaVa.v1.0.tar.gz
-    mv baqlava_release_v1.0_hostedfiles/data/ <PATH>/baqlava/baqlava/.
-    mv baqlava_release_v1.0_hostedfiles/utility_files/idmap_protein.txt <PATH>/baqlava/baqlava/utility_files/.
-    mv baqlava_release_v1.0_hostedfiles/utility_files/nucleotide_marker_reference.txt <PATH>/baqlava/baqlava/utility_files/.
-    mv baqlava_release_v1.0_hostedfiles/utility_files/translated_protein_reference.txt <PATH>/baqlava/baqlava/utility_files/.
+    wget -P <LOCATION_TO_DOWNLOAD> https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.tar.gz
+    tar -zxvf BAQLaVa.V0.5.tar.gz
+    mv BAQLaVa.V0.5/data/ <PATH>/baqlava/baqlava/.
+    mv BAQLaVa.V0.5/utility_files/idmap_protein.txt <PATH>/baqlava/baqlava/utility_files/.
+    mv BAQLaVa.V0.5/utility_files/nucleotide_marker_reference.txt <PATH>/baqlava/baqlava/utility_files/.
+    mv BAQLaVa.V0.5/utility_files/translated_protein_reference.txt <PATH>/baqlava/baqlava/utility_files/.
 
 If you chose other locations to store this data, update the config file located at baqlava/baqlava/configs/baqlava.cfg so that the new locations for the protein and nucleotide databases and reference files are reflected.
 
