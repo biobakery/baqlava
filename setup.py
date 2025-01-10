@@ -9,16 +9,26 @@ import zipfile
 import tempfile
 import re
 import time
+import configparser
 
+#try:
+#    import ConfigParser as configparser
+#except ImportError:
+#    import configparser
 
-VERSION = "0.5"
+config = configparser.ConfigParser()
+install_folder=os.path.dirname(os.path.realpath(__file__))
+config_file=os.path.join(install_folder,"configs/baqlava.cfg")
+config.read(config_file)
+
+VERSION = config.get("metadata","version",fallback="0.5")
 AUTHOR = "BAQLaVa Development Team"
 MAINTAINER = "Jordan Jensen"
 MAINTAINER_EMAIL = "jordanjensen@g.harvard.edu"
 
 
 # check for either of the required versions
-# required python versions (3.6+)
+# required python versions (3.10+)
 required_python_version_major = [3]
 required_python_version_minor = [10]
 
@@ -231,6 +241,5 @@ setuptools.setup(
 			'data/nucleotidedb/*',
 			'data/proteindb/*',
 		]},
-	# scripts=['baqlava/baqlava.py'],
 	zip_safe=False
 )

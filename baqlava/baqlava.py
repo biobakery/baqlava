@@ -52,10 +52,10 @@ install_folder=os.path.dirname(os.path.realpath(__file__))
 config_file=os.path.join(install_folder,"configs/baqlava.cfg")
 config.read(config_file)
 
-
 # Setting the version of the workflow and short description
+
 workflow = Workflow(
-    version="1.0.0",                    #Update the version as needed
+    version=config.get('metadata','version'),                    #Update the version as needed
     description="Viral Profiling"     #Update the description as needed
     )
 
