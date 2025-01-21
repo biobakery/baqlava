@@ -1,6 +1,12 @@
 
-# Template History #
-## v1.0.0 05-31-2024
+# History #
+
+## v0.5.0 01-21-2025
+
+* Added --keep-tempfiles flag
+* Adjusted low abundance coverage estimate to account for sample read length
+
+## v0.5.0 05-31-2024
 
 * Updated protein search to target VGB-specific proteins only
 * Updated taxonomy naming (bug fix)

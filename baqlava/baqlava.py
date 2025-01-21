@@ -125,6 +125,12 @@ workflow.add_argument(
     desc = "Minimum length of proteome mapped to report in BAQLaVa output.",
     default = config.get('features','proteome_length'))
 
+workflow.add_argument(
+    name = "keep-tempfiles",
+    desc = "Keep temporary mapping files. This is memory intensive.",
+    action = 'store_true',
+    default = config.get('features','keep_tempfiles'))
+
 args = workflow.parse_args()
 
 
@@ -390,10 +396,13 @@ def main():
     depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
     args = [baq_dir])
 
-    workflow.add_task(
-    "rm -r [args[0]]",
-    depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
-    args = [tempdir])
+    if args.keep_tempfiles == True:
+        pass
+    else:
+        workflow.add_task(
+        "rm -r [args[0]]",
+        depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
+        args = [tempdir])
 
     workflow.go()
 

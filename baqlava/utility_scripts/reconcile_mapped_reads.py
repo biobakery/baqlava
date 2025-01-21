@@ -151,14 +151,16 @@ def process_baqlava_nucleotide1(base, format_df, ref, readlen):
     df15 = df14[df14['RPK']!=0][['# Gene Family','VGB','RPK']].rename(columns={"# Gene Family":"Marker"})
     return df13, df15
 
-def process_baqlava_nucleotide2(cov25, cov50, base, taxref):
+def process_baqlava_nucleotide2(cov25, cov50, base, taxref, readlen):
     newbase = "_".join(base.split("_nucleotide_"))
 
     df1 = pd.merge(cov25.copy(), cov50.copy(), on=['segment_group','observed_RPK'], how='outer', indicator=True)
     df2 = df1.copy().query("_merge!='left_only'")
     df3 = df1.copy().query("_merge=='left_only'")
-    df3 = df3[df3['observed_RPK']>=5]
-    df3 = df3[df3['observed_RPK']<=10]
+    df3['observed_coverage'] = (df3['observed_RPK'] * readlen) / 1000
+    df3 = df3[df3['observed_coverage'] >= 0.5]
+    df3 = df3[df3['observed_coverage'] <= 1]
+    df3 = df3.drop(columns=['observed_coverage'])
 
     df4 = pd.merge(df2, df3, on='segment_group', how='outer')
     df4['observed_RPK_x'] = df4['observed_RPK_x'].fillna(df4['observed_RPK_y'])
@@ -293,7 +295,7 @@ def run_reconciliation(sys1, sys2, sys3, sys4, nucref, transref, taxref, inp_fa,
         c = get_read_length(inp_fa)
         d1,e1 = process_baqlava_nucleotide1(a, b1, nucref, c)
         d2,e2 = process_baqlava_nucleotide1(a, b2, nucref, c)
-        f = process_baqlava_nucleotide2(d1, d2, a, taxref)
+        f = process_baqlava_nucleotide2(d1, d2, a, taxref, c)
         e1.to_csv(sys.argv[8], sep="\t", index=False)
     if sys1 == "2" or sys1 == "3":
         print('processing trans')

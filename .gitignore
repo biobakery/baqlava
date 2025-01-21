@@ -29,3 +29,6 @@ share/python-wheels/
 *.egg
 MANIFEST
 .pyc
+baqlava/utility_files/BAQLaVa_genomes_reference.txt
+baqlava/data/
+log_file_name.log
