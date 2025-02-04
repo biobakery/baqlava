@@ -391,18 +391,18 @@ def main():
         print('ERROR')
 
 
-    workflow.add_task(
-    "rm -r [args[0]]",
-    depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
-    args = [baq_dir])
-
     if args.keep_tempfiles == True:
         pass
     else:
         workflow.add_task(
         "rm -r [args[0]]",
         depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
-        args = [tempdir])
+        args = [baq_dir])
+
+    workflow.add_task(
+    "rm -r [args[0]]",
+    depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
+    args = [tempdir])
 
     workflow.go()
 
