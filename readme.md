@@ -24,6 +24,10 @@ When running BAQLaVa v0.5, you have the following options:
      --taxonomic-profile: If you sample has previously been profiled with MetaPhlAn, you can speed up the bacterial depletion step and provide a MetaPhlAn taxonomic profile to be used directly
      
 ## Database requirements
+Usage: (BAQLaVa DB + utility files are automatically downloaded and installed during setup)
+```
+baqlava_database --download database baqlava-db .
+```
 
 BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. BAQLaVa also needs two large reference files. These can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
  
