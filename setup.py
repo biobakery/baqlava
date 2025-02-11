@@ -205,6 +205,34 @@ def download_unpack_zip(url, download_file_name, folder, software_name):
 		except EnvironmentError:
 			print("WARNING: Unable to remove the temp download: " + download_file)
 
+class Install(_install):
+    """
+    Custom setuptools install command
+    """
+    
+    _install.user_options=_install.user_options+[('bypass-dependencies-install', 
+        None, 'bypass install of dependencies')]
+    
+    def initialize_options(self):
+        self.bypass_dependencies_install=False
+        _install.initialize_options(self)
+    
+    def finalize_options(self):
+        _install.finalize_options(self)
+    
+    def run(self):
+        _install.run(self)
+
+        # find out the platform
+        mac_os=False
+        if sys.platform in ["darwin","os2","os2emx"]:
+            mac_os=True
+        
+        # install dependencies if not already installed
+        # if not self.bypass_dependencies_install:
+        #     # install_databases(self.install_scripts,mac_os,replace_install=False)
+        # else:
+        #     print("Bypass install of dependencies.")
 
 setuptools.setup(
 	name="baqlava",
@@ -222,7 +250,7 @@ setuptools.setup(
 		"Environment :: Console",
 		"Operating System :: MacOS",
 		"Operating System :: Unix",
-		"Programming Language :: Python :: 3.6",
+		"Programming Language :: Python :: 3.10",
 		"Topic :: Scientific/Engineering :: Bio-Informatics"
 	],
 	#install_requires=['anadama2>=0.7.4'],
@@ -232,6 +260,7 @@ setuptools.setup(
 		'console_scripts': [
 			'baqlava = baqlava.baqlava:main',
                         'baqlava_join_tables = baqlava.utility_scripts.join_tables:main',
+						"baqlava_database = baqlava.download_db:main",
 		]},
 	package_data={
 		'baqlava': [
