@@ -30,7 +30,7 @@ current_downloads={
     # genome/database
     "database" : {
         # database build type
-        "baqlava-db" : "https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa.V0.5.tar.gz",
+        "baqlava-db" : "https://huttenhower.sph.harvard.edu/baqlava-db/databases.V0.5.tar.gz",
     },
 }
 

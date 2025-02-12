@@ -20,6 +20,7 @@ config = configparser.ConfigParser()
 install_folder=os.path.dirname(os.path.realpath(__file__))
 config_file=os.path.join(install_folder,"configs/baqlava.cfg")
 config.read(config_file)
+setup_directory = os.path.abspath(os.path.dirname(__file__))
 
 VERSION = config.get("metadata","version",fallback="0.5")
 AUTHOR = "BAQLaVa Development Team"
@@ -205,6 +206,31 @@ def download_unpack_zip(url, download_file_name, folder, software_name):
 		except EnvironmentError:
 			print("WARNING: Unable to remove the temp download: " + download_file)
 
+def install_databases(final_install_folder, mac_os, replace_install=None):
+	url="https://huttenhower.sph.harvard.edu/baqlava-db/databases.V0.5.tar.gz"
+	download_file_name="databases.V0.5.tar.gz"
+	database_full_path=tempfile.mkdtemp(prefix="baqlava-db-download_",dir=setup_directory)
+	print("Downloading baqlava protein and nucleotide databases.")
+	error_during_install=False
+	download_unpack_tar(url, download_file_name, database_full_path, "database")   
+    # copy the installed software to the final bin location
+	try:
+		print("db full path="+database_full_path)
+		print("setup_dir="+setup_directory)
+		shutil.copytree( os.path.join(database_full_path), os.path.join(setup_directory,"baqlava"),dirs_exist_ok=True)
+	except (EnvironmentError, shutil.Error):
+		error_during_install=True        
+	try:
+		shutil.rmtree(database_full_path)
+	except EnvironmentError:
+		print("Warning: Unable to remove temp install folder.")
+        
+	if error_during_install:
+		print("Warning: Unable to install baqlava databases.")
+	else:
+		print("Installed baqlava database at "+setup_directory)
+        
+
 class Install(_install):
     """
     Custom setuptools install command
@@ -221,18 +247,18 @@ class Install(_install):
         _install.finalize_options(self)
     
     def run(self):
-        _install.run(self)
-
         # find out the platform
         mac_os=False
         if sys.platform in ["darwin","os2","os2emx"]:
             mac_os=True
         
         # install dependencies if not already installed
-        # if not self.bypass_dependencies_install:
-        #     # install_databases(self.install_scripts,mac_os,replace_install=False)
-        # else:
-        #     print("Bypass install of dependencies.")
+        if not self.bypass_dependencies_install:
+            install_databases(self.install_scripts,mac_os,replace_install=False)
+        else:
+            print("Bypass install of databases.")
+		
+        _install.run(self)
 
 setuptools.setup(
 	name="baqlava",
@@ -255,7 +281,7 @@ setuptools.setup(
 	],
 	#install_requires=['anadama2>=0.7.4'],
 	packages=setuptools.find_packages(),
-	# cmdclass={'install': Install},
+	cmdclass={'install': Install},
 	entry_points={
 		'console_scripts': [
 			'baqlava = baqlava.baqlava:main',
@@ -267,8 +293,8 @@ setuptools.setup(
 			'configs/*',
 			'utility_files/*',
 			'utility_scripts/*',
-			'data/nucleotidedb/*',
-			'data/proteindb/*',
+			'data/BAQLaVa.V0.5.nucleotide/*',
+			'data/BAQLaVa.V0.5.protein/*',
 		]},
 	zip_safe=False
 )

@@ -26,7 +26,7 @@ When running BAQLaVa v0.5, you have the following options:
 ## Database requirements
 Usage: (BAQLaVa DB + utility files are automatically downloaded and installed during setup)
 ```
-baqlava_database --download database baqlava-db .
+baqlava_database --download database baqlava-db /path/to/install_database
 ```
 
 BAQLaVa requires two input databases: 1) a bowtie2-formatted nucleotide sequence database and 2) aa DIAMOND-formatted protein sequence database. BAQLaVa also needs two large reference files. These can be downloaded from https://huttenhower.sph.harvard.edu/baqlava-db/:
