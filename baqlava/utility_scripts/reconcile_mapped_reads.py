@@ -16,16 +16,31 @@ try:
     import ConfigParser as configparser
 except ImportError:
     import configparser
+class AbsolutePathConfigParser(configparser.ConfigParser):
+    def get(self, section, option, **kwargs):
+        # Get the raw value from the configuration file.
+        value = super().get(section, option, **kwargs)
+        # If the value is already absolute, return it.
+        if os.path.isabs(value):
+            return value
+        # If the value contains "//", assume it is a URL; leave it unchanged.
+        if "//" in value:
+            return value
+        # If the value does not contain any slash, leave it unchanged.
+        if "/" not in value:
+            return value
+        # Otherwise, join the value with base_dir.
+        return os.path.join(parent_dir, value)
 
-config = configparser.ConfigParser()
-
-install_folder=os.path.dirname(os.path.realpath(__file__))
-config_file=os.path.join(install_folder,os.path.pardir,"configs/baqlava.cfg")
+lib_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(os.path.dirname(lib_dir))
+config_file=os.path.join(parent_dir,"configs/baqlava.cfg")
+config = AbsolutePathConfigParser()
 config.read(config_file)
 
-nucleotide_reference_file = os.path.abspath(config.get('utility','nucleotide_reference'))
-protein_reference_file = os.path.abspath(config.get('utility','protein_reference'))
-VGB_taxonomy_file = os.path.abspath(config.get('utility','VGB_taxonomy'))
+nucleotide_reference_file = config.get('utility','nucleotide_reference')
+protein_reference_file = config.get('utility','protein_reference')
+VGB_taxonomy_file = config.get('utility','VGB_taxonomy')
 
 nucleotide_reference = pd.read_csv(nucleotide_reference_file, sep="\t", low_memory=False)
 protein_reference = pd.read_csv(protein_reference_file, sep="\t", low_memory=False).query("len>=200")
