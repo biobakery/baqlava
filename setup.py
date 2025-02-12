@@ -215,8 +215,6 @@ def install_databases(final_install_folder, mac_os, replace_install=None):
 	download_unpack_tar(url, download_file_name, database_full_path, "database")   
     # copy the installed software to the final bin location
 	try:
-		print("db full path="+database_full_path)
-		print("setup_dir="+setup_directory)
 		shutil.copytree( os.path.join(database_full_path), os.path.join(setup_directory,"baqlava"),dirs_exist_ok=True)
 	except (EnvironmentError, shutil.Error):
 		error_during_install=True        
@@ -254,11 +252,16 @@ class Install(_install):
         
         # install dependencies if not already installed
         if not self.bypass_dependencies_install:
-            install_databases(self.install_lib,mac_os,replace_install=False)
+            # install_databases(self.install_lib,mac_os,replace_install=False)
+            database=False
         else:
             print("Bypass install of databases.")
 		
         _install.run(self)
+        print("----------------------------------------------------------")
+        print("Install BAQLaVa database here: "+ os.path.join(self.install_lib,"baqlava"))
+        print("USE COMMAND: baqlava_database --download database baqlava-db "+ os.path.join(self.install_lib,"baqlava"))
+        print("----------------------------------------------------------")
 
 setuptools.setup(
 	name="baqlava",
