@@ -296,5 +296,6 @@ setuptools.setup(
 			'data/BAQLaVa.V0.5.nucleotide/*',
 			'data/BAQLaVa.V0.5.protein/*',
 		]},
+		include_package_data=True, 
 	zip_safe=False
 )

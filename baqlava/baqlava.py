@@ -47,11 +47,18 @@ try:
 except ImportError:
     import configparser
 
-config = configparser.ConfigParser()
-install_folder=os.path.dirname(os.path.realpath(__file__))
-config_file=os.path.join(install_folder,"configs/baqlava.cfg")
+class AbsolutePathConfigParser(configparser.ConfigParser):
+    def get(self, section, option, **kwargs):
+        # Get the raw value from the configuration file.
+        value = super().get(section, option, **kwargs)
+        # If the value is not absolute, prepend the library directory.
+        if not os.path.isabs(value):
+            value = os.path.join(lib_dir, value)
+        return value
+lib_dir = os.path.dirname(os.path.abspath(__file__))
+config_file=os.path.join(lib_dir,"configs/baqlava.cfg")
+config = AbsolutePathConfigParser()
 config.read(config_file)
-
 # Setting the version of the workflow and short description
 
 workflow = Workflow(
