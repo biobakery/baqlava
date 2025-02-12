@@ -254,7 +254,7 @@ class Install(_install):
         
         # install dependencies if not already installed
         if not self.bypass_dependencies_install:
-            install_databases(self.install_scripts,mac_os,replace_install=False)
+            install_databases(self.install_lib,mac_os,replace_install=False)
         else:
             print("Bypass install of databases.")
 		
