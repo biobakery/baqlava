@@ -33,7 +33,7 @@ class AbsolutePathConfigParser(configparser.ConfigParser):
         return os.path.join(parent_dir, value)
 
 lib_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(os.path.dirname(lib_dir))
+parent_dir = os.path.dirname(lib_dir)
 config_file=os.path.join(parent_dir,"configs/baqlava.cfg")
 config = AbsolutePathConfigParser()
 config.read(config_file)
