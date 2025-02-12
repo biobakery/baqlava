@@ -52,9 +52,17 @@ class AbsolutePathConfigParser(configparser.ConfigParser):
         # Get the raw value from the configuration file.
         value = super().get(section, option, **kwargs)
         # If the value is not absolute, prepend the library directory.
-        if not os.path.isabs(value):
-            value = os.path.join(lib_dir, value)
-        return value
+        if os.path.isabs(value):
+            return value
+        # If the value contains "//", assume it’s a URL and return it as is.
+        if '//' in value:
+            return value
+        # If the value does not contain a slash at all, return it.
+        if '/' not in value:
+            return value
+        # Otherwise, join the value with lib_dir to create an absolute path.
+        return os.path.join(lib_dir, value)
+    
 lib_dir = os.path.dirname(os.path.abspath(__file__))
 config_file=os.path.join(lib_dir,"configs/baqlava.cfg")
 config = AbsolutePathConfigParser()
