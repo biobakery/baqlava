@@ -16,7 +16,7 @@ Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQL
 - [Contributions](#Contributions)
 - [Option List](#option-list)
 
-  ## Requirements:
+## Requirements:
 - HUMAnN>=3.9 (https://github.com/biobakery/humann)
 - AnADAMA2>=0.10.0 (https://github.com/biobakery/anadama2)
 - Python>=3.10 (https://github.com/biobakery/anadama2)
@@ -49,7 +49,8 @@ https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_database
 To run, your reads should be in a single fastq or fasta file (cat paired end reads together into one file as needed).
 We reccomend using the depletion step to remove the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag `--bypass-bacterial-depletion`
 
-MGX Example Input File: https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa.V0.2.tutorial.MGX.fa
+MGX Example Input File:  
+https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa.V0.2.tutorial.MGX.fa
 
 MTX Example Input File: 
 https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa.V0.2.tutorial.MTX.fa
