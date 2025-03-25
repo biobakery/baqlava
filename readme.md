@@ -127,9 +127,7 @@ Running BAQLaVa creates four output products:
 <FILENAME>_tempfile_proteins.txt
 ```
 
-The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral profile. We will examine this in depth below.
-
-The additional files are products you may find helpful in further or downstream analysis of your viromes: 
+The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral profile. We will examine this in depth below. The other three files produced are not reqired for any further viral analysis but are produced to aid in future research. If you do not plan to utilize them, they can be discarded to save space.
 
 ```<FILENAME>_bacterial_depeled.fq``` is a copy of the input file, with any reads that mapped to a bacterial database having been removed, cutting down the number of reads within the file drastically. 
 
@@ -161,6 +159,18 @@ If a sample has already been profiled with MetaPhlAn previously and as such the 
 These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions.  
 
 
+## BAQLaVa Output
+
+Let's look at the output of the demo data profiling to examine what the standard output 
+
+
+
+## Merging BAQLaVa Profiles
+
+
+
+## Paired MGX - MTX Data
+
 
 
   
@@ -171,99 +181,6 @@ These flags can be used to bypass either of the individual search steps of BAQLa
 
 https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_databases.tar.gz
 
-  
-
-  
-
-## Input Data
-
-  
-
-To run, your reads should be in a single fastq or fasta file (cat paired end reads together into one file as needed).
-
-  
-
-We reccomend using the depletion step to remove the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag `--bypass-bacterial-depletion`
-
-  
-
-  
-
-## How to run:
-
-  
-
-#### Demo Run
-
-  
-
-Finally, run BAQLaVa on your data!
-
-  
-
-```
-baqlava -i <FILE> -o <OUTPUT_DIRECTORY>
-```
-
-  
-
-  
-
-When running BAQLaVa v0.5, you have the following options:
-
-  
-
-```
---bypass-bacterial-depletion: run your sample through viral profiling without removing bacterial reads first
---bypass-nucleotide-search: run only the translated search component of BAQLaVa
---bypass-translated-search: run only the nucleotide search component of BAQLaVa
---taxonomic-profile: If you sample has previously been profiled with MetaPhlAn, you can speed up the bacterial depletion step and provide a MetaPhlAn taxonomic profile to be used directly
-```
-
-  
-
-  
-
-## Output Data
-
-  
-
-BAQLaVa produces the following data products:
-
-  
-
-```
-FILE_BAQLaVa_profile.txt
-FILE_bacterial_depleted.fa
-FILE_tempfile_markers.txt
-FILE_tempfile_proteins.txt
-```
-
-  
-
-  
-
-`FILE_BAQLaVa_profile.txt` is the BAQLaVa viral profile. The other three files produced are not reqired for any further viral analysis but are produced to aid in future research. If you do not plan to utilize them, they can be discarded.
-
-  
-
-  
-
-`FILE_bacterial_depleted.fa`: The intermediate fasta file that has been bacterially depleted and only contains viral reads and other microbial dark matter reads.
-
-  
-
-  
-
-`FILE_tempfile_markers.txt`: A list of all nucleotide markers mapped to, at what abundances, and which VGBs the markers belong to.
-
-  
-
-  
-
-`FILE_tempfile_proteins.txt`: A list of all proteins mapped to, at what abundances, and which VGBs the proteins belong to.
-
-  
 
   
 
