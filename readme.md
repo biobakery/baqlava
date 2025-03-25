@@ -101,37 +101,64 @@ BAQLaVa requires two input databases: (`Total size ~1.6GB`)
 These databases are large so you may want to specify a storage location for them outside of the default install path!
 
   
-Download and install the required BAQLaVa DBs with:
+Download and install the required BAQLaVa databases with:
 ```
 baqlava_database --download database baqlava-db /path/to/install_database
 ```
-With this, your BAQLaVa install should be complete and you should be ready to process samples!
+With this completed, your BAQLaVa install should be complete and you should be ready to process samples!
 
 
 
-## Input Data
-
-  
-
-To run, your reads should be in a single fastq or fasta file (cat paired end reads together into one file as needed).
+## Running BAQLaVa
 
   
+
+To run, your reads should be in a single fastq or fasta file. If you have paired end reads, we reccomend using ```cat``` to join paired end reads together into one file. To run, you only need to supply BAQLaVa the input file and the name of an output location for it to save outputs to. It will create this directory in the location specified if it does not already exist.
+
+```
+baqlava -i <FILE> -o <OUTPUT_DIRECTORY>
+```
+
+Running BAQLaVa creates four output products:
+```
+<FILENAME>_BAQLaVa_profile.txt
+<FILENAME>_bacterial_depeled.fq
+<FILENAME>_tempfile_markers.txt
+<FILENAME>_tempfile_proteins.txt
+```
+
+The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral profile. We will examine this in depth below.
+
+The additional files are products you may find helpful in further or downstream analysis of your viromes: 
+```<FILENAME>_bacterial_depeled.fq``` is a copy of the input file, with any reads that mapped to a bacterial database having been removed, cutting down the number of reads within the file drastically. 
+```<FILENAME>_tempfile_markers.txt``` is a file that contains all markers that were mapped to in the nucleotide search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
+```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
+
+### Options for BAQLaVa run
+When running BAQLaVa v0.5, you have the following options to modify the standard run:
+
+
+```
+--bypass-bacterial-depletion: run your sample through viral profiling without removing bacterial reads first
+--bypass-nucleotide-search: run only the translated search component of BAQLaVa
+--bypass-translated-search: run only the nucleotide search component of BAQLaVa
+--taxonomic-profile: If you sample has previously been profiled with MetaPhlAn, you can speed up the bacterial depletion step and provide a MetaPhlAn taxonomic profile to be used directly
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 We reccomend using the depletion step to remove the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag `--bypass-bacterial-depletion`
-
-  
-
-Demo Input File: https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa_demo.fq
-
-  
-
-#### Demo Databases:
-
-The standard BAQLaVa install comes with the demo databases below for testing the install of BAQLaVa. If you need to access them again in the future, they can be downloaded at:
-
-Nucleotide Demo DB: https://github.com/biobakery/baqlava/tree/master/examples/BAQLaVa.V0.5.nucleotide
-
-Protein Demo DB: https://github.com/biobakery/baqlava/tree/master/examples/BAQLaVa.V0.5.protein
 
   
 
@@ -156,8 +183,6 @@ To run, your reads should be in a single fastq or fasta file (cat paired end rea
 We reccomend using the depletion step to remove the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag `--bypass-bacterial-depletion`
 
   
-
-Demo Input File: https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa_demo.fq
 
   
 
