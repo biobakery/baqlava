@@ -39,57 +39,95 @@ Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQL
 - AnADAMA2>=0.10.0 (https://github.com/biobakery/anadama2)
 - Python>=3.10 (https://github.com/biobakery/anadama2)
   
+Please ensure that HUMAnN is working properly before initiating a BAQLaVa run. 
 
 ## Installation:
 
-#### Install Using PyPi
-```
-pip install baqlava
-```  
-#### Install Using Github
+
+#### Option 1: Install Using Github
+This option provides demo data directly downloaded to test your install with.
 ```
 git clone https://github.com/biobakery/baqlava.git
 cd baqlava/
 pip install .
 ```
+## Test the BAQLaVa install:
 
+Before continuing, we will test the install of BAQLaVa is functional with a small demo database and demo data provided with the install:
+```
+baqlava -i baqlava/examples/baqlava_demo.fq -o <PATH/TO/OUTPUT> --nucdb examples/BAQLaVa.V0.5.nucleotide/ --protdb examples/BAQLaVa.V0.5.protein/
+```
+In the test run, we specify the demo databases to be supplied rather than full BAQLaVa databases. 
+
+#### Option 2: Install Using PyPi
+This option requires the demo data to be downloaded directly if you want to test your installation before moving on to download the full BAQLaVa databases. 
+```
+pip install baqlava
+```  
 
 Please use `--user` flag if you do not have permission to install the tools as a root user.
 ```
 pip install baqlava --user
 ```
+### Download Demo Databases & Test the BAQLaVa Install:
 
-  
+Download the small demo data & databases:
 
-## Database requirements
+Demo Input File: https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa_demo.fq
 
-  
+Nucleotide Demo DB: https://github.com/biobakery/baqlava/tree/master/examples/BAQLaVa.V0.5.nucleotide
 
-  
+Protein Demo DB: https://github.com/biobakery/baqlava/tree/master/examples/BAQLaVa.V0.5.protein
 
-Usage: (BAQLaVa DB instructions will be shown at the end of the setup completion as a banner message)
-
-  
-
+Test the BAQLaVa install:
 ```
-baqlava_database --download database baqlava-db /path/to/install_database
+baqlava -i <PATH/TO/FILE>baqlava_demo.fq -o <PATH/TO/OUTPUT> --nucdb /PATH/TO/BAQLaVa.V0.5.nucleotide/ --protdb /PATH/TO/BAQLaVa.V0.5.protein/
 ```
+In the test run, we specify the demo databases to be supplied rather than full BAQLaVa databases.
 
-The above command will download and install the required BAQLaVa DB for the run in the specified path.
+
+
+### Download Full BAQLaVa Databases:
+
+Installing BAQLaVa from above will deliver a functional version of BAQLaVa with access to small demo databases only. In order to run BAQLaVa, download and install the full databases. The instructions to do so are below, and will also be shown at the end of the install as a banner message upon setup completion. 
 
 BAQLaVa requires two input databases: (`Total size ~1.6GB`)
 
-  
-
 1) a bowtie2-formatted nucleotide sequence database and
-
   
 
 2) a DIAMOND-formatted protein sequence database.
 
+These databases are large so you may want to specify a storage location for them outside of the default install path!
+
+  
+Download and install the required BAQLaVa DBs with:
+```
+baqlava_database --download database baqlava-db /path/to/install_database
+```
+With this, your BAQLaVa install should be complete and you should be ready to process samples!
+
+
+
+## Input Data
+
   
 
-#### Demo Database available here:
+To run, your reads should be in a single fastq or fasta file (cat paired end reads together into one file as needed).
+
+  
+
+We reccomend using the depletion step to remove the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag `--bypass-bacterial-depletion`
+
+  
+
+Demo Input File: https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa_demo.fq
+
+  
+
+#### Demo Databases:
+
+The standard BAQLaVa install comes with the demo databases below for testing the install of BAQLaVa. If you need to access them again in the future, they can be downloaded at:
 
 Nucleotide Demo DB: https://github.com/biobakery/baqlava/tree/master/examples/BAQLaVa.V0.5.nucleotide
 
