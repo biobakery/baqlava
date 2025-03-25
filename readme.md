@@ -44,14 +44,14 @@ Please ensure that HUMAnN is working properly before initiating a BAQLaVa run.
 ## Installation:
 
 
-#### Option 1: Install Using Github
+### Step 1, Option 1: Install Using Github
 This option provides demo data directly downloaded to test your install with.
 ```
 git clone https://github.com/biobakery/baqlava.git
 cd baqlava/
 pip install .
 ```
-## Test the BAQLaVa install:
+#### Test the BAQLaVa install:
 
 Before continuing, we will test the install of BAQLaVa is functional with a small demo database and demo data provided with the install:
 ```
@@ -59,7 +59,7 @@ baqlava -i baqlava/examples/baqlava_demo.fq -o <PATH/TO/OUTPUT> --nucdb examples
 ```
 In the test run, we specify the demo databases to be supplied rather than full BAQLaVa databases. 
 
-#### Option 2: Install Using PyPi
+### Step 1, Option 2: Install Using PyPi
 This option requires the demo data to be downloaded directly if you want to test your installation before moving on to download the full BAQLaVa databases. 
 ```
 pip install baqlava
@@ -69,7 +69,7 @@ Please use `--user` flag if you do not have permission to install the tools as a
 ```
 pip install baqlava --user
 ```
-### Download Demo Databases & Test the BAQLaVa Install:
+#### Download Demo Databases & Test the BAQLaVa Install:
 
 Download the small demo data & databases:
 
@@ -87,7 +87,7 @@ In the test run, we specify the demo databases to be supplied rather than full B
 
 
 
-### Download Full BAQLaVa Databases:
+### Step 2: Download Full BAQLaVa Databases:
 
 Installing BAQLaVa from above will deliver a functional version of BAQLaVa with access to small demo databases only. In order to run BAQLaVa, download and install the full databases. The instructions to do so are below, and will also be shown at the end of the install as a banner message upon setup completion. 
 
