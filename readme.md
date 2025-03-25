@@ -137,31 +137,31 @@ The additional files are products you may find helpful in further or downstream 
 
 ```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
-### Options for BAQLaVa run
+### Options for BAQLaVa runs
 When running BAQLaVa v0.5, you have the following options to modify the standard run:
 
 
 ```
---bypass-bacterial-depletion: run your sample through viral profiling without removing bacterial reads first
---bypass-nucleotide-search: run only the translated search component of BAQLaVa
---bypass-translated-search: run only the nucleotide search component of BAQLaVa
---taxonomic-profile: If you sample has previously been profiled with MetaPhlAn, you can speed up the bacterial depletion step and provide a MetaPhlAn taxonomic profile to be used directly
+--bypass-bacterial-depletion
+```
+ 
+Using the ```--bypass-bacterial-depletion``` flag will skip the first step of BAQLaVa to remove any bacterial reads from the input sample before proceeding to viral profiling. The bacterial depletion step is aimed at reducing false positive predictions. However, samples with particularly low abundance, along with metatranscriptomic samples, may require this mode if no bacterial reads are detected in the file. (Samples running through bacterial depletion but finding no bacterial reads will automatically fail. Rescue by rerunning with ```--bypass-bacterial-depletion```). 
+
+```
+--taxonomic-profile /PATH/TO/MetaPhlAn_profile
 ```
 
+If a sample has already been profiled with MetaPhlAn previously and as such the bacteria present in a sample are known, this flag can be used to speed up the bacterial depletion step. It will allow BAQLaVa to use a known profile to deplete bacterial reads rather than remapping entirely. Use the flag along with the path to a MetaPhlAn taxonomic profile. 
+
+
+```
+--bypass-nucleotide-search
+--bypass-translated-search
+```
+These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions.  
 
 
 
-
-
-
-
-
-
-
-
-
-
-We reccomend using the depletion step to remove the fastq or fasta of potential bacterial reads before running baqlava. If you would like to bypass this step, you can include the flag `--bypass-bacterial-depletion`
 
   
 
