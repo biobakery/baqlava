@@ -214,7 +214,7 @@ https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_database
 
 Thanks go to these wonderful people:
 
-  
+Jordan Jensen, Eric Franzosa, Sagun Maharjan, Philipp Munch, Lea Wang, Curtis Huttenhower
 
   
 
