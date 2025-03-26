@@ -186,6 +186,8 @@ The final column will only have text when VGBs containing ICTV species genomes a
 ## BAQLaVa Nuleotide & Translated Search: When to use individual vs. total abundances
 
 
+
+
 ## Merging BAQLaVa Profiles
 
 BAQLaVa contains an accessory utility which can be used when mutliple samples have been profiled at a time. All individual sample BAQLaVa profiles should be located within a single directory, and then they can be merged with:
@@ -198,15 +200,12 @@ This utility will make a merged BAQLaVa profile of the total viral abundances ac
 
 ## Paired MGX - MTX Data
 
-Because BAQLaVa works with both metagenomic and metatranscriptomic data, you may want to profile paired MGX-MTX data. 
-
+Because BAQLaVa works with both metagenomic and metatranscriptomic data, you may want to profile paired MGX-MTX data. To do so, we suggest the following workflow: After both samples has been QC'd and rRNA reads have been removed from the MTX sample, run MetaPhlan to carry out bacterial profiling on the MGX sample. The produced bacterial taxonomic profile should then be provided to BAQLaVa profiling of both the MTX and MGX sample with --taxonomic-profile (see section above). Doing this will deplete the same set of bacteria from both MGX and MTX samples.  
 
 
 ## BAQLaVa Full Length Genomes
 
-**NOTE:** If you'd like to access the full length BAQLaVa genomes, they are available for download here:
-
-  
+The databases BAQLaVa uses in profiling are comprised of only VGB-specific genetic regions (markers) and ORFs. If you'd like to use the full genomes for the viruses within VGBs for further analysis, you can download them here:
 
 https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_databases.tar.gz
 
