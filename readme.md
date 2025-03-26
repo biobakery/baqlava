@@ -14,21 +14,17 @@ Before opening a new issue here, please check the appropriate help channel on th
 
 ## BAQLaVa User Manual v0.5
 
-  
-
-Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa) is made to be run on the FASRC severs with existing modules of HUMAnN & ANADAMA.
-
-  
-
-  
+Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa)
 
 ## Contents ##
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Input Data](#Input-Data)
-- [How to Run](#how-to-run)
-- [Demo Run](#Demo)
-- [Output Data](#Output-Data)
+- [How to Run](#Running-BAQLaVa)
+- [Options](#Options-for-BAQLaVa-runs)
+- [Output Data](#BAQLaVa-Output)
+- [Creating a Merged Output from Individual Profiles](#Merging-BAQLaVa-Profiles)
+- [Processing Paired Metagenomes + Metatranscriptomes](#Paired-MGX---MTX-Data)
+- [BAQLaVa Viral Genomes](#BAQLaVa-Full-Length-Genomes)
 - [Contributions](#Contributions)
 - [Option List](#option-list)
 
@@ -135,7 +131,7 @@ The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral
 
 ```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
-### Options for BAQLaVa runs
+## Options for BAQLaVa runs
 When running BAQLaVa v0.5, you have the following options to modify the standard run:
 
 
