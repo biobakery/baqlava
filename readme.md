@@ -175,16 +175,30 @@ VGB_6438|translated   39.447859546400004	          VGB_6438	          r__viruses
 
 ```
 
-The BAQLaVa column ```BAQLaVa VGB``` names which Viral Genome Bin (VGB) was detected. Each VGB will have 2 or 3 lines. The first line will be the total BAQLaVa viral abundance of the VGB. The lines following the total abundance will show the abundance detected from each mapping step (```|nucleotide```, ```|translated```, or both). 
+The BAQLaVa column ```BAQLaVa VGB``` names which Viral Genome Bin (VGB) was detected. Each VGB will have 2 or 3 lines. The first line will be the total BAQLaVa viral abundance of the VGB. The lines following the total abundance will show the abundance detected from each mapping step (```|nucleotide```, ```|translated```, or both). The total abundance is the max of the two individual abundances observed. The second column shows the individual or total abundance.
+
+The third column gives either a reference species when the VGB contains any species formally recognized by ICTV. When the VGB does not contain a formally recognized species, the VGB name is given as the reference species. Here, no VGBs were identified which have an ICTV name.
+
+The fourth column gives the full taxonomic lineage for the VGB. All lineages are ICTV-resolved and based on the known or predicted taxonomy of all genomes in the VGB. 
+
+The final column will only have text when VGBs containing ICTV species genomes are identified (see column three for more info). When a VGB contains any ICTV species, the names of all ICTV-recognized species which are found in that VGB will be given in the fifth column.
+
+## BAQLaVa Nuleotide & Translated Search: When to use individual vs. total abundances
 
 
 ## Merging BAQLaVa Profiles
 
+BAQLaVa contains an accessory utility which can be used when mutliple samples have been profiled at a time. All individual sample BAQLaVa profiles should be located within a single directory, and then they can be merged with:
+```
+baqlava_join_tables /PATH/TO/DIRECTORY/ <FILE_PREFIX>
+```
+
+This utility will make a merged BAQLaVa profile of the total viral abundances across all samples, which will be named ```<FILE_PREFIX>_BAQLaVa_VGB_table.tsv```.
 
 
 ## Paired MGX - MTX Data
 
-
+Because BAQLaVa works with both metagenomic and metatranscriptomic data, you may want to profile paired MGX-MTX data. 
 
 
 
