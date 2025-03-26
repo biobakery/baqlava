@@ -163,15 +163,15 @@ These flags can be used to bypass either of the individual search steps of BAQLa
 
 The standard BAQLaVa profile output (```<FILENAME>_BAQLaVa_profile.txt```) looks like this for the demo data run above:
 ```
-BAQLaVa VGB           BAQLaVa_demo_Abundance-RPKs	  Reference Species	  Taxonomy	                                                                                                                                                                  Other ICTV Genomes in VGB
-VGB_1593              43.5046709396	                VGB_1593            r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
-VGB_1593|nucleotide   13.184010221779264	          VGB_1593	          r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
-VGB_1593|translated   43.5046709396	                VGB_1593	          r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
-VGB_49585             17.38481941893226	            VGB_49585	          r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
-VGB_49585|nucleotide  13.127554139030849	          VGB_49585	          r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
-VGB_49585|translated  17.38481941893226	            VGB_49585	          r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
-VGB_6438              39.447859546400004	          VGB_6438	          r__viruses_unclassified;k__viruses_unclassified;p__viruses_unclassified;c__viruses_unclassified;o__viruses_unclassified;f__viruses_unclassified;g__viruses_unclassified	
-VGB_6438|translated   39.447859546400004	          VGB_6438	          r__viruses_unclassified;k__viruses_unclassified;p__viruses_unclassified;c__viruses_unclassified;o__viruses_unclassified;f__viruses_unclassified;g__viruses_unclassified
+BAQLaVa VGB           BAQLaVa_demo_Abundance-RPKs    Reference Species      Taxonomy	                                                                                                                                                                  Other ICTV Genomes in VGB
+VGB_1593              43.5046709396                  VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
+VGB_1593|nucleotide   13.184010221779264             VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
+VGB_1593|translated   43.5046709396                  VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
+VGB_49585             17.38481941893226              VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
+VGB_49585|nucleotide  13.127554139030849             VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
+VGB_49585|translated  17.38481941893226              VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
+VGB_6438              39.447859546400004             VGB_6438               r__viruses_unclassified;k__viruses_unclassified;p__viruses_unclassified;c__viruses_unclassified;o__viruses_unclassified;f__viruses_unclassified;g__viruses_unclassified	
+VGB_6438|translated   39.447859546400004             VGB_6438               r__viruses_unclassified;k__viruses_unclassified;p__viruses_unclassified;c__viruses_unclassified;o__viruses_unclassified;f__viruses_unclassified;g__viruses_unclassified
 
 ```
 
