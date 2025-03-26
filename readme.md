@@ -184,7 +184,7 @@ The fourth column gives the full taxonomic lineage for the VGB. All lineages are
 The final column will only have text when VGBs containing ICTV species genomes are identified (see column three for more info). When a VGB contains any ICTV species, the names of all ICTV-recognized species which are found in that VGB will be given in the fifth column.
 
 ## BAQLaVa Nuleotide & Translated Search: When to use individual vs. total abundances
-
+We've tuned each of the individual seach steps (nucleotide & translated) to each serve a purpose, with nucleotide search being more specific, and translated search being more sensitive in the face of the growing amount of phage genomes being found that as a field we are far from having comprehensively captured or characterized. So, if the research question you have is something very focused, you may want to just look at the nucleotide subset lines. For general profiling, we recommend using the lines with the total viral abundance. 
 
 
 
