@@ -81,14 +81,14 @@ In the test run, we specify the demo databases to be supplied rather than full B
 
 Installing BAQLaVa from above will deliver a functional version of BAQLaVa with access to small demo databases only. In order to run BAQLaVa, download and install the full databases. The instructions to do so are below, and will also be shown at the end of the install as a banner message upon setup completion. 
 
-BAQLaVa requires two input databases: (`Total size ~1.6GB`)
+BAQLaVa requires two input databases: (`Total size ~1.9GB`)
 
-1) a bowtie2-formatted nucleotide sequence database and
+1) a bowtie2-formatted nucleotide sequence database (`~1.6GB`) and
   
 
-2) a DIAMOND-formatted protein sequence database.
+2) a DIAMOND-formatted protein sequence database (`~0.3GB`).
 
-These databases are large so you may want to specify a storage location for them outside of the default install path!
+These databases are large so you may want to specify a storage location for them outside of the default install path:
 
   
 Download and install the required BAQLaVa databases with:
@@ -119,7 +119,7 @@ Running BAQLaVa creates four output products:
 
 The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral profile. We will examine this in depth below. The other three files produced are not reqired for any further viral analysis but are produced to aid in future research. If you do not plan to utilize them, they can be discarded to save space.
 
-```<FILENAME>_bacterial_depeled.fq``` is a copy of the input file, with any reads that mapped to a bacterial database having been removed, cutting down the number of reads within the file drastically. 
+```<FILENAME>_bacterial_depeled.fq``` is a copy of the input file, with any reads that mapped to a bacterial database having been removed, cutting down the number of reads within the file drastically. If you want to just look at possible viral reads for subsequent analysis in the future, this is a nice (much smaller!) file to work with.
 
 ```<FILENAME>_tempfile_markers.txt``` is a file that contains all markers that were mapped to in the nucleotide search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
@@ -133,20 +133,20 @@ When running BAQLaVa v0.5, you have the following options to modify the standard
 --bypass-bacterial-depletion
 ```
  
-Using the ```--bypass-bacterial-depletion``` flag will skip the first step of BAQLaVa to remove any bacterial reads from the input sample before proceeding to viral profiling. The bacterial depletion step is aimed at reducing false positive predictions. However, samples with particularly low abundance, along with metatranscriptomic samples, may require this mode if no bacterial reads are detected in the file. (Samples running through bacterial depletion but finding no bacterial reads will automatically fail. Rescue by rerunning with ```--bypass-bacterial-depletion```). 
+Using the ```--bypass-bacterial-depletion``` flag will skip the first step of BAQLaVa which removes any bacterial reads from the input sample before proceeding to viral profiling. The bacterial depletion step is aimed at reducing false positive predictions. However, samples with particularly low abundance, along with metatranscriptomic samples, may require this mode if no bacterial reads are detected in the file. (Samples running through bacterial depletion but finding no bacterial reads will automatically fail. Rescue by rerunning with ```--bypass-bacterial-depletion```). 
 
 ```
 --taxonomic-profile /PATH/TO/MetaPhlAn_profile
 ```
 
-If a sample has already been profiled with MetaPhlAn previously and as such the bacteria present in a sample are known, this flag can be used to speed up the bacterial depletion step. It will allow BAQLaVa to use a known profile to deplete bacterial reads rather than remapping entirely. Use the flag along with the path to a MetaPhlAn taxonomic profile. 
+If a sample has already been profiled with MetaPhlAn previously and the bacteria present in a sample are therfore known, this flag can be used to speed up the bacterial depletion step. It will allow BAQLaVa to use the known profile to deplete bacterial reads rather than remapping entirely. Use the flag along with the path to a MetaPhlAn taxonomic profile. 
 
 
 ```
 --bypass-nucleotide-search
 --bypass-translated-search
 ```
-These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions.  
+These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions. You can always use the standard output stratified to the desired subset of information to obtain the same information.    
 
 
 ## BAQLaVa Output
@@ -166,8 +166,9 @@ VGB_6438|translated   39.447859546400004             VGB_6438               r__v
 ```
 
 The BAQLaVa column ```BAQLaVa VGB``` names which Viral Genome Bin (VGB) was detected. Each VGB will have 2 or 3 lines. The first line will be the total BAQLaVa viral abundance of the VGB. The lines following the total abundance will show the abundance detected from each mapping step (```|nucleotide```, ```|translated```, or both). The total abundance is the max of the two individual abundances observed. The second column shows the individual or total abundance.
+When Segment_Group is shown rather than a VGB, this indicates the viral species has a segmented genome, and as such represents a group of VGBs observed, but a single species bin.
 
-The third column gives either a reference species when the VGB contains any species formally recognized by ICTV. When the VGB does not contain a formally recognized species, the VGB name is given as the reference species. Here, no VGBs were identified which have an ICTV name.
+The third column gives a reference species when the VGB contains any species formally recognized by ICTV. When the VGB does not contain a formally recognized species, the VGB name is given as the reference species. Here, no VGBs were identified which have an ICTV name.
 
 The fourth column gives the full taxonomic lineage for the VGB. All lineages are ICTV-resolved and based on the known or predicted taxonomy of all genomes in the VGB. 
 
@@ -190,7 +191,10 @@ This utility will make a merged BAQLaVa profile of the total viral abundances ac
 
 ## Paired MGX - MTX Data
 
-Because BAQLaVa works with both metagenomic and metatranscriptomic data, you may want to profile paired MGX-MTX data. To do so, we suggest the following workflow: After both samples has been QC'd and rRNA reads have been removed from the MTX sample, run MetaPhlan to carry out bacterial profiling on the MGX sample. The produced bacterial taxonomic profile should then be provided to BAQLaVa profiling of both the MTX and MGX sample with --taxonomic-profile (see section above). Doing this will deplete the same set of bacteria from both MGX and MTX samples.  
+Because BAQLaVa works with both metagenomic and metatranscriptomic data, you may want to profile paired MGX-MTX data. To do so, we suggest the following workflow: 
+1. QC both samples, making sure to remove rRNA reads from the MTX sample
+2. Run MetaPhlan to carry out bacterial profiling on the MGX sample
+3. Provide BAQLaVa the produced bacterial taxonomic profile for both the MTX and MGX sample (```--taxonomic-profile``` (see section above)). Doing this will deplete the same set of bacteria from both MGX and MTX samples.  
 
 
 ## BAQLaVa Full Length Genomes
