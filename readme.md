@@ -1,16 +1,10 @@
   
 
-# ***ATTENTION***
+# ***ATTENTION***  
 
-  
+Before opening a new issue here, please check the appropriate help channel on the [bioBakery Support Forum](https://forum.biobakery.org) and consider opening or commenting on a thread there. 
 
-  
-
-Before opening a new issue here, please check the appropriate help channel on the [bioBakery Support Forum](https://forum.biobakery.org) and consider opening or commenting on a thread there.
-
-  
-
-  
+For more in depth guidance on use, check out the BAQLaVa tutorial [here](https://github.com/biobakery/biobakery/wiki/BAQLaVa)! 
 
 ## BAQLaVa User Manual v0.5
 
