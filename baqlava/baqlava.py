@@ -199,7 +199,7 @@ def main():
                 "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 25",
                 depends = [args.input],
                 args = [baq_dir, file_base + "_nucleotide"],
-                targets = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
+                targets = [baq_dir + file_base + "_nucleotide_2_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
                 idx = os.path.abspath(args.nucindex),
                 threads = args.threads,
@@ -207,15 +207,15 @@ def main():
 
             workflow.add_task(
                 "mv [depends[0]] [targets[0]]",
-                depends = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
-                targets = [baq_dir + file_base + "_nucleotide_25_genefamilies.tsv"])
+                depends = [baq_dir + file_base + "_nucleotide_2_genefamilies.tsv"],
+                targets = [baq_dir + file_base + "_nucleotide_25_2_genefamilies.tsv"])
 
             # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
             workflow.add_task(
                 "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --resume",
-                depends = [args.input, baq_dir + file_base + "_nucleotide_25_genefamilies.tsv"],
+                depends = [args.input, baq_dir + file_base + "_nucleotide_25_2_genefamilies.tsv"],
                 args = [baq_dir, file_base + "_nucleotide"],
-                targets = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
+                targets = [baq_dir + file_base + "_nucleotide_2_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
                 idx = os.path.abspath(args.nucindex),
                 threads = args.threads,
@@ -223,8 +223,8 @@ def main():
 
             workflow.add_task(
                 "mv [depends[0]] [targets[0]]",
-                depends = [baq_dir + file_base + "_nucleotide_genefamilies.tsv", baq_dir + file_base + "_nucleotide_25_genefamilies.tsv"],
-                targets = [baq_dir + file_base + "_nucleotide_50_genefamilies.tsv"])
+                depends = [baq_dir + file_base + "_nucleotide_2_genefamilies.tsv", baq_dir + file_base + "_nucleotide_25_2_genefamilies.tsv"],
+                targets = [baq_dir + file_base + "_nucleotide_50_2_genefamilies.tsv"])
 
         if args.bypass_translated_search == True:
        	    # BYPASSING TRANSLATED SEARCH
@@ -235,7 +235,7 @@ def main():
                 "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --translated-subject-coverage-threshold 50",
                 depends = [args.input],
                 args = [baq_dir, file_base + "_translated"],
-                targets = [baq_dir + file_base + "_translated_genefamilies.tsv"],
+                targets = [baq_dir + file_base + "_translated_2_genefamilies.tsv"],
                 p_db = os.path.abspath(args.protdb),
                 idx = os.path.abspath(args.protindex),
                 threads = args.threads,
@@ -249,7 +249,7 @@ def main():
             mode = "1",
             proteomelen = args.proteome_length,
             args = ["NA"],
-            depends = [baq_dir + file_base + "_nucleotide_25_genefamilies.tsv", baq_dir + file_base + "_nucleotide_50_genefamilies.tsv", args.input],
+            depends = [baq_dir + file_base + "_nucleotide_25_2_genefamilies.tsv", baq_dir + file_base + "_nucleotide_50_2_genefamilies.tsv", args.input],
             targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_markers.txt"],
             name = "Making BAQLaVa Viral Profile")
 
@@ -260,7 +260,7 @@ def main():
             mode = "2",
             proteomelen = args.proteome_length,
             args = ["NA"],
-            depends = [baq_dir + file_base + "_translated_genefamilies.tsv"],
+            depends = [baq_dir + file_base + "_translated_2_genefamilies.tsv"],
             targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_proteins.txt"],
             name = "Making BAQLaVa Viral Profile")
 
@@ -270,7 +270,7 @@ def main():
             script = args.reconcile_mapped_script,
             mode = "3",
             proteomelen = args.proteome_length,
-            depends = [baq_dir + file_base + "_nucleotide_25_genefamilies.tsv", baq_dir + file_base + "_nucleotide_50_genefamilies.tsv", baq_dir + file_base + "_translated_genefamilies.tsv", args.input],
+            depends = [baq_dir + file_base + "_nucleotide_25_2_genefamilies.tsv", baq_dir + file_base + "_nucleotide_50_2_genefamilies.tsv", baq_dir + file_base + "_translated_2_genefamilies.tsv", args.input],
             targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_markers.txt", output_dir + file_base + "_tempfile_proteins.txt"],
             name = "Making BAQLaVa Viral Profile")
 
