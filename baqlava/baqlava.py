@@ -196,7 +196,7 @@ def main():
             # NUCLEOTIDE SEARCH:
             # FIRST RUN & CALCULATE AT 25% COVERAGE:
             workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 25",
+                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 25",
                 depends = [args.input],
                 args = [baq_dir, file_base + "_nucleotide"],
                 targets = [baq_dir + file_base + "_nucleotide_2_genefamilies.tsv"],
@@ -212,7 +212,7 @@ def main():
 
             # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
             workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --resume",
+                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --count-normalization 'Adjusted RPKs' --resume",
                 depends = [args.input, baq_dir + file_base + "_nucleotide_25_2_genefamilies.tsv"],
                 args = [baq_dir, file_base + "_nucleotide"],
                 targets = [baq_dir + file_base + "_nucleotide_2_genefamilies.tsv"],
@@ -232,7 +232,7 @@ def main():
        	else:
             # TRANSLATED SEARCH:
             workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --translated-subject-coverage-threshold 50",
+                "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --translated-subject-coverage-threshold 50",
                 depends = [args.input],
                 args = [baq_dir, file_base + "_translated"],
                 targets = [baq_dir + file_base + "_translated_2_genefamilies.tsv"],
