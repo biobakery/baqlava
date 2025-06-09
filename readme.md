@@ -117,7 +117,7 @@ Running BAQLaVa creates four output products:
 <FILENAME>_tempfile_proteins.txt
 ```
 
-The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral profile. We will examine this in depth below. The other three files produced are not reqired for any further viral analysis but are produced to aid in future research. If you do not plan to utilize them, they can be discarded to save space.
+The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral profile. We will examine this in depth below. The other three files produced are not required for any further viral analysis but are produced to aid in future research. If you do not plan to utilize them, they can be discarded to save space.
 
 ```<FILENAME>_bacterial_depeled.fq``` is a copy of the input file, with any reads that mapped to a bacterial database having been removed, cutting down the number of reads within the file drastically. If you want to just look at possible viral reads for subsequent analysis in the future, this is a nice (much smaller!) file to work with.
 
