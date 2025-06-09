@@ -139,7 +139,7 @@ Using the ```--bypass-bacterial-depletion``` flag will skip the first step of BA
 --taxonomic-profile /PATH/TO/MetaPhlAn_profile
 ```
 
-If a sample has already been profiled with MetaPhlAn previously and the bacteria present in a sample are therfore known, this flag can be used to speed up the bacterial depletion step. It will allow BAQLaVa to use the known profile to deplete bacterial reads rather than remapping entirely. Use the flag along with the path to a MetaPhlAn taxonomic profile. 
+If a sample has already been profiled with MetaPhlAn previously and the bacteria present in a sample are therefore known, this flag can be used to speed up the bacterial depletion step. It will allow BAQLaVa to use the known profile to deplete bacterial reads rather than remapping entirely. Use the flag along with the path to a MetaPhlAn taxonomic profile. 
 
 
 ```
