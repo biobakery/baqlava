@@ -104,6 +104,7 @@ With this completed, your BAQLaVa install should be complete and you should be r
   
 
 To run, your reads should be in a single fastq or fasta file. If you have paired end reads, we reccomend using ```cat``` to join paired end reads together into one file. To run, you only need to supply BAQLaVa the input file and the name of an output location for it to save outputs to. It will create this directory in the location specified if it does not already exist.
+
 Filenames must not contain periods besides those used in file extensions. 
 
 ```
