@@ -128,7 +128,7 @@ The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral
 ```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
 ## Options for BAQLaVa runs
-When running BAQLaVa v0.5, you have the following options to modify the standard run:
+When running BAQLaVa v1.0, you have the following options to modify the standard run:
 
 
 ```
@@ -150,6 +150,18 @@ If a sample has already been profiled with MetaPhlAn previously and the bacteria
 ```
 These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions. You can always use the standard output stratified to the desired subset of information to obtain the same information.    
 
+### Genome Filtering (v1.1.0 alpha)
+
+Three options for filtering BAQLaVa genomes are possible. The default filtering applied is based on geNomad's default viral filtering (https://portal.nersc.gov/genomad/post_classification_filtering.html#default-parameters-and-presets). This filtering removes the markers and proteins from the mapping files BAQLaVa references, for vMAGs or genomes which do not meeting the determined viral confidence thresholds. The following alternatives are available:
+
+No filtering: this reflects the parameters applied in BAQLaVa v1.0.0. All MAGs and genomes in the original BAQLaVa database are candidates for markerization & proteome creation.
+Conservative filtering: This reflects the geNomad conservative filters. Only MAGs and genomes meeting the conservative threshold are candidates for markerization & proteome creation.
+
+To apply one of the alternative filters, replace the name of the associated idmap files in the baqlava config file:
+
+No filtering: idmap_nucleotide_nofilter.txt & idmap_protein_nofilter.txt 
+Default filtering: idmap_nucleotide_default.txt & idmap_protein_default.txt 
+Conservative filtering: idmap_nucleotide_conservative.txt & idmap_protein_conservative.txt 
 
 ## BAQLaVa Output
 
@@ -236,4 +248,5 @@ usage: baqlava [-h] [--version] [--nucdb NUCDB] [--nucindex NUCINDEX] [--protind
 [--target TARGET] [--exclude-target EXCLUDE_TARGET] [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
 ```
+
 
