@@ -6,7 +6,7 @@ Before opening a new issue here, please check the appropriate help channel on th
 
 For more in depth guidance on use, check out the BAQLaVa tutorial [here](https://github.com/biobakery/biobakery/wiki/BAQLaVa)! 
 
-## BAQLaVa User Manual v0.5
+## BAQLaVa User Manual v1.0
 
 Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa)
 
@@ -236,3 +236,4 @@ usage: baqlava [-h] [--version] [--nucdb NUCDB] [--nucindex NUCINDEX] [--protind
 [--target TARGET] [--exclude-target EXCLUDE_TARGET] [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
 ```
+
