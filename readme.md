@@ -6,7 +6,7 @@ Before opening a new issue here, please check the appropriate help channel on th
 
 For more in depth guidance on use, check out the BAQLaVa tutorial [here](https://github.com/biobakery/biobakery/wiki/BAQLaVa)! 
 
-## BAQLaVa User Manual v1.0
+## BAQLaVa User Manual v1.1.0-alpha
 
 Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa)
 
@@ -150,6 +150,18 @@ If a sample has already been profiled with MetaPhlAn previously and the bacteria
 ```
 These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions. You can always use the standard output stratified to the desired subset of information to obtain the same information.    
 
+### Genome Filtering (v1.1.0 alpha)
+
+Three options for filtering BAQLaVa genomes are possible. The default filtering applied is based on geNomad's default viral filtering (https://portal.nersc.gov/genomad/post_classification_filtering.html#default-parameters-and-presets). This filtering removes the markers and proteins from the mapping files BAQLaVa references, for vMAGs or genomes which do not meeting the determined viral confidence thresholds. The following alternatives are available:
+
+No filtering: this reflects the parameters applied in BAQLaVa v1.0.0. All MAGs and genomes in the original BAQLaVa database are candidates for markerization & proteome creation.
+Conservative filtering: This reflects the geNomad conservative filters. Only MAGs and genomes meeting the conservative threshold are candidates for markerization & proteome creation.
+
+To apply one of the alternative filters, replace the name of the associated idmap files in the baqlava config file:
+
+No filtering: idmap_nucleotide_nofilter.txt & idmap_protein_nofilter.txt 
+Default filtering: idmap_nucleotide_default.txt & idmap_protein_default.txt 
+Conservative filtering: idmap_nucleotide_conservative.txt & idmap_protein_conservative.txt 
 
 ## BAQLaVa Output
 
