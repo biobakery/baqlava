@@ -25,7 +25,7 @@ Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQL
 
 ## Requirements:
 
-- HUMAnN>=3.9 (https://github.com/biobakery/humann)
+- HUMAnN=3.9 (https://github.com/biobakery/humann)
 - AnADAMA2>=0.10.0 (https://github.com/biobakery/anadama2)
 - Python>=3.10 (https://github.com/biobakery/anadama2)
   
@@ -236,4 +236,5 @@ usage: baqlava [-h] [--version] [--nucdb NUCDB] [--nucindex NUCINDEX] [--protind
 [--target TARGET] [--exclude-target EXCLUDE_TARGET] [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
 ```
+
 
