@@ -99,6 +99,9 @@ def get_read_length(file):
                 print("ERROR: File type not recognized. Supported file types are fasta (.fasta, .fa) and fastq (.fastq, .fq). Please check that your file is one of these types.")
                 return None
 
+    if not lens:
+        sys.exit("ERROR: No sequences could be parsed from input file: " + file + "\n"
+                 "Please ensure the file is not empty and contains valid FASTA or FASTQ sequences.")
     return sum(lens) / len(lens)
 
 def process_baqlava_nucleotide1(base, format_df, ref, readlen):
@@ -111,6 +114,10 @@ def process_baqlava_nucleotide1(base, format_df, ref, readlen):
     df3 = df2[df2['len']>400]
     df3 = df3.copy()
     df3['marker_len_adj'] = df3['len'] - (readlen-1)
+    n_invalid = (df3['marker_len_adj'] <= 0).sum()
+    if n_invalid > 0:
+        print("WARNING: {:d} markers have an adjusted length <= 0 (marker length <= read length of {:.0f} bp) and will be excluded.".format(n_invalid, readlen))
+    df3 = df3[df3['marker_len_adj'] > 0].copy()
 
     # get VGBs/segment groups with >75% markerized length mapped to:
     # (for VGBs, 75% of one cluster representative genome's markerized length)
@@ -308,6 +315,9 @@ def run_reconciliation(sys1, sys2, sys3, sys4, nucref, transref, taxref, inp_fa,
         a,b1 = format_file_and_base(sys2)
         a,b2 = format_file_and_base(sys3)
         c = get_read_length(inp_fa)
+        if c is None:
+            sys.exit("ERROR: Could not determine read length from input file: " + inp_fa + "\n"
+                     "Supported file types are FASTA (.fasta, .fa) and FASTQ (.fastq, .fq).")
         d1,e1 = process_baqlava_nucleotide1(a, b1, nucref, c)
         d2,e2 = process_baqlava_nucleotide1(a, b2, nucref, c)
         f = process_baqlava_nucleotide2(d1, d2, a, taxref, c)
