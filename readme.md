@@ -75,6 +75,7 @@ baqlava -i <PATH/TO/FILE>baqlava_demo.fq -o <PATH/TO/OUTPUT> --nucdb /PATH/TO/BA
 ```
 In the test run, we specify the demo databases to be supplied rather than full BAQLaVa databases.
 
+The installation and demo/test run should take no longer than a couple minutes, as these are designed to be quick tests.
 
 
 ### Step 2: Download Full BAQLaVa Databases:
