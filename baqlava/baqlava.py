@@ -62,7 +62,7 @@ class AbsolutePathConfigParser(configparser.ConfigParser):
             return value
         # Otherwise, join the value with lib_dir to create an absolute path.
         return os.path.join(lib_dir, value)
-    
+
 lib_dir = os.path.dirname(os.path.abspath(__file__))
 config_file=os.path.join(lib_dir,"configs/baqlava.cfg")
 config = AbsolutePathConfigParser()
@@ -82,15 +82,15 @@ workflow.add_argument(
     desc = "nucleotide database folder to use",
     default = config.get('database','nucleotide_db'))
 
-workflow.add_argument(
-    name = "nucindex",
-    desc = "nucleotide annotation index to use",
-    default = config.get('utility','idmap_nucl'))
+#workflow.add_argument(
+#    name = "nucindex",
+#    desc = "nucleotide annotation index to use",
+#    default = config.get('utility','idmap_nucl'))
 
-workflow.add_argument(
-    name = "protindex",
-    desc = "protein annotation index to use",
-    default = config.get('utility','idmap_prot'))
+#workflow.add_argument(
+#    name = "protindex",
+#    desc = "protein annotation index to use",
+#    default = config.get('utility','idmap_prot'))
 
 workflow.add_argument(
     name = "threads",
@@ -146,8 +146,35 @@ workflow.add_argument(
     action = 'store_true',
     default = config.get('features','keep_tempfiles'))
 
+workflow.add_argument(
+    name="genome-filtering",
+    desc="Level of genome filtering to allow genomes to be represented in a VGB (genomes removed based on probability of plasmid). Options: no-filtering, default, conservative",
+    default="default"
+)
+
 args = workflow.parse_args()
 
+############ settings based on provided args:
+
+GENOME_FILTERS = {
+    "no-filtering": {
+        "nucleotide": config.get('utility','idmap_nucl_NF'),
+        "translated": config.get('utility','idmap_prot_NF'),
+    },
+    "default": {
+        "nucleotide": config.get('utility','idmap_nucl_D'),
+        "translated": config.get('utility','idmap_prot_D'),
+    },
+    "conservative": {
+        "nucleotide": config.get('utility','idmap_nucl_C'),
+        "translated": config.get('utility','idmap_prot_C'),
+    },
+}
+
+nucleotide_idmapping = GENOME_FILTERS[args.genome_filtering]["nucleotide"]
+translated_idmapping = GENOME_FILTERS[args.genome_filtering]["translated"]
+
+############################# MAIN
 
 def main():
     ############################
@@ -201,7 +228,7 @@ def main():
                 args = [baq_dir, file_base + "_nucleotide"],
                 targets = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(args.nucindex),
+                idx = os.path.abspath(nucleotide_idmapping),
                 threads = args.threads,
                 name = "Running BAQLaVa Nucleotide Search")
 
@@ -217,7 +244,7 @@ def main():
                 args = [baq_dir, file_base + "_nucleotide"],
                 targets = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(args.nucindex),
+                idx = os.path.abspath(nucleotide_idmapping),
                 threads = args.threads,
                 name = "Calculating Marker Coverage & Abundance")
 
@@ -237,7 +264,7 @@ def main():
                 args = [baq_dir, file_base + "_translated"],
                 targets = [baq_dir + file_base + "_translated_genefamilies.tsv"],
                 p_db = os.path.abspath(args.protdb),
-                idx = os.path.abspath(args.protindex),
+                idx = os.path.abspath(translated_idmapping),
                 threads = args.threads,
                 name = "Running BAQLaVa Translated Search")
 
@@ -324,7 +351,7 @@ def main():
                 args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
                 targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(args.nucindex),
+                idx = os.path.abspath(nucleotide_idmapping),
                 threads = args.threads,
                 name = "Running BAQLaVa Nucleotide Search")
 
@@ -340,7 +367,7 @@ def main():
                 args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
                 targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(args.nucindex),
+                idx = os.path.abspath(nucleotide_idmapping),
                 threads = args.threads,
                 name = "Calculating Marker Coverage & Abundance")
 
@@ -360,7 +387,7 @@ def main():
                 args = [baq_dir, file_base + "_bacterial_depleted_translated"],
                 targets = [baq_dir + file_base + "_bacterial_depleted_translated_genefamilies.tsv"],
                 p_db = os.path.abspath(args.protdb),
-                idx = os.path.abspath(args.protindex),
+                idx = os.path.abspath(translated_idmapping),
                 threads = args.threads,
                 name = "Running BAQLaVa Translated Search")
 
