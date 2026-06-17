@@ -200,14 +200,16 @@ Because BAQLaVa works with both metagenomic and metatranscriptomic data, you may
 3. Provide BAQLaVa the produced bacterial taxonomic profile for both the MTX and MGX sample (```--taxonomic-profile``` (see section above)). Doing this will deplete the same set of bacteria from both MGX and MTX samples.  
 
 
-## BAQLaVa Full Length Genomes
+## BAQLaVa Full Length Genomes & Module Databases
 
 The databases BAQLaVa uses in profiling are comprised of only VGB-specific genetic regions (markers) and ORFs. If you'd like to use the full genomes for the viruses within VGBs for further analysis, you can download them here:
 
 https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_databases.tar.gz
 
+If you'd like to use the markers or ORFs individually, you can download them here:
 
-  
+https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa_markers_ORFs.tar.gz
+
 
 ## Contributions ##
 
