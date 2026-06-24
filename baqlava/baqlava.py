@@ -219,6 +219,72 @@ def check_humann_version(minimum_major=MINIMUM_HUMANN_MAJOR_VERSION):
 
     logger.info("Verified HUMAnN version (H4+): " + version_output)
     print("\nVerified HUMAnN version (H4+): " + version_output + "\n")
+    return version_output
+
+############################# VERSION & DATABASE REPORTING
+
+# Common MetaPhlAn DB tag style, e.g. vOct22_CHOCOPhlAnSGB_202403
+MPA_DB_TAG = re.compile(r'v[A-Z][a-z]{2}\d{2}_[A-Za-z0-9]+_\d{6}')
+
+def _run_version_cmd(cmd):
+    """Return combined stdout+stderr of a command, or None if it cannot run."""
+    try:
+        proc = subprocess.run(
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            universal_newlines=True)
+    except (FileNotFoundError, OSError):
+        return None
+    if proc.returncode != 0:
+        return None
+    output = ((proc.stdout or "") + (proc.stderr or "")).strip()
+    return output if output else None
+
+def log_versions(humann_version=None):
+    """Record BAQLaVa, sub-tool (HUMAnN, MetaPhlAn), MPA database, HUMAnN
+    database, and BAQLaVa database versions to the logfile and stdout."""
+    lines = ["BAQLaVa run environment - versions & databases:"]
+
+    # BAQLaVa
+    lines.append("  BAQLaVa version: " + config.get('metadata', 'version'))
+
+    # HUMAnN (reuse the version captured at startup when available)
+    if humann_version is None:
+        humann_version = _run_version_cmd(["humann", "--version"])
+    lines.append("  HUMAnN version: " + (humann_version or "unable to determine"))
+
+    # MetaPhlAn tool version + MPA (MetaPhlAn) database version
+    mpa_output = _run_version_cmd(["metaphlan", "--version"])
+    if mpa_output:
+        lines.append("  MetaPhlAn version: " + mpa_output.replace("\n", " ").strip())
+        db_match = MPA_DB_TAG.search(mpa_output)
+        lines.append("  MPA database: " + (
+            db_match.group(0) if db_match
+            else "unable to determine from 'metaphlan --version'"))
+    else:
+        lines.append("  MetaPhlAn version: unable to determine")
+        lines.append("  MPA database: unable to determine")
+
+    # HUMAnN databases (nucleotide ChocoPhlAn, protein UniRef, utility mapping)
+    humann_cfg = _run_version_cmd(["humann_config", "--print"])
+    db_folder_lines = []
+    if humann_cfg:
+        db_folder_lines = [ln.strip() for ln in humann_cfg.splitlines()
+                           if "database_folders" in ln]
+    if db_folder_lines:
+        lines.append("  HUMAnN databases:")
+        for ln in db_folder_lines:
+            lines.append("    " + ln)
+    else:
+        lines.append("  HUMAnN databases: unable to determine")
+
+    # BAQLaVa databases
+    lines.append("  BAQLaVa nucleotide database: " + os.path.abspath(args.nucdb))
+    lines.append("  BAQLaVa protein database: " + os.path.abspath(args.protdb))
+    lines.append("  BAQLaVa genome-filtering level: " + str(args.genome_filtering))
+
+    report = "\n".join(lines)
+    logger.info(report)
+    print("\n" + report + "\n")
 
 ############################# MAIN
 
@@ -228,7 +294,7 @@ def main():
     ############################
 
     # Confirm HUMAnN 4 (H4) is available before doing any work.
-    check_humann_version()
+    humann_version = check_humann_version()
 
     file_base = args.input.split("/")[-1].split(".")[0]
     output_dir = args.output + "/"
@@ -244,11 +310,16 @@ def main():
     os.system("mkdir " + tempdir)
     os.system("mkdir " + baq_dir)
 
+    log_file = os.path.join(output_dir, file_base + "_baqlava.log")
     logging.basicConfig(
-     filename='log_file_name.log',
+     filename=log_file,
      level=logging.INFO,
      format= '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
-     datefmt='%H:%M:%S')
+     datefmt='%H:%M:%S',
+     force=True)
+
+    # Record versions of BAQLaVa, its sub-tools, and the databases in use.
+    log_versions(humann_version)
 
     # set the name of the log file
     #log_file=os.path.join(output_dir,config.file_basename+"_0.log")
