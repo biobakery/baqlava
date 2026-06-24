@@ -25,11 +25,11 @@ Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQL
 
 ## Requirements:
 
-- HUMAnN>=3.9 (https://github.com/biobakery/humann)
+- HUMAnN>=4.0 (H4) (https://github.com/biobakery/humann)
 - AnADAMA2>=0.10.0 (https://github.com/biobakery/anadama2)
 - Python>=3.10 (https://github.com/biobakery/anadama2)
   
-Please ensure that HUMAnN is working properly before initiating a BAQLaVa run. 
+BAQLaVa v1.2.0 requires HUMAnN 4 (H4), which uses the standard HUMAnN MetaPhlAn (MPA) database (e.g. the MPA Jan 2025 release) for its bacterial-depletion step. BAQLaVa checks the HUMAnN version at startup and will exit with an error if HUMAnN 4 is not found; HUMAnN 4 then verifies the MetaPhlAn database version at runtime. Please ensure that HUMAnN is working properly before initiating a BAQLaVa run. 
 
 ## Installation:
 
