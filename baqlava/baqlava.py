@@ -20,6 +20,8 @@ THE SOFTWARE.
 
 import os
 import sys
+import re
+import subprocess
 from glob import glob
 from anadama2 import Workflow
 from anadama2.tracked import TrackedExecutable
@@ -174,12 +176,60 @@ GENOME_FILTERS = {
 nucleotide_idmapping = GENOME_FILTERS[args.genome_filtering]["nucleotide"]
 translated_idmapping = GENOME_FILTERS[args.genome_filtering]["translated"]
 
+############################# HUMAnN COMPATIBILITY CHECK
+
+# BAQLaVa v1.2.0 requires HUMAnN 4 (H4). H4 uses the standard MetaPhlAn (MPA)
+# database for its bacterial-depletion prescreen and performs its own MetaPhlAn
+# DB version check at runtime, so BAQLaVa only needs to confirm that H4 (not an
+# older HUMAnN) is the version on the PATH.
+MINIMUM_HUMANN_MAJOR_VERSION = 4
+
+def check_humann_version(minimum_major=MINIMUM_HUMANN_MAJOR_VERSION):
+    """Verify HUMAnN >= 4.0 (H4) is installed; exit with an error otherwise."""
+    try:
+        proc = subprocess.run(
+            ["humann", "--version"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            universal_newlines=True, check=True)
+    except FileNotFoundError:
+        sys.exit("ERROR: HUMAnN was not found on your PATH. BAQLaVa requires "
+                 "HUMAnN >= 4.0 (H4). Please install HUMAnN 4 and try again.")
+    except subprocess.CalledProcessError as e:
+        sys.exit("ERROR: Unable to determine the HUMAnN version "
+                 "('humann --version' failed). BAQLaVa requires HUMAnN >= 4.0 "
+                 "(H4).\n" + (e.stderr or ""))
+
+    version_output = ((proc.stdout or "") + (proc.stderr or "")).strip()
+
+    # e.g. "humann v4.0.0.alpha.2" -> major version 4
+    match = re.search(r'humann\s+v?(\d+)', version_output, re.IGNORECASE)
+    if not match:
+        match = re.search(r'(\d+)', version_output)
+    if not match:
+        sys.exit("ERROR: Unable to parse the HUMAnN version from "
+                 "'humann --version' output: '" + version_output + "'. "
+                 "BAQLaVa requires HUMAnN >= 4.0 (H4).")
+
+    major = int(match.group(1))
+    if major < minimum_major:
+        sys.exit("ERROR: BAQLaVa requires HUMAnN >= 4.0 (H4), but found "
+                 "'" + version_output + "'. HUMAnN 4 uses the standard MetaPhlAn "
+                 "(MPA) database required for BAQLaVa's bacterial-depletion step. "
+                 "Please upgrade to HUMAnN 4.")
+
+    logger.info("Verified HUMAnN version (H4+): " + version_output)
+    print("\nVerified HUMAnN version (H4+): " + version_output + "\n")
+
 ############################# MAIN
 
 def main():
     ############################
     # function to run workflow #
     ############################
+
+    # Confirm HUMAnN 4 (H4) is available before doing any work.
+    check_humann_version()
+
     file_base = args.input.split("/")[-1].split(".")[0]
     output_dir = args.output + "/"
     tempdir = args.output + "/" + file_base + "_temp/"
