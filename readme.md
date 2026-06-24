@@ -135,7 +135,7 @@ When running BAQLaVa v0.5, you have the following options to modify the standard
 --bypass-bacterial-depletion
 ```
  
-Using the ```--bypass-bacterial-depletion``` flag will skip the first step of BAQLaVa which removes any bacterial reads from the input sample before proceeding to viral profiling. The bacterial depletion step is aimed at reducing false positive predictions. However, samples with particularly low abundance, along with metatranscriptomic samples, may require this mode if no bacterial reads are detected in the file. (Samples running through bacterial depletion but finding no bacterial reads will automatically fail. Rescue by rerunning with ```--bypass-bacterial-depletion```). 
+Using the ```--bypass-bacterial-depletion``` flag will skip the first step of BAQLaVa which removes any bacterial reads from the input sample before proceeding to viral profiling. The bacterial depletion step is aimed at reducing false positive predictions. However, samples with particularly low abundance, along with metatranscriptomic samples, may benefit from this mode if no bacterial reads are detected in the file. (Bacterial depletion fails gracefully: if the depletion step does not complete successfully, BAQLaVa automatically falls back to the original, non-depleted input and proceeds to nucleotide and translated search. Using ```--bypass-bacterial-depletion``` skips the step entirely instead.) 
 
 ```
 --taxonomic-profile /PATH/TO/MetaPhlAn_profile

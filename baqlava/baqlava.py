@@ -115,6 +115,11 @@ workflow.add_argument(
     default = config.get('code','reconcile_mapped_script'))
 
 workflow.add_argument(
+    name = "bacterial-depletion-script",
+    desc = "location of python script used to run bacterial depletion (fails gracefully and falls back to the original input)",
+    default = config.get('code','bacterial_depletion_script'))
+
+workflow.add_argument(
     name = "bypass-bacterial-depletion",
     desc = "Using this flag turns OFF bactieral depletion. Input file will be immediately profiled by BAQLaVa.",
     action = 'store_true',
@@ -428,35 +433,32 @@ def main():
     elif args.bypass_bacterial_depletion == 'False':
     # UPSTREAM BACTERIAL DEPLETION
 
+        # BACTERIAL DEPLETION (first step; not optional unless explicitly
+        # bypassed). This step fails gracefully: if HUMAnN does not complete,
+        # the wrapper falls back to the original (non-depleted) input so that
+        # nucleotide & translated search still proceed. The wrapper always
+        # produces the bacterial-depleted FASTA target.
         if args.taxonomic_profile == 'False':
-        # PROCEED WITHOUT METAPHLAN TAXONOMIC PROFILE
-
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads]",
-                depends = [args.input],
-                args = [tempdir],
-                targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
-                threads = args.threads,
-                name = "Running HUMAnN to depete bacterial reads from file")
-
+            # PROCEED WITHOUT METAPHLAN TAXONOMIC PROFILE
+            depletion_depends = [args.input]
+            tax_profile = "NA"
         else:
-        # USE A METAPHLAN TAXONOMIC PROFILE TO AID BACTERIAL DEPLETION
-
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads] --taxonomic-profile [depends[1]]",
-                depends = [args.input, args.taxonomic_profile],
-                args = [tempdir],
-                targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
-                threads = args.threads,
-                name = "Running HUMAnN to depete bacterial reads from file")
+            # USE A METAPHLAN TAXONOMIC PROFILE TO AID BACTERIAL DEPLETION
+            depletion_depends = [args.input, args.taxonomic_profile]
+            tax_profile = os.path.abspath(args.taxonomic_profile)
 
         workflow.add_task(
-            "python [len_adj] [depends[0]] [args[0]]",
-            depends = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
-            args = [output_dir],
+            "python [bd_script] [depends[0]] [tempdir] [outdir] [base] [threads] [len_adj] [targets[0]] [tax]",
+            depends = depletion_depends,
             targets = [output_dir + file_base + "_bacterial_depleted.fa"],
+            bd_script = os.path.abspath(args.bacterial_depletion_script),
+            tempdir = tempdir,
+            outdir = output_dir,
+            base = file_base,
+            threads = args.threads,
             len_adj = os.path.abspath(args.lengthadjust),
-            name = "Formatting bacterially depleted FASTA file")
+            tax = tax_profile,
+            name = "Running HUMAnN to deplete bacterial reads from file")
 
         # BAQLAVA VIRAL PROFILING:
         if args.bypass_nucleotide_search == True:
