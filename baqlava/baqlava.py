@@ -569,7 +569,29 @@ def main():
     depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
     args = [tempdir])
 
-    workflow.go()
+    # Nucleotide and translated search are independent (they share no task
+    # dependency), so run them in parallel. Count how many search branches will
+    # actually run (0, 1, or 2) and set the number of local jobs accordingly,
+    # while honoring a higher user-supplied --local-jobs value. Steps within a
+    # branch, depletion, reconciliation, and cleanup remain ordered by their
+    # task dependencies regardless of the job count.
+    run_nucleotide = args.bypass_nucleotide_search == 'False'
+    run_translated = args.bypass_translated_search == 'False'
+    parallel_search_jobs = int(run_nucleotide) + int(run_translated)
+    local_jobs = max(args.jobs, parallel_search_jobs, 1)
+
+    if run_nucleotide and run_translated and local_jobs > 1:
+        message = "Running nucleotide and translated search in parallel (local jobs: " + str(local_jobs) + ")."
+    elif run_nucleotide:
+        message = "Running nucleotide search only."
+    elif run_translated:
+        message = "Running translated search only."
+    else:
+        message = "No search selected (both nucleotide and translated search bypassed)."
+    logger.info(message)
+    print("\n" + message + "\n")
+
+    workflow.go(jobs=local_jobs)
 
 
 if __name__ == '__main__':
