@@ -135,18 +135,13 @@ workflow.add_argument(
     name = "keep-tempfiles",
     desc = "Keep temporary mapping files. This is memory intensive.",
     action = 'store_true',
-    default = config.getboolean('features','keep_tempfiles'))
+    default = config.get('features','keep_tempfiles'))
 
 workflow.add_argument(
     name="genome-filtering",
     desc="Level of genome filtering to allow genomes to be represented in a VGB (genomes removed based on probability of plasmid). Options: no-filtering, default, conservative",
-    default="default")
-
-workflow.add_argument(
-    name = "humann-depleted-fasta",
-    desc = "This flag is designed to be used within the biobakery workflows. However, this flag can additionally be used if processing samples similar to the biobakery workflow - that is, if providing BAQLaVa with a fasta file that has already been processed by HUMAnN to deplete bacterial reads (HUMAnN output file named <SAMPLE>_bowtie2_unaligned.fa). If using this flag, --bypass-bacterial-depletion does NOT need to be additionally provided.",
-    action = 'store_true',
-    default = config.getboolean('features','humann_depleted_fasta'))
+    default="default"
+)
 
 args = workflow.parse_args()
 
@@ -184,9 +179,6 @@ def main():
     else:
         file_base = Path(file_name).stem  # fallback for other extensions
 
-    if args.humann_depleted_fasta: # file provided has already been depleted by humann (eg in bb4 workflows)
-        file_base = file_base.replace("_bowtie2_unaligned", "")
-
     output_dir = Path(args.output)
     tempdir = output_dir / f"{file_base}_temp"
     baq_dir = output_dir / f"{file_base}_baqlava"
@@ -209,6 +201,8 @@ def main():
 
     ########### File processing module ###########
 
+    # !!!!!!!!add step to check if file has length appended to end
+
     if args.bypass_bacterial_depletion: # bypassing bacterial depletion
         # NO UPSTREAM BACTERIAL DEPLETION
 
@@ -217,14 +211,6 @@ def main():
                 depends = [args.input],
                 targets = [str(tempdir / f"{file_base}_processed.fa")],
                 name = "Upstream file processing")
-
-    if args.humann_depleted_fasta: # file provided has already been depleted by humann (eg in bb4 workflows)
-        workflow.add_task(
-            "python [len_adj] [depends[0]] [targets[0]]",
-            depends = [args.input],
-            targets = [str(tempdir / f"{file_base}_processed.fa")],
-            len_adj = os.path.abspath(args.lengthadjust),
-            name = "Formatting bacterially depleted FASTA file")
 
     elif not args.bypass_bacterial_depletion: # bacterial depletion
         # UPSTREAM BACTERIAL DEPLETION
@@ -250,7 +236,7 @@ def main():
                 name = "Running HUMAnN to deplete bacterial reads from file")
 
         workflow.add_task(
-            "python [len_adj] [depends[0]] [targets[0]]",
+            "python [len_adj] [depends[0]]",
             depends = [str(tempdir / f"{file_base}_humann_temp" / f"{file_base}_bowtie2_unaligned.fa")],
             targets = [str(tempdir / f"{file_base}_processed.fa")],
             len_adj = os.path.abspath(args.lengthadjust),
@@ -353,20 +339,99 @@ def main():
     else:
         print("ERROR: Incorrect reconciliation task prompted")
 
-    ########### FILE CLEANUP ###########
-    
-    if not args.keep_tempfiles: # delete extra baqlava files
-        workflow.add_task(
-        "rm -r [args[0]]",
-        depends = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt")],
-        args = [baq_dir],
-        name = "File Cleanup")
+#    elif args.bypass_bacterial_depletion == 'False':
+#    # UPSTREAM BACTERIAL DEPLETION
 
-    workflow.add_task(
-    "rm -r [args[0]]",
-    depends = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt")],
-    args = [tempdir],
-    name = "File Cleanup")
+#        if args.taxonomic_profile == 'False':
+#        # PROCEED WITHOUT METAPHLAN TAXONOMIC PROFILE
+
+#            workflow.add_task(
+#                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads]",
+#                depends = [args.input],
+#                args = [tempdir],
+#                targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
+#                threads = args.threads,
+#                name = "Running HUMAnN to depete bacterial reads from file")
+
+#        else:
+#        # USE A METAPHLAN TAXONOMIC PROFILE TO AID BACTERIAL DEPLETION
+
+#            workflow.add_task(
+#                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads] --taxonomic-profile [depends[1]]",
+#                depends = [args.input, args.taxonomic_profile],
+#                args = [tempdir],
+#                targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
+#                threads = args.threads,
+#                name = "Running HUMAnN to depete bacterial reads from file")
+
+#        workflow.add_task(
+#            "python [len_adj] [depends[0]] [args[0]]",
+#            depends = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
+#            args = [output_dir],
+#            targets = [output_dir + file_base + "_bacterial_depleted.fa"],
+#            len_adj = os.path.abspath(args.lengthadjust),
+#            name = "Formatting bacterially depleted FASTA file")
+
+#        # BAQLAVA VIRAL PROFILING:
+#        if args.bypass_nucleotide_search == True:
+#            # BYPASS NUCLEOTIDE SEARCH:
+#            pass
+#        else:
+
+#            # NUCLEOTIDE SEARCH:
+#            # FIRST RUN & CALCULATE AT 25% COVERAGE:
+#            workflow.add_task(
+#                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 25",
+#                depends = [output_dir + file_base + "_bacterial_depleted.fa"],
+#                args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
+#                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
+#                n_db = os.path.abspath(args.nucdb),
+#                idx = os.path.abspath(nucleotide_idmapping),
+#                threads = args.threads,
+#                name = "Running BAQLaVa Nucleotide Search")
+
+#            workflow.add_task(
+#                "mv [depends[0]] [targets[0]]",
+#                depends = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
+#                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"])
+
+#            # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
+#            workflow.add_task(
+#                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --resume",
+#                depends = [output_dir + file_base + "_bacterial_depleted.fa", baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"],
+#                args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
+#                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
+#                n_db = os.path.abspath(args.nucdb),
+#                idx = os.path.abspath(nucleotide_idmapping),
+#                threads = args.threads,
+#                name = "Calculating Marker Coverage & Abundance")
+
+#            workflow.add_task(
+#                "mv [depends[0]] [targets[0]]",
+#                depends = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv", baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"],
+#                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_50_genefamilies.tsv"])
+
+#        if args.bypass_translate
+
+#        else:
+#            print("ERROR: Incorrect reconciliation task prompted")
+
+#    else:
+#        print('ERROR')
+
+
+#    if args.keep_tempfiles == True:
+#        pass
+#    else:
+#        workflow.add_task(
+#        "rm -r [args[0]]",
+#        depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
+#        args = [baq_dir])
+
+#    workflow.add_task(
+#    "rm -r [args[0]]",
+#    depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
+#    args = [tempdir])
 
     workflow.go()
 

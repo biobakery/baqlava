@@ -3,10 +3,12 @@ import os
 import gzip
 from pathlib import Path
 
-#p = Path(sys.argv[1])
-#savefile = p.parent.parent / p.name.replace("_bowtie2_unaligned.fa","_processed.fa")
+#newname = os.path.split(sys.argv[1])[1].replace("_bowtie2_unaligned.fa", "_processed.fa")
+#savefile = os.path.join(sys.argv[1], newname)
 
-savefile = sys.argv[2]
+p = Path(sys.argv[1])
+savefile = p.parent.parent / p.name.replace("_bowtie2_unaligned.fa","_processed.fa")
+
 
 if sys.argv[1].endswith(".gz"):
     open_func=gzip.open
