@@ -1,9 +1,12 @@
 import sys
 import os
 import gzip
+from pathlib import Path
 
-newname = os.path.split( sys.argv[1] )[1].replace("_bowtie2_unaligned.fa", "_bacterial_depleted.fa") 
-savefile = sys.argv[2] + newname
+#p = Path(sys.argv[1])
+#savefile = p.parent.parent / p.name.replace("_bowtie2_unaligned.fa","_processed.fa")
+
+savefile = sys.argv[2]
 
 if sys.argv[1].endswith(".gz"):
     open_func=gzip.open
@@ -15,7 +18,6 @@ with open_func(sys.argv[1], "rt") as deplfasta:
         for i in deplfasta:
             i = i.strip()
             if ">" in i:
-                #print(i)
                 i = i.split("|")[:-1]
                 i = "|".join(i)
                 wfasta.write(i)

@@ -46,13 +46,18 @@ nucleotide_reference = pd.read_csv(nucleotide_reference_file, sep="\t", low_memo
 protein_reference = pd.read_csv(protein_reference_file, sep="\t", low_memory=False).query("len>=200")
 VGB_taxonomy = pd.read_csv(VGB_taxonomy_file, sep="\t", index_col='Unnamed: 0', low_memory=False)
 
+
 def format_file_and_base(in_genefams):
     # get column of interest (basename plus RPK)
-    base = ".".join(os.path.split( in_genefams )[1].split(".")[:-1]).replace('_nucleotide_25_genefamilies', '_nucleotide_Abundance-RPKs').replace('_nucleotide_50_genefamilies', '_nucleotide_Abundance-RPKs').replace('_translated_genefamilies', '_translated_Abundance-RPKs')
+    #base = os.path.split( in_genefams )[1].split("_2_genefamilies")[0]
+    #if 'nucleotide_25_genefamilies.tsv' in in_genefams or 'nucleotide_50_genefamilies.tsv' in in_genefams:
+    #    base = "_".join(base.split("_")[:-1])
     # remove duplicate abundance lines (since everything is unclassified)
     df1 = pd.read_csv(in_genefams, sep="\t").copy()
-    df2 = df1[~df1['# Gene Family'].str.contains("\|")]
-    df3 = df2[df2['# Gene Family'] != 'UNMAPPED']
+    base = df1.columns[1]
+    col1name = df1.columns[0]
+    df2 = df1[~df1[col1name].str.contains("\|")]
+    df3 = df2[df2[col1name] != 'READS_UNMAPPED']
     return base, df3
 
 
@@ -103,9 +108,10 @@ def get_read_length(file):
 
 def process_baqlava_nucleotide1(base, format_df, ref, readlen):
     newbase = "_".join(base.split("_nucleotide_"))
-
     df1 = format_df.copy()
-    df2 = pd.merge(df1, ref.copy()[['VGB','marker','len','cluster_member', 'segment_group']], left_on='# Gene Family', right_on='marker', how='right')
+    col1name = df1.columns[0]
+    
+    df2 = pd.merge(df1, ref.copy()[['VGB','marker','len','cluster_member', 'segment_group']], left_on=col1name, right_on='marker', how='right')
     df2[base] = df2[base].fillna(0)
     df2['reads_mapped'] = df2[base] * (df2['len']/1000)
     df3 = df2[df2['len']>400]
@@ -161,13 +167,14 @@ def process_baqlava_nucleotide1(base, format_df, ref, readlen):
     df13 = pd.merge(df12, df38, on='segment_group', how='inner')
 
     # format tempfile to save out:
-    df14 = df3.copy()[['# Gene Family','VGB', 'reads_mapped', 'marker_len_adj']]
+    df14 = df3.copy()[[col1name,'VGB', 'reads_mapped', 'marker_len_adj']]
     df14['RPK'] = df14['reads_mapped']/(df14['marker_len_adj']/1000)
-    df15 = df14[df14['RPK']!=0][['# Gene Family','VGB','RPK']].rename(columns={"# Gene Family":"Marker"})
+    df15 = df14[df14['RPK']!=0][[col1name,'VGB','RPK']].rename(columns={col1name:"Marker"})
     return df13, df15
 
 def process_baqlava_nucleotide2(cov25, cov50, base, taxref, readlen):
-    newbase = "_".join(base.split("_nucleotide_"))
+    #newbase = "_".join(base.split("_nucleotide_"))
+    newbase = "_".join(base.split("_")[:-1])
 
     df1 = pd.merge(cov25.copy(), cov50.copy(), on=['segment_group','observed_RPK'], how='outer', indicator=True)
     df2 = df1.copy().query("_merge!='left_only'")
@@ -194,8 +201,9 @@ def process_baqlava_nucleotide2(cov25, cov50, base, taxref, readlen):
 def process_baqlava_translated(base, format_df, ref, taxref, length):
     newbase = "_".join(base.split("_translated_"))
     df1 = format_df.copy()
+    col1name = df1.columns[0]
 
-    df2 = pd.merge(df1, ref.copy(), left_on='# Gene Family', right_on='protein', how='right')
+    df2 = pd.merge(df1, ref.copy(), left_on=col1name, right_on='protein', how='right')
     df2[base] = df2[base].fillna(0)
 
     # get VGB where mappings occured to at least n length - use these later to drop VGBs we don't want to report:
@@ -258,17 +266,17 @@ def process_baqlava_translated(base, format_df, ref, taxref, length):
     df14 = pd.concat([df12, df13]).sort_values(by=['segment_group', 'BAQLaVa VGB']).rename(columns={'observed_RPK':newbase})[['BAQLaVa VGB',newbase, 'Taxonomy','Reference Species', 'Other ICTV Genomes in VGB']]
 
     # format tempfile to save out:
-    df15 = df2.copy()[['# Gene Family','VGB', base]]
-    df16 = df15[df15[base]!=0].rename(columns={"# Gene Family":"Protein", base:"RPK"})
+    df15 = df2.copy()[[col1name,'VGB', base]]
+    df16 = df15[df15[base]!=0].rename(columns={col1name:"Protein", base:"RPK"})
 
     return df14, df16
 
-def join_nuc_trans(nuc, trans, nucbase, ref):
-    newbase = "_".join(nucbase.split("_nucleotide_"))
-
+def join_nuc_trans(nuc, trans, nucbase, transbase, ref):
+    newbase = "_".join(nucbase.split("_")[:-1])
+    
     nuc = nuc.rename(columns={newbase:'nucleotide'})
     nuc = nuc[~nuc['BAQLaVa VGB'].str.contains("\|")]
-    trans = trans.rename(columns={newbase:'translated'})
+    trans = trans.rename(columns={transbase:'translated'})
     trans = trans[~trans['BAQLaVa VGB'].str.contains("\|")]
     df1 = pd.merge(nuc[['BAQLaVa VGB', 'nucleotide']], trans[['BAQLaVa VGB', 'translated']], on='BAQLaVa VGB', how='outer').fillna(0)
 
@@ -290,12 +298,11 @@ def join_nuc_trans(nuc, trans, nucbase, ref):
     df72 = df7.copy().query("variable!='Total'")
     df72['BAQLaVa VGB'] = df72['BAQLaVa VGB'] + "|" + df72['variable']
 
-    if "bacterial_depleted" in nucbase:
-        outcol = "_".join(nucbase.split("_bacterial_depleted_nucleotide_"))
-        df8 = pd.concat([df71, df72]).rename(columns={'value':outcol}).reset_index().sort_values(by='index')[['BAQLaVa VGB',outcol,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
-    else:
-        df8 = pd.concat([df71, df72]).rename(columns={'value':newbase}).reset_index().sort_values(by='index')[['BAQLaVa VGB',newbase,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
-
+    #if "bacterial_depleted" in nucbase:
+    #    outcol = "_".join(nucbase.split("_bacterial_depleted_nucleotide_"))
+    #    df8 = pd.concat([df71, df72]).rename(columns={'value':outcol}).reset_index().sort_values(by='index')[['BAQLaVa VGB',outcol,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
+    #else:
+    df8 = pd.concat([df71, df72]).rename(columns={'value':newbase}).reset_index().sort_values(by='index')[['BAQLaVa VGB',newbase,'Reference Species','Taxonomy','Other ICTV Genomes in VGB']]
     return df8
 
 
@@ -305,12 +312,12 @@ def run_reconciliation(sys1, sys2, sys3, sys4, nucref, transref, taxref, inp_fa,
     #3: both
     if sys1 == "1" or sys1 == "3":
         print('processing nuc')
-        a,b1 = format_file_and_base(sys2)
-        a,b2 = format_file_and_base(sys3)
+        a1,b1 = format_file_and_base(sys2)
+        a2,b2 = format_file_and_base(sys3)
         c = get_read_length(inp_fa)
-        d1,e1 = process_baqlava_nucleotide1(a, b1, nucref, c)
-        d2,e2 = process_baqlava_nucleotide1(a, b2, nucref, c)
-        f = process_baqlava_nucleotide2(d1, d2, a, taxref, c)
+        d1,e1 = process_baqlava_nucleotide1(a1, b1, nucref, c)
+        d2,e2 = process_baqlava_nucleotide1(a2, b2, nucref, c)
+        f = process_baqlava_nucleotide2(d1, d2, a1, taxref, c)
         e1.to_csv(sys.argv[8], sep="\t", index=False)
     if sys1 == "2" or sys1 == "3":
         print('processing trans')
@@ -323,7 +330,7 @@ def run_reconciliation(sys1, sys2, sys3, sys4, nucref, transref, taxref, inp_fa,
     elif sys1 == "2":
         return i
     elif sys1 == "3":
-        k = join_nuc_trans(f, i, a, taxref)
+        k = join_nuc_trans(f, i, a1, g, taxref)
         return k
     else:
         return 'ERROR: incorrect reconciliation task requested'

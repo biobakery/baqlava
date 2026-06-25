@@ -27,6 +27,7 @@ from anadama2 import Workflow
 from anadama2.tracked import TrackedExecutable
 import tempfile
 import logging
+from pathlib import Path
 
 # name global logging instance
 logger=logging.getLogger(__name__)
@@ -84,16 +85,6 @@ workflow.add_argument(
     desc = "nucleotide database folder to use",
     default = config.get('database','nucleotide_db'))
 
-#workflow.add_argument(
-#    name = "nucindex",
-#    desc = "nucleotide annotation index to use",
-#    default = config.get('utility','idmap_nucl'))
-
-#workflow.add_argument(
-#    name = "protindex",
-#    desc = "protein annotation index to use",
-#    default = config.get('utility','idmap_prot'))
-
 workflow.add_argument(
     name = "threads",
     desc="number of threads for each process to use",
@@ -123,24 +114,24 @@ workflow.add_argument(
     name = "bypass-bacterial-depletion",
     desc = "Using this flag turns OFF bactieral depletion. Input file will be immediately profiled by BAQLaVa.",
     action = 'store_true',
-    default = config.get('features','bypass_bacterial_depletion'))
+    default = config.getboolean('features','bypass_bacterial_depletion'))
 
 workflow.add_argument(
     name = "bypass-nucleotide-search",
     desc = "Using this flag turns OFF nucleotide search. BAQLaVa will only use protein search in viral profiling.",
     action = 'store_true',
-    default = config.get('features','bypass_nucleotide_search'))
+    default = config.getboolean("features", "bypass_nucleotide_search"))
 
 workflow.add_argument(
     name = "bypass-translated-search",
     desc = "Using this flag turns OFF translated search. BAQLaVa will only use nucleotide search in viral profiling.",
     action = 'store_true',
-    default = config.get('features','bypass_translated_search'))
+    default = config.getboolean('features','bypass_translated_search'))
 
 workflow.add_argument(
     name = "taxonomic-profile",
     desc = "Using this flag supplies a metaphlan generated bacterial species profile to baqlava to deplete bacterial reads rather than running the full metaphlan search.",
-    default = config.get('features','taxonomic_profile'))
+    default = config.getboolean('features','taxonomic_profile'))
 
 workflow.add_argument(
     name = "proteome-length",
@@ -151,13 +142,18 @@ workflow.add_argument(
     name = "keep-tempfiles",
     desc = "Keep temporary mapping files. This is memory intensive.",
     action = 'store_true',
-    default = config.get('features','keep_tempfiles'))
+    default = config.getboolean('features','keep_tempfiles'))
 
 workflow.add_argument(
     name="genome-filtering",
     desc="Level of genome filtering to allow genomes to be represented in a VGB (genomes removed based on probability of plasmid). Options: no-filtering, default, conservative",
-    default="default"
-)
+    default="default")
+
+workflow.add_argument(
+    name = "humann-depleted-fasta",
+    desc = "This flag is designed to be used within the biobakery workflows. However, this flag can additionally be used if processing samples similar to the biobakery workflow - that is, if providing BAQLaVa with a fasta file that has already been processed by HUMAnN to deplete bacterial reads (HUMAnN output file named <SAMPLE>_bowtie2_unaligned.fa). If using this flag, --bypass-bacterial-depletion does NOT need to be additionally provided.",
+    action = 'store_true',
+    default = config.getboolean('features','humann_depleted_fasta'))
 
 args = workflow.parse_args()
 
@@ -301,19 +297,29 @@ def main():
     # Confirm HUMAnN 4 (H4) is available before doing any work.
     humann_version = check_humann_version()
 
-    file_base = args.input.split("/")[-1].split(".")[0]
-    output_dir = args.output + "/"
-    tempdir = args.output + "/" + file_base + "_temp/"
-    baq_dir = args.output + "/" + file_base + "_baqlava/"
+    file_name = Path(args.input).name
+    for suffix in [".fastq.gz", ".fq.gz", ".fastq", ".fq", ".fasta.gz", ".fa.gz", ".fasta", ".fa"]:
+        if file_name.endswith(suffix):
+            file_base = file_name.removesuffix(suffix)
+            break
+    else:
+        file_base = Path(file_name).stem  # fallback for other extensions
 
-    logger.info("Output files will be written to: " + output_dir)
-    message="Writing temp files to directory: " + tempdir
+    if args.humann_depleted_fasta: # file provided has already been depleted by humann (eg in bb4 workflows)
+        file_base = file_base.replace("_bowtie2_unaligned", "")
+
+    output_dir = Path(args.output)
+    tempdir = output_dir / f"{file_base}_temp"
+    baq_dir = output_dir / f"{file_base}_baqlava"
+
+    logger.info(f"Output files will be written to: {output_dir}")
+    message = f"Writing temp files to directory: {tempdir}"
     print("\n"+message+"\n")
 
     # create directories
-    os.system("mkdir " + args.output)
-    os.system("mkdir " + tempdir)
-    os.system("mkdir " + baq_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    tempdir.mkdir(parents=True, exist_ok=True)
+    baq_dir.mkdir(parents=True, exist_ok=True)
 
     log_file = os.path.join(output_dir, file_base + "_baqlava.log")
     logging.basicConfig(
@@ -326,119 +332,33 @@ def main():
     # Record versions of BAQLaVa, its sub-tools, and the databases in use.
     log_versions(humann_version)
 
-    # set the name of the log file
-    #log_file=os.path.join(output_dir,config.file_basename+"_0.log")
 
-    # change file name if set
-    #if args.o_log:
-    #    log_file=args.o_log
+    ########### File processing module ###########
 
-    # configure the logger
-    #logging.basicConfig(filename=log_file,format='%(asctime)s - %(name)s - %(levelname)s: %(message)s',
-    #    level=getattr(logging,args.log_level), filemode='w', datefmt='%m/%d/%Y %I:%M:%S %p')
-
-
-    if args.bypass_bacterial_depletion == True:
+    if args.bypass_bacterial_depletion: # bypassing bacterial depletion
         # NO UPSTREAM BACTERIAL DEPLETION
 
-        if args.bypass_nucleotide_search == True:
-            # BYPASSING NUCLEOTIDE SEARCH
-            pass
-        else:
-
-            # NUCLEOTIDE SEARCH:
-            # FIRST RUN & CALCULATE AT 25% COVERAGE:
             workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 25",
+                "scp [depends[0]] [targets[0]]",
                 depends = [args.input],
-                args = [baq_dir, file_base + "_nucleotide"],
-                targets = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
-                n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(nucleotide_idmapping),
-                threads = args.threads,
-                name = "Running BAQLaVa Nucleotide Search")
+                targets = [str(tempdir / f"{file_base}_processed.fa")],
+                name = "Upstream file processing")
 
-            workflow.add_task(
-                "mv [depends[0]] [targets[0]]",
-                depends = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
-                targets = [baq_dir + file_base + "_nucleotide_25_genefamilies.tsv"])
+    if args.humann_depleted_fasta: # file provided has already been depleted by humann (eg in bb4 workflows)
+        workflow.add_task(
+            "python [len_adj] [depends[0]] [targets[0]]",
+            depends = [args.input],
+            targets = [str(tempdir / f"{file_base}_processed.fa")],
+            len_adj = os.path.abspath(args.lengthadjust),
+            name = "Formatting bacterially depleted FASTA file")
 
-            # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --resume",
-                depends = [args.input, baq_dir + file_base + "_nucleotide_25_genefamilies.tsv"],
-                args = [baq_dir, file_base + "_nucleotide"],
-                targets = [baq_dir + file_base + "_nucleotide_genefamilies.tsv"],
-                n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(nucleotide_idmapping),
-                threads = args.threads,
-                name = "Calculating Marker Coverage & Abundance")
-
-            workflow.add_task(
-                "mv [depends[0]] [targets[0]]",
-                depends = [baq_dir + file_base + "_nucleotide_genefamilies.tsv", baq_dir + file_base + "_nucleotide_25_genefamilies.tsv"],
-                targets = [baq_dir + file_base + "_nucleotide_50_genefamilies.tsv"])
-
-        if args.bypass_translated_search == True:
-       	    # BYPASSING TRANSLATED SEARCH
-            pass
-       	else:
-            # TRANSLATED SEARCH:
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --translated-subject-coverage-threshold 50",
-                depends = [args.input],
-                args = [baq_dir, file_base + "_translated"],
-                targets = [baq_dir + file_base + "_translated_genefamilies.tsv"],
-                p_db = os.path.abspath(args.protdb),
-                idx = os.path.abspath(translated_idmapping),
-                threads = args.threads,
-                name = "Running BAQLaVa Translated Search")
-
-        # NOW RECONCILE GENEFAMILIES.TSV FILES BASED ON PROCESESS RUN:
-        if args.bypass_nucleotide_search == 'False' and args.bypass_translated_search == True:
-
-            workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [args[0]] [depends[2]] [proteomelen] [targets[0]] [targets[1]] [args[0]]",
-            script = args.reconcile_mapped_script,
-            mode = "1",
-            proteomelen = args.proteome_length,
-            args = ["NA"],
-            depends = [baq_dir + file_base + "_nucleotide_25_genefamilies.tsv", baq_dir + file_base + "_nucleotide_50_genefamilies.tsv", args.input],
-            targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_markers.txt"],
-            name = "Making BAQLaVa Viral Profile")
-
-        elif args.bypass_nucleotide_search == True and args.bypass_translated_search == 'False':
-
-            workflow.add_task("python [script] [mode] [args[0]] [args[0]] [depends[0]] [args[0]] [proteomelen] [targets[0]] [args[0]] [targets[1]]",
-            script = args.reconcile_mapped_script,
-            mode = "2",
-            proteomelen = args.proteome_length,
-            args = ["NA"],
-            depends = [baq_dir + file_base + "_translated_genefamilies.tsv"],
-            targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_proteins.txt"],
-            name = "Making BAQLaVa Viral Profile")
-
-        elif args.bypass_nucleotide_search == 'False' and args.bypass_translated_search == 'False':
-
-            workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [depends[2]] [depends[3]] [proteomelen] [targets[0]] [targets[1]] [targets[2]]",
-            script = args.reconcile_mapped_script,
-            mode = "3",
-            proteomelen = args.proteome_length,
-            depends = [baq_dir + file_base + "_nucleotide_25_genefamilies.tsv", baq_dir + file_base + "_nucleotide_50_genefamilies.tsv", baq_dir + file_base + "_translated_genefamilies.tsv", args.input],
-            targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_markers.txt", output_dir + file_base + "_tempfile_proteins.txt"],
-            name = "Making BAQLaVa Viral Profile")
-
-        else:
-            print("ERROR: Incorrect reconciliation task prompted")
-
-    elif args.bypass_bacterial_depletion == 'False':
-    # UPSTREAM BACTERIAL DEPLETION
-
-        # BACTERIAL DEPLETION (first step; not optional unless explicitly
-        # bypassed). This step fails gracefully: if HUMAnN does not complete,
-        # the wrapper falls back to the original (non-depleted) input so that
-        # nucleotide & translated search still proceed. The wrapper always
-        # produces the bacterial-depleted FASTA target.
-        if args.taxonomic_profile == 'False':
+    elif not args.bypass_bacterial_depletion: # bacterial depletion
+        # UPSTREAM BACTERIAL DEPLETION
+        # BACTERIAL DEPLETION (first step). This step fails gracefully: if HUMAnN
+        # does not complete, the wrapper falls back to the original (non-depleted)
+        # input so that nucleotide & translated search still proceed. The wrapper
+        # always produces the processed FASTA target.
+        if not args.taxonomic_profile:
             # PROCEED WITHOUT METAPHLAN TAXONOMIC PROFILE
             depletion_depends = [args.input]
             tax_profile = "NA"
@@ -448,126 +368,125 @@ def main():
             tax_profile = os.path.abspath(args.taxonomic_profile)
 
         workflow.add_task(
-            "python [bd_script] [depends[0]] [tempdir] [outdir] [base] [threads] [len_adj] [targets[0]] [tax]",
+            "python [bd_script] [depends[0]] [tempdir] [base] [threads] [len_adj] [targets[0]] [tax]",
             depends = depletion_depends,
-            targets = [output_dir + file_base + "_bacterial_depleted.fa"],
+            targets = [str(tempdir / f"{file_base}_processed.fa")],
             bd_script = os.path.abspath(args.bacterial_depletion_script),
-            tempdir = tempdir,
-            outdir = output_dir,
+            tempdir = str(tempdir),
             base = file_base,
             threads = args.threads,
             len_adj = os.path.abspath(args.lengthadjust),
             tax = tax_profile,
             name = "Running HUMAnN to deplete bacterial reads from file")
 
-        # BAQLAVA VIRAL PROFILING:
-        if args.bypass_nucleotide_search == True:
-            # BYPASS NUCLEOTIDE SEARCH:
-            pass
-        else:
+        workflow.add_task(
+            "scp [depends[0]] [targets[0]]",
+            depends = [str(tempdir / f"{file_base}_processed.fa")],
+            targets = [str(output_dir / f"{file_base}_bacterial_depleted.fa")],
+            name = "Saving bacterially depleted FASTA file")
 
-            # NUCLEOTIDE SEARCH:
-            # FIRST RUN & CALCULATE AT 25% COVERAGE:
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 25",
-                depends = [output_dir + file_base + "_bacterial_depleted.fa"],
-                args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
-                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
-                n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(nucleotide_idmapping),
-                threads = args.threads,
-                name = "Running BAQLaVa Nucleotide Search")
+    ########### BAQLaVa NUCLEOIDE & TRANSLATED SEARCH ###########
 
-            workflow.add_task(
-                "mv [depends[0]] [targets[0]]",
-                depends = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
-                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"])
+    if not args.bypass_nucleotide_search: # bypass nucleotide != True
 
-            # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --resume",
-                depends = [output_dir + file_base + "_bacterial_depleted.fa", baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"],
-                args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
-                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
-                n_db = os.path.abspath(args.nucdb),
-                idx = os.path.abspath(nucleotide_idmapping),
-                threads = args.threads,
-                name = "Calculating Marker Coverage & Abundance")
+        # FIRST RUN & CALCULATE AT 25% COVERAGE:
+        workflow.add_task(
+            "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 25",
+            depends = [str(tempdir / f"{file_base}_processed.fa")],
+            args = [baq_dir, str(f"{file_base}_nucleotide1")],
+            targets = [str(baq_dir / f"{file_base}_nucleotide1_2_genefamilies.tsv")],
+            n_db = os.path.abspath(args.nucdb),
+            idx = os.path.abspath(nucleotide_idmapping),
+            threads = args.threads,
+            name = "Running BAQLaVa Nucleotide Search")
 
-            workflow.add_task(
-                "mv [depends[0]] [targets[0]]",
-                depends = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv", baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"],
-                targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_50_genefamilies.tsv"])
+        workflow.add_task(
+            "scp [depends[0]] [targets[0]]",
+            depends = [str(baq_dir / f"{file_base}_nucleotide1_2_genefamilies.tsv")],
+            targets = [str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv")],
+            name = "File Processing")
 
-        if args.bypass_translated_search == True:
-            # BYPASS TRANSLATED SEARCH
-            pass
-        else:
-            # TRANSLATED SEARCH:
-            workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --translated-subject-coverage-threshold 50",
-                depends = [output_dir + file_base + "_bacterial_depleted.fa"],
-                args = [baq_dir, file_base + "_bacterial_depleted_translated"],
-                targets = [baq_dir + file_base + "_bacterial_depleted_translated_genefamilies.tsv"],
-                p_db = os.path.abspath(args.protdb),
-                idx = os.path.abspath(translated_idmapping),
-                threads = args.threads,
-                name = "Running BAQLaVa Translated Search")
+        # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
+        workflow.add_task(
+            "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 50 --resume",
+            depends = [str(tempdir / f"{file_base}_processed.fa"), str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv")],
+            args = [baq_dir, str(f"{file_base}_nucleotide2")],
+            targets = [str(baq_dir / f"{file_base}_nucleotide2_2_genefamilies.tsv")],
+            n_db = os.path.abspath(args.nucdb),
+            idx = os.path.abspath(nucleotide_idmapping),
+            threads = args.threads,
+            name = "Calculating Marker Coverage & Abundance")
 
-        # NOW RECONCILE GENEFAMILIES.TSV FILES BASED ON PROCESESS RUN:
+        workflow.add_task(
+            "scp [depends[0]] [targets[0]]",
+            depends = [str(baq_dir / f"{file_base}_nucleotide2_2_genefamilies.tsv"), str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv")],
+            targets = [str(baq_dir / f"{file_base}_nucleotide_50_genefamilies.tsv")],
+            name = "File Processing")
 
-        if args.bypass_nucleotide_search == 'False' and args.bypass_translated_search == True:
+    if not args.bypass_translated_search: # bypass translated != True
 
-            workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [args[0]] [depends[2]] [proteomelen] [targets[0]] [targets[1]] [args[0]]",
+        workflow.add_task(
+            "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --translated-subject-coverage-threshold 50",
+            depends = [args.input],
+            args = [baq_dir, str(f"{file_base}_translated")],
+            targets = [str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv")],
+            p_db = os.path.abspath(args.protdb),
+            idx = os.path.abspath(translated_idmapping),
+            threads = args.threads,
+            name = "Running BAQLaVa Translated Search")
+
+
+    ########### RECONCILING GENEFAMILIES.TSV FILES BASED ON PROCESSES RUN ###########
+
+    if not args.bypass_nucleotide_search and args.bypass_translated_search: # nucleotide only, no translated
+
+        workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [args[0]] [depends[2]] [proteomelen] [targets[0]] [targets[1]] [args[0]]",
             script = args.reconcile_mapped_script,
             mode = "1",
             proteomelen = args.proteome_length,
             args = ["NA"],
-            depends = [baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv", baq_dir + file_base + "_bacterial_depleted_nucleotide_50_genefamilies.tsv", args.input],
-            targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_markers.txt"],
+            depends = [str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv"), str(baq_dir / f"{file_base}_nucleotide_50_genefamilies.tsv"), args.input],
+            targets = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt"), str(output_dir / f"{file_base}_tempfile_markers.txt")],
             name = "Making BAQLaVa Viral Profile")
 
-        elif args.bypass_nucleotide_search == True and args.bypass_translated_search == 'False':
+    elif args.bypass_nucleotide_search and not args.bypass_translated_search: # translated only, no nucleotide
 
-            workflow.add_task("python [script] [mode] [args[0]] [args[0]] [depends[0]] [args[0]] [proteomelen] [targets[0]] [args[0]] [targets[1]]",
+        workflow.add_task("python [script] [mode] [args[0]] [args[0]] [depends[0]] [args[0]] [proteomelen] [targets[0]] [args[0]] [targets[1]]",
             script = args.reconcile_mapped_script,
             mode = "2",
             proteomelen = args.proteome_length,
             args = ["NA"],
-            depends = [baq_dir + file_base + "_bacterial_depleted_translated_genefamilies.tsv"],
-            targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_proteins.txt"],
+            depends = [str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv")],
+            targets = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt"), str(output_dir / f"{file_base}_tempfile_proteins.txt")],
             name = "Making BAQLaVa Viral Profile")
 
-        elif args.bypass_nucleotide_search == 'False' and args.bypass_translated_search == 'False':
+    elif not args.bypass_nucleotide_search and not args.bypass_translated_search: # nucleotide + translated (full workflow)
 
             workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [depends[2]] [depends[3]] [proteomelen] [targets[0]] [targets[1]] [targets[2]]",
             script = args.reconcile_mapped_script,
             mode = "3",
             proteomelen = args.proteome_length,
-            depends = [baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv", baq_dir + file_base + "_bacterial_depleted_nucleotide_50_genefamilies.tsv", baq_dir + file_base + "_bacterial_depleted_translated_genefamilies.tsv", args.input],
-            targets = [output_dir + file_base + "_BAQLaVa_profile.txt", output_dir + file_base + "_tempfile_markers.txt", output_dir + file_base + "_tempfile_proteins.txt"],
+            depends = [str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv"), str(baq_dir / f"{file_base}_nucleotide_50_genefamilies.tsv"), str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv"), args.input],
+            targets = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt"), str(output_dir / f"{file_base}_tempfile_markers.txt"), str(output_dir / f"{file_base}_tempfile_proteins.txt")],
             name = "Making BAQLaVa Viral Profile")
 
-
-        else:
-            print("ERROR: Incorrect reconciliation task prompted")
-
     else:
-        print('ERROR')
+        print("ERROR: Incorrect reconciliation task prompted")
 
+    ########### FILE CLEANUP ###########
 
-    if args.keep_tempfiles == True:
-        pass
-    else:
+    if not args.keep_tempfiles: # delete extra baqlava files
         workflow.add_task(
         "rm -r [args[0]]",
-        depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
-        args = [baq_dir])
+        depends = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt")],
+        args = [baq_dir],
+        name = "File Cleanup")
 
     workflow.add_task(
     "rm -r [args[0]]",
-    depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
-    args = [tempdir])
+    depends = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt")],
+    args = [tempdir],
+    name = "File Cleanup")
 
     # Nucleotide and translated search are independent (they share no task
     # dependency), so run them in parallel. Count how many search branches will
@@ -575,8 +494,8 @@ def main():
     # while honoring a higher user-supplied --local-jobs value. Steps within a
     # branch, depletion, reconciliation, and cleanup remain ordered by their
     # task dependencies regardless of the job count.
-    run_nucleotide = args.bypass_nucleotide_search == 'False'
-    run_translated = args.bypass_translated_search == 'False'
+    run_nucleotide = not args.bypass_nucleotide_search
+    run_translated = not args.bypass_translated_search
     parallel_search_jobs = int(run_nucleotide) + int(run_translated)
     local_jobs = max(args.jobs, parallel_search_jobs, 1)
 

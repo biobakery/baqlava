@@ -22,7 +22,7 @@ config_file=os.path.join(install_folder,"configs/baqlava.cfg")
 config.read(config_file)
 setup_directory = os.path.abspath(os.path.dirname(__file__))
 
-VERSION = config.get("metadata","version",fallback="1.2.0")
+VERSION = config.get("metadata","version",fallback="0.5")
 AUTHOR = "BAQLaVa Development Team"
 MAINTAINER = "Jordan Jensen"
 MAINTAINER_EMAIL = "jordanjensen@g.harvard.edu"
