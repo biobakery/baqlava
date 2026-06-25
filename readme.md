@@ -128,8 +128,7 @@ The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral
 ```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
 ## Options for BAQLaVa runs
-When running BAQLaVa v0.5, you have the following options to modify the standard run:
-
+When running BAQLaVa, you have the following options to modify the standard run:
 
 ```
 --bypass-bacterial-depletion
@@ -215,8 +214,15 @@ The databases BAQLaVa uses in profiling are comprised of only VGB-specific genet
 
 https://g-227ca.190ebd.75bc.data.globus.org/baqlava-db/BAQLaVa.V0.5.raw_databases.tar.gz
 
+This file contains two versions of the database:
+- **BAQLaVa_nucleotidedb.fasta** contains **all** genomes input to the BAQLaVa database (Step 1 in [Figure 1a](https://www.biorxiv.org/content/10.64898/2026.02.11.705346v1))
+- **BAQLaVa_nucleotidedb_dereplicated.fasta** contains the representative genomes that emerge after Cluster Stage 1 of Step 2 in [Figure 1a](https://www.biorxiv.org/content/10.64898/2026.02.11.705346v1). It is most likely that this is the version of the database you will find useful - these genomes are the source of all markers & proteins in the BAQLaVa search databases. 
 
-  
+
+If you'd like to use the markers or ORFs individually, you can download them here:
+
+https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa_markers_ORFs.tar.gz
+
 
 ## Contributions ##
 
