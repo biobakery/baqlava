@@ -150,18 +150,20 @@ If a sample has already been profiled with MetaPhlAn previously and the bacteria
 ```
 These flags can be used to bypass either of the individual search steps of BAQLaVa if desired. We do not reccomend this as standard practice but may be useful for targeted research questions. You can always use the standard output stratified to the desired subset of information to obtain the same information.    
 
-### Genome Filtering (v1.1.0 alpha)
+### Genome Filtering (v1.1.0)
 
-Three options for filtering BAQLaVa genomes are possible. The default filtering applied is based on geNomad's default viral filtering (https://portal.nersc.gov/genomad/post_classification_filtering.html#default-parameters-and-presets). This filtering removes the markers and proteins from the mapping files BAQLaVa references, for vMAGs or genomes which do not meeting the determined viral confidence thresholds. The following alternatives are available:
+The original BAQLaVa V1.0 database did not have any plasmid or genome filtering beyond the methods employed by each source database in the QC of included genomes/MAGs. In the use of BAQLaVa V1.0, users noted a small number of VGBs were found to contain plasmid genomes, which caused poor profiling behavior. To remedy this, V1.0 offered a set of VGBs which could be dropped after profiling - these VGBs were identified via PPR-meta prediction scores, specifically examining the behavior of the markers & proteins originating from genomes with high PPR-meta plasmid probability scores. Importantly, this behavior was examined on the HMP2 dataset, and may not generalize to new virome environments. For that reason, v1.1.0 offers new filtering options.
 
-No filtering: this reflects the parameters applied in BAQLaVa v1.0.0. All MAGs and genomes in the original BAQLaVa database are candidates for markerization & proteome creation.
-Conservative filtering: This reflects the geNomad conservative filters. Only MAGs and genomes meeting the conservative threshold are candidates for markerization & proteome creation.
+In v1.1.0, three options for filtering our plasmid genomes are now available:
+- No filtering
+    No filtering will reflect BAQLaVa V1.0 and the manuscript data directly. You may optionally remove the identified plasmid-contaminated VGB set after profiling.
+- Default Filtering (default setting)
+    Default filtering is based on geNomad's default settings (https://portal.nersc.gov/genomad/post_classification_filtering.html#default-parameters-and-presets). Any genomes assigned to the identity of plasmid by GeNomad were removed from the marker & protein databases. 
+- Conservative Filtering
+    Conservative filtering is also based on geNomad predictions, however the conservative filter is applied to any genome where the probability of being plasmid exceeds the probability of being viral. These genomes are removed from the BAQLaVa databases.  
 
 To apply one of the alternative filters, replace the name of the associated idmap files in the baqlava config file:
 
-No filtering: idmap_nucleotide_nofilter.txt & idmap_protein_nofilter.txt 
-Default filtering: idmap_nucleotide_default.txt & idmap_protein_default.txt 
-Conservative filtering: idmap_nucleotide_conservative.txt & idmap_protein_conservative.txt 
 
 ## BAQLaVa Output
 
