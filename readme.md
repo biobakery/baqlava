@@ -128,7 +128,7 @@ The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral
 ```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
 ## Options for BAQLaVa runs
-When running BAQLaVa v1.1.0, you have the following options to modify the standard run:
+When running BAQLaVa, you have the following options to modify the standard run:
 
 
 ```
