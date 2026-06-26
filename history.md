@@ -1,6 +1,7 @@
 
 # History #
-## v0.5.1 TBD
+## v1.0.0 03-01-2026
+* This version is the same as v0.5.0, but was updated to v1.0 status with the release of the BAQLaVa preprint.
 
 ## v0.5.0 01-21-2025
 * Automatically installed baqlava databases before the setup
