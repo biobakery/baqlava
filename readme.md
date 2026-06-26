@@ -6,7 +6,7 @@ Before opening a new issue here, please check the appropriate help channel on th
 
 For more in depth guidance on use, check out the BAQLaVa tutorial [here](https://github.com/biobakery/biobakery/wiki/BAQLaVa)! 
 
-## BAQLaVa User Manual v1.1.0-alpha
+## BAQLaVa User Manual v1.1.0
 
 Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa)
 
@@ -128,7 +128,7 @@ The main output is ```<FILENAME>_BAQLaVa_profile.txt``` which contains the viral
 ```<FILENAME>_tempfile_proteins.txt``` is a file that contains all ORFs that were mapped to in the translated search step of BAQLaVa, the Viral Genome Bin (VGB) to which they belong, and their observed abundance.
 
 ## Options for BAQLaVa runs
-When running BAQLaVa v0.5, you have the following options to modify the standard run:
+When running BAQLaVa v1.1.0, you have the following options to modify the standard run:
 
 
 ```
