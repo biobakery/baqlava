@@ -167,15 +167,16 @@ The standard BAQLaVa profile output (```<FILENAME>_BAQLaVa_profile.txt```) looks
 ```
 BAQLaVa VGB           BAQLaVa_demo_Abundance-RPKs    Reference Species      Taxonomy	                                                                                                                                                                  Other ICTV Genomes in VGB
 VGB_1593              43.5046709396                  VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
-VGB_1593|nucleotide   13.184010221779264             VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
+VGB_1593|nucleotide   13.115436783358199             VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
 VGB_1593|translated   43.5046709396                  VGB_1593               r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__crassvirales;f__crassvirales_unclassified;g__crassvirales_unclassified	
-VGB_49585             17.38481941893226              VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
-VGB_49585|nucleotide  13.127554139030849             VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
-VGB_49585|translated  17.38481941893226              VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
+VGB_49585             17.80983498312581              VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
+VGB_49585|nucleotide  12.143775140111783             VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
+VGB_49585|translated  17.80983498312581              VGB_49585              r__duplodnaviria;k__heunggongvirae;p__uroviricota;c__caudoviricetes;o__caudoviricetes_unclassified;f__caudoviricetes_unclassified;g__caudoviricetes_unclassified	
 VGB_6438              39.447859546400004             VGB_6438               r__viruses_unclassified;k__viruses_unclassified;p__viruses_unclassified;c__viruses_unclassified;o__viruses_unclassified;f__viruses_unclassified;g__viruses_unclassified	
 VGB_6438|translated   39.447859546400004             VGB_6438               r__viruses_unclassified;k__viruses_unclassified;p__viruses_unclassified;c__viruses_unclassified;o__viruses_unclassified;f__viruses_unclassified;g__viruses_unclassified
 
 ```
+
 
 The BAQLaVa column ```BAQLaVa VGB``` names which Viral Genome Bin (VGB) was detected. Each VGB will have 2 or 3 lines. The first line will be the total BAQLaVa viral abundance of the VGB. The lines following the total abundance will show the abundance detected from each mapping step (```|nucleotide```, ```|translated```, or both). The total abundance is the max of the two individual abundances observed. The second column shows the individual or total abundance.
 When Segment_Group is shown rather than a VGB, this indicates the viral species has a segmented genome, and as such represents a group of VGBs observed, but a single species bin.
