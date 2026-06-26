@@ -188,7 +188,7 @@ The fourth column gives the full taxonomic lineage for the VGB. All lineages are
 The final column will only have text when VGBs containing ICTV species genomes are identified (see column three for more info). When a VGB contains any ICTV species, the names of all ICTV-recognized species which are found in that VGB will be given in the fifth column.
 
 ## BAQLaVa Nuleotide & Translated Search: When to use individual vs. total abundances
-We've tuned each of the individual seach steps (nucleotide & translated) to each serve a purpose, with nucleotide search being more specific, and translated search being more sensitive in the face of the growing amount of phage genomes being found that as a field we are far from having comprehensively captured or characterized. So, if the research question you have is something very focused, you may want to just look at the nucleotide subset lines. For general profiling, we recommend using the lines with the total viral abundance. 
+We've tuned each of the individual seach steps (nucleotide & translated) to each serve a purpose, with nucleotide search being more specific, and translated search being more sensitive in the face of the growing amount of phage genomes being found that as a field we are far from having comprehensively captured or characterized. So, if the research question you have is something very focused, you may want to just look at the nucleotide subset lines. For general profiling, we recommend using the total viral abundance. You can read more about the difference in performance and desired viral subset to target in the [manuscript](https://www.biorxiv.org/content/10.64898/2026.02.11.705346v1), particularly Figure 2c.  
 
 
 
@@ -232,8 +232,7 @@ https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa_markers_ORFs.tar.gz
 
 Thanks go to these wonderful people:
 
-Jordan Jensen, Eric Franzosa, Sagun Maharjan, Jiaxian Shen, Etienne Nzabarushimana, Philipp Munch, Lea Wang, Long Nguyen, Curtis Huttenhower
-
+Jordan S. L. Jensen, Sagun Maharjan, Philipp C. Münch, Jiaxian Shen, Bailey Bowcutt, Jack T. Sumner, Moreno Zolfo, Claudia Mengoni, Xochitl C. Morgan, Kelsey N. Thompson, Nicola Segata, Long H. Nguyen, Eric A. Franzosa, Curtis Huttenhower
   
 
 ## Options List ##
@@ -245,13 +244,14 @@ All options can be accessed with `$ baqlava --help`.
   
 
 ```
-usage: baqlava [-h] [--version] [--nucdb NUCDB] [--nucindex NUCINDEX] [--protindex PROTINDEX] [--threads THREADS] [--protdb PROTDB] [--lengthadjust LENGTHADJUST]
-[--reconcile-mapped-script RECONCILE_MAPPED_SCRIPT] [--bypass-bacterial-depletion] [--bypass-nucleotide-search] [--bypass-translated-search]
-[--taxonomic-profile TAXONOMIC_PROFILE] [--proteome-length PROTEOME_LENGTH] [--keep-tempfiles] -o OUTPUT [-i INPUT] [--config CONFIG] [--scripts SCRIPTS] [--tmp TMP]
-[--local-jobs JOBS] [--grid-jobs GRID_JOBS] [--grid-tasks GRID_TASKS] [--grid GRID] [--grid-partition GRID_PARTITION] [--grid-benchmark {on,off}]  
-[--grid-options GRID_OPTIONS] [--grid-submit-sleep GRID_SUBMIT_SLEEP] [--grid-environment GRID_ENVIRONMENT] [--grid-image GRID_IMAGE] [--grid-scratch GRID_SCRATCH]
-[--grid-time-max GRID_TIME_MAX] [--grid-mem-max GRID_MEM_MAX] [--dry-run] [--skip-nothing] [--quit-early] [--until-task UNTIL_TASK] [--exclude-task EXCLUDE_TASK]
-[--target TARGET] [--exclude-target EXCLUDE_TARGET] [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+usage: baqlava [-h] [--version] [--nucdb NUCDB] [--threads THREADS] [--protdb PROTDB] [--lengthadjust LENGTHADJUST]
+               [--reconcile-mapped-script RECONCILE_MAPPED_SCRIPT] [--bypass-bacterial-depletion] [--bypass-nucleotide-search] [--bypass-translated-search]
+               [--taxonomic-profile TAXONOMIC_PROFILE] [--proteome-length PROTEOME_LENGTH] [--keep-tempfiles] [--genome-filtering GENOME_FILTERING] -o OUTPUT
+               [-i INPUT] [--config CONFIG] [--scripts SCRIPTS] [--tmp TMP] [--local-jobs JOBS] [--grid-jobs GRID_JOBS] [--grid-tasks GRID_TASKS] [--grid GRID]
+               [--grid-partition GRID_PARTITION] [--grid-benchmark {on,off}] [--grid-options GRID_OPTIONS] [--grid-submit-sleep GRID_SUBMIT_SLEEP]
+               [--grid-environment GRID_ENVIRONMENT] [--grid-image GRID_IMAGE] [--grid-scratch GRID_SCRATCH] [--grid-time-max GRID_TIME_MAX]
+               [--grid-mem-max GRID_MEM_MAX] [--dry-run] [--skip-nothing] [--quit-early] [--until-task UNTIL_TASK] [--exclude-task EXCLUDE_TASK]
+               [--target TARGET] [--exclude-target EXCLUDE_TARGET] [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
 ```
 
