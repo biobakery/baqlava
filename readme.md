@@ -230,8 +230,7 @@ https://huttenhower.sph.harvard.edu/baqlava-db/BAQLaVa_markers_ORFs.tar.gz
 
 Thanks go to these wonderful people:
 
-Jordan Jensen, Eric Franzosa, Sagun Maharjan, Jiaxian Shen, Etienne Nzabarushimana, Philipp Munch, Lea Wang, Long Nguyen, Curtis Huttenhower
-
+Jordan S. L. Jensen, Sagun Maharjan, Philipp C. Münch, Jiaxian Shen, Bailey Bowcutt, Jack T. Sumner, Moreno Zolfo, Claudia Mengoni, Xochitl C. Morgan, Kelsey N. Thompson, Nicola Segata, Long H. Nguyen, Eric A. Franzosa, Curtis Huttenhower
   
 
 ## Options List ##
