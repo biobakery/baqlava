@@ -1,10 +1,10 @@
 
 # History #
-## v1.1.0
+## v1.1.0 06-26-2026
 * Added --genome-filtering options to remove contaminant genomes from BAQLaVa VGBs in reponse to users identifying a small number of poorly performing VGBs (suspected plasmid contamination).
 * Added a genome_comparison_utility to allow visualization of differences between VGBs at different levels of filtering.
 
-## v1.0.0
+## v1.0.0 03-01-2026
 * This version is the same as v0.5.0, but was updated to v1.0 status with the release of the BAQLaVa preprint.
 
 ## v0.5.0 01-21-2025
