@@ -155,6 +155,16 @@ workflow.add_argument(
     action = 'store_true',
     default = config.getboolean('features','humann_depleted_fasta'))
 
+workflow.add_argument(
+    name = "humann-passthrough-parameters-nucleotide",
+    desc = "Provide nucleotide search parameters to HUMAnN - to maintain parameter choice as validated in BAQLaVa even if HUMAnN parameters change.",
+    default = config.get('features','humann_passthrough_parameters_nucleotide'))
+
+workflow.add_argument(
+    name = "humann-passthrough-parameters-translated",
+    desc = "Provide translated search parameters to HUMAnN - to maintain parameter choice as validated in BAQLaVa even if HUMAnN parameters change.",
+    default = config.get('features','humann_passthrough_parameters_translated'))
+
 args = workflow.parse_args()
 
 ############ settings based on provided args:
@@ -391,9 +401,9 @@ def main():
 
         # FIRST RUN & CALCULATE AT 25% COVERAGE:
         workflow.add_task(
-            "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 25",
+            "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 25 [args[2]]",
             depends = [str(tempdir / f"{file_base}_processed.fa")],
-            args = [baq_dir, str(f"{file_base}_nucleotide1")],
+            args = [baq_dir, str(f"{file_base}_nucleotide1"), args.humann_passthrough_parameters_nucleotide],
             targets = [str(baq_dir / f"{file_base}_nucleotide1_2_genefamilies.tsv")],
             n_db = os.path.abspath(args.nucdb),
             idx = os.path.abspath(nucleotide_idmapping),
@@ -408,9 +418,9 @@ def main():
 
         # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
         workflow.add_task(
-            "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 50 --resume",
+            "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --nucleotide-subject-coverage-threshold 50 --resume [args[2]]",
             depends = [str(tempdir / f"{file_base}_processed.fa"), str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv")],
-            args = [baq_dir, str(f"{file_base}_nucleotide2")],
+            args = [baq_dir, str(f"{file_base}_nucleotide2"), args.humann_passthrough_parameters_nucleotide],
             targets = [str(baq_dir / f"{file_base}_nucleotide2_2_genefamilies.tsv")],
             n_db = os.path.abspath(args.nucdb),
             idx = os.path.abspath(nucleotide_idmapping),
@@ -426,9 +436,9 @@ def main():
     if not args.bypass_translated_search: # bypass translated != True
 
         workflow.add_task(
-            "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --translated-subject-coverage-threshold 50",
+            "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --translated-subject-coverage-threshold 50 [args[2]]",
             depends = [args.input],
-            args = [baq_dir, str(f"{file_base}_translated")],
+            args = [baq_dir, str(f"{file_base}_translated"), args.humann_passthrough_parameters_translated],
             targets = [str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv")],
             p_db = os.path.abspath(args.protdb),
             idx = os.path.abspath(translated_idmapping),
