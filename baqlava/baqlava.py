@@ -437,7 +437,7 @@ def main():
 
         workflow.add_task(
             "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --count-normalization 'Adjusted RPKs' --translated-subject-coverage-threshold 50 [args[2]]",
-            depends = [args.input],
+            depends = [str(tempdir / f"{file_base}_processed.fa")],
             args = [baq_dir, str(f"{file_base}_translated"), args.humann_passthrough_parameters_translated],
             targets = [str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv")],
             p_db = os.path.abspath(args.protdb),
