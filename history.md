@@ -1,8 +1,13 @@
 
 # History #
-## v1.2.0 TBD
+## v1.2.0-devel TBD
 * Updated BAQLaVa to compatibility with HUMAnN 4.0-alpha.
 * Refactored core BAQLaVa code (baqlava.py) for a more streamlined and maintainable workflow.
+* Nucleotide and translated search now run in parallel when both are enabled, reducing wall-clock runtime on multi-core systems.
+* Bacterial depletion now fails gracefully: if HUMAnN depletion does not complete, BAQLaVa automatically falls back to the original (non-depleted) input and continues to viral profiling rather than aborting the run.
+* Added version and database logging at startup: BAQLaVa, HUMAnN, MetaPhlAn, MPA database, HUMAnN databases, and BAQLaVa databases are now recorded in a per-run log file (`<output>/<sample>_baqlava.log`).
+* Added HUMAnN passthrough parameters (`--humann-passthrough-parameters-nucleotide` and `--humann-passthrough-parameters-translated`) to explicitly fix validated search settings (Bowtie2/DIAMOND options, identity/coverage thresholds) independent of HUMAnN version changes.
+* Fixed translated search to use the processed (bacterial-depleted) input file rather than the raw input.
 
 ## v1.1.0 06-26-2026
 * Added --genome-filtering options to remove contaminant genomes from BAQLaVa VGBs in reponse to users identifying a small number of poorly performing VGBs (suspected plasmid contamination).
