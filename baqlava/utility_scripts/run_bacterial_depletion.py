@@ -69,7 +69,7 @@ def main():
     if depletion_ok and os.path.isfile(unaligned):
         # Format the HUMAnN unaligned reads into the processed FASTA. The
         # length-adjust script takes (input, output_target).
-        if not run(["python", lengthadjust, unaligned, target]):
+        if not run([sys.executable, lengthadjust, unaligned, target]):
             depletion_ok = False
     else:
         depletion_ok = False

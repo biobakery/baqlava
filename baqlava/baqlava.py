@@ -356,9 +356,10 @@ def main():
 
     if args.humann_depleted_fasta: # file provided has already been depleted by humann (eg in bb4 workflows)
         workflow.add_task(
-            "python [len_adj] [depends[0]] [targets[0]]",
+            "[py_exe] [len_adj] [depends[0]] [targets[0]]",
             depends = [args.input],
             targets = [str(tempdir / f"{file_base}_processed.fa")],
+            py_exe = sys.executable,
             len_adj = os.path.abspath(args.lengthadjust),
             name = "Formatting bacterially depleted FASTA file")
 
@@ -378,9 +379,10 @@ def main():
             tax_profile = os.path.abspath(args.taxonomic_profile)
 
         workflow.add_task(
-            "python [bd_script] [depends[0]] [tempdir] [base] [threads] [len_adj] [targets[0]] [tax]",
+            "[py_exe] [bd_script] [depends[0]] [tempdir] [base] [threads] [len_adj] [targets[0]] [tax]",
             depends = depletion_depends,
             targets = [str(tempdir / f"{file_base}_processed.fa")],
+            py_exe = sys.executable,
             bd_script = os.path.abspath(args.bacterial_depletion_script),
             tempdir = str(tempdir),
             base = file_base,
@@ -450,9 +452,10 @@ def main():
 
     if not args.bypass_nucleotide_search and args.bypass_translated_search: # nucleotide only, no translated
 
-        workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [args[0]] [depends[2]] [proteomelen] [targets[0]] [targets[1]] [args[0]]",
+        workflow.add_task("[py_exe] [script] [mode] [depends[0]] [depends[1]] [args[0]] [depends[2]] [proteomelen] [targets[0]] [targets[1]] [args[0]]",
             script = args.reconcile_mapped_script,
             mode = "1",
+            py_exe = sys.executable,
             proteomelen = args.proteome_length,
             args = ["NA"],
             depends = [str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv"), str(baq_dir / f"{file_base}_nucleotide_50_genefamilies.tsv"), args.input],
@@ -461,9 +464,10 @@ def main():
 
     elif args.bypass_nucleotide_search and not args.bypass_translated_search: # translated only, no nucleotide
 
-        workflow.add_task("python [script] [mode] [args[0]] [args[0]] [depends[0]] [args[0]] [proteomelen] [targets[0]] [args[0]] [targets[1]]",
+        workflow.add_task("[py_exe] [script] [mode] [args[0]] [args[0]] [depends[0]] [args[0]] [proteomelen] [targets[0]] [args[0]] [targets[1]]",
             script = args.reconcile_mapped_script,
             mode = "2",
+            py_exe = sys.executable,
             proteomelen = args.proteome_length,
             args = ["NA"],
             depends = [str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv")],
@@ -472,9 +476,10 @@ def main():
 
     elif not args.bypass_nucleotide_search and not args.bypass_translated_search: # nucleotide + translated (full workflow)
 
-            workflow.add_task("python [script] [mode] [depends[0]] [depends[1]] [depends[2]] [depends[3]] [proteomelen] [targets[0]] [targets[1]] [targets[2]]",
+            workflow.add_task("[py_exe] [script] [mode] [depends[0]] [depends[1]] [depends[2]] [depends[3]] [proteomelen] [targets[0]] [targets[1]] [targets[2]]",
             script = args.reconcile_mapped_script,
             mode = "3",
+            py_exe = sys.executable,
             proteomelen = args.proteome_length,
             depends = [str(baq_dir / f"{file_base}_nucleotide_25_genefamilies.tsv"), str(baq_dir / f"{file_base}_nucleotide_50_genefamilies.tsv"), str(baq_dir / f"{file_base}_translated_2_genefamilies.tsv"), args.input],
             targets = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt"), str(output_dir / f"{file_base}_tempfile_markers.txt"), str(output_dir / f"{file_base}_tempfile_proteins.txt")],
