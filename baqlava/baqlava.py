@@ -289,7 +289,7 @@ def main():
                 args = [tempdir],
                 targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
                 threads = args.threads,
-                name = "Running HUMAnN to depete bacterial reads from file")
+                name = "Running HUMAnN to deplete bacterial reads from file")
 
         else:
         # USE A METAPHLAN TAXONOMIC PROFILE TO AID BACTERIAL DEPLETION
@@ -300,7 +300,7 @@ def main():
                 args = [tempdir],
                 targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
                 threads = args.threads,
-                name = "Running HUMAnN to depete bacterial reads from file")
+                name = "Running HUMAnN to deplete bacterial reads from file")
 
         workflow.add_task(
             "python [len_adj] [depends[0]] [args[0]]",
