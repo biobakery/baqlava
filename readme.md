@@ -47,7 +47,7 @@ pip install .
 
 Before continuing, we will test the install of BAQLaVa is functional with a small demo database and demo data provided with the install:
 ```
-baqlava -i baqlava/examples/baqlava_demo.fq -o <PATH/TO/OUTPUT> --nucdb examples/BAQLaVa.V0.5.nucleotide/ --protdb examples/BAQLaVa.V0.5.protein/
+baqlava -i examples/baqlava_demo.fq -o <PATH/TO/OUTPUT> --nucdb examples/BAQLaVa.V0.5.nucleotide/ --protdb examples/BAQLaVa.V0.5.protein/
 ```
 In the test run, we specify the demo databases to be supplied rather than full BAQLaVa databases. 
 
