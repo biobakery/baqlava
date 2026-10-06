@@ -65,7 +65,7 @@ pip install baqlava --user
 
 Download the small demo data & databases:
 
-Demo Input File: https://github.com/biobakery/baqlava/blob/master/examples/BAQLaVa_demo.fq
+Demo Input File: https://github.com/biobakery/baqlava/blob/master/examples/demo.fq
 
 Nucleotide Demo DB: https://github.com/biobakery/baqlava/tree/master/examples/BAQLaVa.V0.5.nucleotide
 
