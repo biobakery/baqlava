@@ -25,8 +25,8 @@ Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQL
 
 ## Requirements:
 
-- HUMAnN=3.9 (https://github.com/biobakery/humann)
-- AnADAMA2>=0.10.0 (https://github.com/biobakery/anadama2)
+- HUMAnN=3.9 ([User manual for installation instructions](https://github.com/biobakery/humann))
+- AnADAMA2>=0.10.0 ([User manual for installation instructions](https://github.com/biobakery/anadama2))
 - Python>=3.10
   
 Please ensure that all tools are installed and HUMAnN is working properly before installing BAQLaVa. 
