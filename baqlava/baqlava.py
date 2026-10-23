@@ -348,8 +348,14 @@ def main():
     if args.bypass_bacterial_depletion: # bypassing bacterial depletion
         # NO UPSTREAM BACTERIAL DEPLETION
 
+            # decompress gzipped input so HUMAnN can detect the format of the processed file
+            if args.input.endswith(".gz"):
+                upstream_command = "gzip -dc [depends[0]] > [targets[0]]"
+            else:
+                upstream_command = "scp [depends[0]] [targets[0]]"
+
             workflow.add_task(
-                "scp [depends[0]] [targets[0]]",
+                upstream_command,
                 depends = [args.input],
                 targets = [str(tempdir / f"{file_base}_processed.fa")],
                 name = "Upstream file processing")

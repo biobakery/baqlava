@@ -14,7 +14,8 @@ else:
     open_func=open
 
 with open_func(sys.argv[1], "rt") as deplfasta:
-    with open_func(savefile, "wt") as wfasta:
+    # always write the processed FASTA uncompressed so HUMAnN can detect its format
+    with open(savefile, "wt") as wfasta:
         for i in deplfasta:
             i = i.strip()
             if ">" in i:
