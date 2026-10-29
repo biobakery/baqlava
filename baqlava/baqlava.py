@@ -145,6 +145,12 @@ workflow.add_argument(
     default = config.getboolean('features','keep_tempfiles'))
 
 workflow.add_argument(
+    name = "remove-intermediate-output",
+    desc = "Remove intermediate output files (bacterially depleted FASTA and tempfile_markers/proteins tables), keeping only the BAQLaVa profile and run log.",
+    action = 'store_true',
+    default = config.getboolean('features','remove_intermediate_output'))
+
+workflow.add_argument(
     name="genome-filtering",
     desc="Level of genome filtering to allow genomes to be represented in a VGB (genomes removed based on probability of plasmid). Options: no-filtering, default, conservative",
     default="default")
@@ -509,6 +515,13 @@ def main():
     depends = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt")],
     args = [tempdir],
     name = "File Cleanup")
+
+    if args.remove_intermediate_output: # keep only the BAQLaVa profile and run log
+        workflow.add_task(
+        "rm -f [args[0]] [args[1]] [args[2]]",
+        depends = [str(output_dir / f"{file_base}_BAQLaVa_profile.txt")],
+        args = [str(output_dir / f"{file_base}_bacterial_depleted.fa.gz"), str(output_dir / f"{file_base}_tempfile_markers.txt"), str(output_dir / f"{file_base}_tempfile_proteins.txt")],
+        name = "File Cleanup")
 
     # Nucleotide and translated search are independent (they share no task
     # dependency), so run them in parallel. Count how many search branches will
