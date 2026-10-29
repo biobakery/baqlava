@@ -14,7 +14,7 @@ exits 0, unless the fallback itself cannot be written.
 
 Usage:
     run_bacterial_depletion.py <input> <tempdir> <file_base> <threads> \
-        <lengthadjust_script> <processed_target> [taxonomic_profile]
+        <lengthadjust_script> <processed_target> [taxonomic_profile] [chocophlan_db]
 """
 
 import os
@@ -55,6 +55,9 @@ def main():
     taxonomic_profile = None
     if len(sys.argv) > 7 and sys.argv[7] not in ("", "NA", "False"):
         taxonomic_profile = sys.argv[7]
+    chocophlan_db = None
+    if len(sys.argv) > 8 and sys.argv[8] not in ("", "NA", "False"):
+        chocophlan_db = sys.argv[8]
 
     unaligned = os.path.join(
         tempdir, file_base + "_humann_temp", file_base + "_bowtie2_unaligned.fa")
@@ -63,6 +66,8 @@ def main():
                   "--bypass-translated-search", "--threads", str(threads)]
     if taxonomic_profile:
         humann_cmd += ["--taxonomic-profile", taxonomic_profile]
+    if chocophlan_db:
+        humann_cmd += ["--nucleotide-database", chocophlan_db]
 
     depletion_ok = run(humann_cmd)
 

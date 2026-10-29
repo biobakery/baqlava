@@ -12,6 +12,7 @@
 * Added a project description to the PyPI page.
 * The bacterially depleted reads are now saved gzipped (`<sample>_bacterial_depleted.fa.gz`) to save space.
 * Added `--remove-intermediate-output` to delete everything except the final BAQLaVa profile and run log.
+* Added `--chocophlan-db` to use your own ChocoPhlAn database in the bacterial depletion step.
 
 ## v1.1.0 06-26-2026
 * Added --genome-filtering options to remove contaminant genomes from BAQLaVa VGBs in reponse to users identifying a small number of poorly performing VGBs (suspected plasmid contamination).

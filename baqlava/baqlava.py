@@ -145,6 +145,11 @@ workflow.add_argument(
     default = config.getboolean('features','keep_tempfiles'))
 
 workflow.add_argument(
+    name = "chocophlan-db",
+    desc = "ChocoPhlAn nucleotide database folder for HUMAnN to use in the bacterial depletion step. [default: the database HUMAnN is configured with]",
+    default = config.getboolean('features','chocophlan_db'))
+
+workflow.add_argument(
     name = "remove-intermediate-output",
     desc = "Remove intermediate output files (bacterially depleted FASTA and tempfile_markers/proteins tables), keeping only the BAQLaVa profile and run log.",
     action = 'store_true',
@@ -391,7 +396,7 @@ def main():
             tax_profile = os.path.abspath(args.taxonomic_profile)
 
         workflow.add_task(
-            "[py_exe] [bd_script] [depends[0]] [tempdir] [base] [threads] [len_adj] [targets[0]] [tax]",
+            "[py_exe] [bd_script] [depends[0]] [tempdir] [base] [threads] [len_adj] [targets[0]] [tax] [choco_db]",
             depends = depletion_depends,
             targets = [str(tempdir / f"{file_base}_processed.fa")],
             py_exe = sys.executable,
@@ -401,6 +406,7 @@ def main():
             threads = args.threads,
             len_adj = os.path.abspath(args.lengthadjust),
             tax = tax_profile,
+            choco_db = os.path.abspath(args.chocophlan_db) if args.chocophlan_db else "NA",
             name = "Running HUMAnN to deplete bacterial reads from file")
 
         # save the bacterially depleted FASTA gzipped to save space
