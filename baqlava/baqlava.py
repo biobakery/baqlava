@@ -146,6 +146,12 @@ workflow.add_argument(
     action = 'store_true',
     default = config.get('features','keep_tempfiles'))
 
+workflow.add_argument(
+    name = "remove-intermediate-output",
+    desc = "Remove intermediate output files (bacterially depleted FASTA and tempfile_markers/proteins tables), keeping only the BAQLaVa profile.",
+    action = 'store_true',
+    default = config.get('features','remove_intermediate_output'))
+
 args = workflow.parse_args()
 
 
@@ -418,6 +424,12 @@ def main():
     "rm -r [args[0]]",
     depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
     args = [tempdir])
+
+    if args.remove_intermediate_output == True:
+        workflow.add_task(
+        "rm -f [args[0]] [args[1]] [args[2]]",
+        depends = [output_dir + file_base + "_BAQLaVa_profile.txt"],
+        args = [output_dir + file_base + "_bacterial_depleted.fa.gz", output_dir + file_base + "_tempfile_markers.txt", output_dir + file_base + "_tempfile_proteins.txt"])
 
     workflow.go()
 

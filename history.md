@@ -7,6 +7,7 @@
 * Clear error messages for empty or too-short input reads instead of a crash.
 * Added the MIT license text.
 * The bacterially depleted reads are now saved gzipped (`<sample>_bacterial_depleted.fa.gz`) to save space.
+* Added `--remove-intermediate-output` to delete everything except the final BAQLaVa profile.
 
 ## v0.5.0 01-21-2025
 * Automatically installed baqlava databases before the setup
