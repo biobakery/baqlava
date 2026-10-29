@@ -1,5 +1,9 @@
 
 # History #
+## v1.1.1 10-29-2026
+* Fixed the pip/PyPI package version not being read from the config file (setup.py looked for it in the wrong folder).
+* Added a project description to the PyPI page.
+
 ## v1.1.0 06-29-2026
 * Added --genome-filtering options to remove contaminant genomes from BAQLaVa VGBs in reponse to users identifying a small number of poorly performing VGBs (suspected plasmid contamination).
 * Added a genome_comparison_utility to allow visualization of differences between VGBs at different levels of filtering.
