@@ -147,6 +147,11 @@ workflow.add_argument(
     default = config.get('features','keep_tempfiles'))
 
 workflow.add_argument(
+    name = "chocophlan-db",
+    desc = "ChocoPhlAn nucleotide database folder for HUMAnN to use in the bacterial depletion step. [default: the database HUMAnN is configured with]",
+    default = config.get('features','chocophlan_db'))
+
+workflow.add_argument(
     name = "remove-intermediate-output",
     desc = "Remove intermediate output files (bacterially depleted FASTA and tempfile_markers/proteins tables), keeping only the BAQLaVa profile.",
     action = 'store_true',
@@ -190,6 +195,12 @@ def main():
     #logging.basicConfig(filename=log_file,format='%(asctime)s - %(name)s - %(levelname)s: %(message)s',
     #    level=getattr(logging,args.log_level), filemode='w', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+
+    # use a custom ChocoPhlAn database for bacterial depletion if provided
+    if args.chocophlan_db != 'False':
+        chocophlan_option = "--nucleotide-database " + os.path.abspath(args.chocophlan_db)
+    else:
+        chocophlan_option = ""
 
     if args.bypass_bacterial_depletion == True:
         # NO UPSTREAM BACTERIAL DEPLETION
@@ -290,7 +301,7 @@ def main():
         # PROCEED WITHOUT METAPHLAN TAXONOMIC PROFILE
 
             workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads]",
+                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads] " + chocophlan_option,
                 depends = [args.input],
                 args = [tempdir],
                 targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
@@ -301,7 +312,7 @@ def main():
         # USE A METAPHLAN TAXONOMIC PROFILE TO AID BACTERIAL DEPLETION
 
             workflow.add_task(
-                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads] --taxonomic-profile [depends[1]]",
+                "humann --input [depends[0]] --output [args[0]] --bypass-translated-search --threads [threads] --taxonomic-profile [depends[1]] " + chocophlan_option,
                 depends = [args.input, args.taxonomic_profile],
                 args = [tempdir],
                 targets = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
