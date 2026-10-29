@@ -10,6 +10,7 @@
 * Fixed translated search to use the processed (bacterial-depleted) input file rather than the raw input.
 * Fixed the pip/PyPI package version not being read from the config file (setup.py looked for it in the wrong folder).
 * Added a project description to the PyPI page.
+* The bacterially depleted reads are now saved gzipped (`<sample>_bacterial_depleted.fa.gz`) to save space.
 
 ## v1.1.0 06-26-2026
 * Added --genome-filtering options to remove contaminant genomes from BAQLaVa VGBs in reponse to users identifying a small number of poorly performing VGBs (suspected plasmid contamination).

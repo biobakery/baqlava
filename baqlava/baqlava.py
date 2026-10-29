@@ -397,10 +397,11 @@ def main():
             tax = tax_profile,
             name = "Running HUMAnN to deplete bacterial reads from file")
 
+        # save the bacterially depleted FASTA gzipped to save space
         workflow.add_task(
-            "scp [depends[0]] [targets[0]]",
+            "gzip -c [depends[0]] > [targets[0]]",
             depends = [str(tempdir / f"{file_base}_processed.fa")],
-            targets = [str(output_dir / f"{file_base}_bacterial_depleted.fa")],
+            targets = [str(output_dir / f"{file_base}_bacterial_depleted.fa.gz")],
             name = "Saving bacterially depleted FASTA file")
 
     ########### BAQLaVa NUCLEOIDE & TRANSLATED SEARCH ###########
