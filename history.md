@@ -8,6 +8,8 @@
 * Added version and database logging at startup: BAQLaVa, HUMAnN, MetaPhlAn, MPA database, HUMAnN databases, and BAQLaVa databases are now recorded in a per-run log file (`<output>/<sample>_baqlava.log`).
 * Added HUMAnN passthrough parameters (`--humann-passthrough-parameters-nucleotide` and `--humann-passthrough-parameters-translated`) to explicitly fix validated search settings (Bowtie2/DIAMOND options, identity/coverage thresholds) independent of HUMAnN version changes.
 * Fixed translated search to use the processed (bacterial-depleted) input file rather than the raw input.
+* Fixed the pip/PyPI package version not being read from the config file (setup.py looked for it in the wrong folder).
+* Added a project description to the PyPI page.
 
 ## v1.1.0 06-26-2026
 * Added --genome-filtering options to remove contaminant genomes from BAQLaVa VGBs in reponse to users identifying a small number of poorly performing VGBs (suspected plasmid contamination).

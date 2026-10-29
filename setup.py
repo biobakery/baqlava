@@ -18,14 +18,17 @@ import configparser
 
 config = configparser.ConfigParser()
 install_folder=os.path.dirname(os.path.realpath(__file__))
-config_file=os.path.join(install_folder,"configs/baqlava.cfg")
+config_file=os.path.join(install_folder,"baqlava","configs","baqlava.cfg")
 config.read(config_file)
 setup_directory = os.path.abspath(os.path.dirname(__file__))
 
 VERSION = config.get("metadata","version",fallback="1.2.0-devel")
+# packaging needs a PEP 440 version, so "1.2.0-devel" becomes "1.2.0.dev0"
+VERSION = VERSION.replace("-devel", ".dev0")
 AUTHOR = "BAQLaVa Development Team"
 MAINTAINER = "Jordan Jensen"
 MAINTAINER_EMAIL = "jordanjensen@g.harvard.edu"
+DESCRIPTION = "BAQLaVa: Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa)."
 
 
 # check for either of the required versions
@@ -79,7 +82,6 @@ except (ValueError, IndexError, NameError):
 
 from setuptools.command.install import install as _install
 
-import distutils
 
 # try to import urllib.request.urlretrieve for python3
 try:
@@ -269,7 +271,9 @@ setuptools.setup(
 	author_email=MAINTAINER_EMAIL,
 	version=VERSION,
 	license="MIT",
-	description="BAQLaVa: Bioinformatic Application of Quantification and Labeling of Viral Taxonomy (BAQLaVa).",
+	description=DESCRIPTION,
+	long_description=DESCRIPTION,
+	long_description_content_type="text/plain",
 	url="https://github.com/biobakery/baqlava",
 	keywords=['microbial', 'microbiome', 'bioinformatics', 'microbiology', 'metagenomic', 'baqlava' ,'anadama2'],
 	platforms=['Linux', 'MacOS'],
