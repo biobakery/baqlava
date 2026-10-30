@@ -333,7 +333,7 @@ def main():
             "python [len_adj] [depends[0]] [args[0]]",
             depends = [tempdir + "/" + file_base + "_humann_temp/" + file_base + "_bowtie2_unaligned.fa"],
             args = [output_dir],
-            targets = [output_dir + file_base + "_bacterial_depleted.fa"],
+            targets = [output_dir + file_base + "_bacterial_depleted.fa.gz"],
             len_adj = os.path.abspath(args.lengthadjust),
             name = "Formatting bacterially depleted FASTA file")
 
@@ -347,7 +347,7 @@ def main():
             # FIRST RUN & CALCULATE AT 25% COVERAGE:
             workflow.add_task(
                 "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 25",
-                depends = [output_dir + file_base + "_bacterial_depleted.fa"],
+                depends = [output_dir + file_base + "_bacterial_depleted.fa.gz"],
                 args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
                 targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
@@ -363,7 +363,7 @@ def main():
             # USE FIRST RUN TO CALCULATE AT 50% COVERAGE:
             workflow.add_task(
                 "humann --input [depends[0]] --output [args[0]] --bypass-nucleotide-index --nucleotide-database [n_db] --id-mapping [idx] --threads [threads] --bypass-translated-search --output-basename [args[1]] --nucleotide-subject-coverage-threshold 50 --resume",
-                depends = [output_dir + file_base + "_bacterial_depleted.fa", baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"],
+                depends = [output_dir + file_base + "_bacterial_depleted.fa.gz", baq_dir + file_base + "_bacterial_depleted_nucleotide_25_genefamilies.tsv"],
                 args = [baq_dir, file_base + "_bacterial_depleted_nucleotide"],
                 targets = [baq_dir + file_base + "_bacterial_depleted_nucleotide_genefamilies.tsv"],
                 n_db = os.path.abspath(args.nucdb),
@@ -383,7 +383,7 @@ def main():
             # TRANSLATED SEARCH:
             workflow.add_task(
                 "humann --input [depends[0]] --output [args[0]] --id-mapping [idx] --protein-database [p_db] --threads [threads] --bypass-nucleotide-search --output-basename [args[1]] --translated-subject-coverage-threshold 50",
-                depends = [output_dir + file_base + "_bacterial_depleted.fa"],
+                depends = [output_dir + file_base + "_bacterial_depleted.fa.gz"],
                 args = [baq_dir, file_base + "_bacterial_depleted_translated"],
                 targets = [baq_dir + file_base + "_bacterial_depleted_translated_genefamilies.tsv"],
                 p_db = os.path.abspath(args.protdb),
