@@ -6,6 +6,7 @@
 * Fixed the pip/PyPI package version not being read from the config file (setup.py looked for it in the wrong folder).
 * Added a project description to the PyPI page.
 * The bacterially depleted reads are now saved gzipped (`<sample>_bacterial_depleted.fa.gz`) to save space.
+* Added `--remove-intermediate-output` to delete everything except the final BAQLaVa profile.
 
 ## v1.0.0 03-01-2026
 * This version is the same as v0.5.0, but was updated to v1.0 status with the release of the BAQLaVa preprint.
